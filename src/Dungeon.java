@@ -10,6 +10,8 @@ public class Dungeon {
     private final Color BLACK = new Color(0, 0, 0);
     Color cellCol;
     private int[][] map = new int[HGT][WID];
+    private final int ALIVE = 1;
+    private final int DEAD = 0; // dead is wall
 
     public Dungeon() {
         genFullRandom(0.45);
@@ -22,7 +24,7 @@ public class Dungeon {
     public void drawDungeon2D(Graphics g) {
         for (int y = 0; y < HGT; y += 1) {
             for (int x = 0; x < WID; x += 1) {
-                cellCol = (map[y][x] == 1) ? WHITE : BLACK;
+                cellCol = (map[y][x] == DEAD) ? BLACK : WHITE;
                 g.setColor(cellCol);
                 g.fillRect(x * DSIZE/2, y * DSIZE/2, DSIZE/2, DSIZE/2);
             }
@@ -37,7 +39,7 @@ public class Dungeon {
     public void genFullRandom(double aliveChance) {
         for (int y = 0; y < HGT; y++)
             for (int x = 0; x < WID; x++)
-                map[y][x] = (Math.random() < aliveChance) ? 1 : 0;
+                map[y][x] = (Math.random() < aliveChance) ? ALIVE : DEAD;
     }
 
     private void calcNextGeneration(int birth, int survival) {
@@ -45,10 +47,10 @@ public class Dungeon {
         for (int y = 0; y < HGT; y++) {
             for (int x = 0; x < WID; x++) {
                 int aliveNbr = calcNeighbourAlive(y, x);
-                if (map[y][x] == 1)  // Cell is alive (wall)
-                    tmpMap[y][x] = (aliveNbr < survival) ? 1 : 0; // Overpopulation or underpopulation, cell dies
-                else if (map[y][x] == 0) // Cell is dead
-                    tmpMap[y][x] = (aliveNbr > birth) ? 1 : 0;
+                if (map[y][x] == ALIVE)  // Cell is alive (wall)
+                    tmpMap[y][x] = (aliveNbr < survival) ? ALIVE : DEAD; // Overpopulation or underpopulation, cell dies
+                else if (map[y][x] == DEAD) // Cell is dead
+                    tmpMap[y][x] = (aliveNbr > birth) ? ALIVE : DEAD;
                 // Birth, cell becomes alive, otherwise cell dies
             }
         }
@@ -60,28 +62,28 @@ public class Dungeon {
         for (int y = 0; y < HGT; y++) {
             for (int x = 0; x < WID; x++) {
                 int aliveNbr = calcNeighbourAlive(y, x);
-                if (map[y][x] == 1 && aliveNbr > removeLoneThreshold)
-                    tmpMap[y][x] = 0;
+                if (map[y][x] == ALIVE && aliveNbr > removeLoneThreshold)
+                    tmpMap[y][x] = DEAD;
             }
         }
         map = tmpMap;
     }
 
     private int calcNeighbourAlive(int y, int x) {
-        int alive = 0;
+        int aliveNbr = 0;
         for (int i = y - 1; i != y + 1; i++) {
             for (int j = x - 1; j != x + 1; j++) {
                 if (i == y && j == x)
                     continue; // skip current cell
                 if ((offGrid(i, j))) {
-                    alive += 1;
+                    aliveNbr += 1;
                     continue;
                 }
-                if (map[i][j] == 1) alive += 1;
+                if (map[i][j] == ALIVE) aliveNbr += 1;
 
             }
         }
-        return alive;
+        return aliveNbr;
     }
 
     private boolean offGrid(int y, int x) {
