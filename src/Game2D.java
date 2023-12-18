@@ -6,7 +6,7 @@ public class Game2D extends BaseFrame{
     private Dungeon dun;
     private Player player;
     public Game2D(Dungeon dun, Player player) {
-        super("Game2D", 64*8, 64*8);
+        super("Game2D", 64*dun.getDSIZE(), 64*dun.getDSIZE());
         this.dun = dun;
         this.player = player;
 

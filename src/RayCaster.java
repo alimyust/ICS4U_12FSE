@@ -19,8 +19,8 @@ public class RayCaster {
     public RayCaster(Player player, Dungeon dun){
         this.player = player;
         this.dun = dun;
-        mapX = dun.getWID();
-        mapY = dun.getHGT();
+        mapX = WID/64;//dun.getWID();
+        mapY = HGT/64;//dun.getHGT();
         mapS = mapX * mapY;
         map = flatten(dun.getMap());
 //        System.out.println(Arrays.deepToString(dun.getMap()));
@@ -110,7 +110,7 @@ public class RayCaster {
     }
 
     public static int[] flatten(int[][] array) {
-        System.out.println(Arrays.deepToString(array));
+//        System.out.println(Arrays.deepToString(array));
         int rows = array.length;
         int cols = array[0].length;
         int[] flattenedArray = new int[rows * cols];

@@ -5,7 +5,7 @@ public class MainGame {
     protected static final int HGT= 64*16;
 
     public static void main(String[] args) {
-        new Game2D(dun,player);
         new Game3D(dun,player);
+        new Game2D(dun,player);
     }
 }
