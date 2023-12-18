@@ -6,7 +6,7 @@ public class Game2D extends BaseFrame{
     private Dungeon dun;
     private Player player;
     public Game2D(Dungeon dun, Player player) {
-        super("Game2D", MainGame.WID, MainGame.HGT);
+        super("Game2D", 64*8, 64*8);
         this.dun = dun;
         this.player = player;
 

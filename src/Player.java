@@ -14,19 +14,20 @@ public class Player extends ParentEntity {
     }
 
     public void movePlayer(boolean[] keys) {
+        int range = 8;
         if (keys[KeyEvent.VK_A]) {
             angle -= 0.1;
             if (angle < 0)
                 angle += 2 * Math.PI;
-            dX = Math.cos(angle) * 2;
-            dY = Math.sin(angle) * 2;
+            dX = Math.cos(angle) * range;
+            dY = Math.sin(angle) * range;
         }
         if (keys[KeyEvent.VK_D]) {
             angle += 0.1;
             if (angle > 2 * Math.PI)
                 angle -= 2 * Math.PI;
-            dX = Math.cos(angle) * 2;
-            dY = Math.sin(angle) * 2;
+            dX = Math.cos(angle) * range;
+            dY = Math.sin(angle) * range;
 
         }
         if (keys[KeyEvent.VK_W]) {

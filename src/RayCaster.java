@@ -23,8 +23,8 @@ public class RayCaster {
         mapY = dun.getHGT();
         mapS = mapX * mapY;
         map = flatten(dun.getMap());
-        System.out.println(Arrays.deepToString(dun.getMap()));
-        System.out.println(Arrays.toString(map));
+//        System.out.println(Arrays.deepToString(dun.getMap()));
+//        System.out.println(Arrays.toString(map));
     }
     public void drawRays3d(Graphics2D g2)
     {
@@ -34,11 +34,12 @@ public class RayCaster {
         double pa = player.getAngle();
         int mx, my, mp, dof;
         float rx = 0, ry = 0, ra, xo = 0, yo = 0, distT = 0;
-        ra = (float) (pa-DR*30);
+        int fov = 30;
+        ra = (float) (pa-DR*fov);
         if(ra < 0) { ra += 2 * PI; }
         if(ra > 2* PI) {ra -= 2* PI;}
 
-        for (int r= 0; r < 60; r++)
+        for (int r= 0; r < 2*fov; r++)
         {
             // Horizontal Lines
             float distH = 1000000, hx = px, hy = py;

@@ -1,7 +1,7 @@
     import java.awt.*;
 
     public class Dungeon {
-        private final int DSIZE = 32;
+        private final int DSIZE = 8;
         //dungeon size. Smaller values make larger dungeons
         private final int WID = MainGame.WID/DSIZE;
         //same divisor keeps it proportional to total size of display
@@ -11,8 +11,8 @@
         Color cellCol;
         private int[][] map = new int[HGT][WID];
         public Dungeon(){
-            System.out.println(HGT + " , " + WID);
-            System.out.println("gen");
+//            System.out.println(HGT + " , " + WID);
+//            System.out.println("gen");
             genFullRandom(0.55);
             generateDungeon(6,7,20);
             postProcess( 7);
@@ -29,17 +29,17 @@
                 }
             }
         }
+        public void generateDungeon(int birth, int survival, int recurs){
+            for(int i=0; i < recurs; i++)
+                calcNextGeneration(birth, survival);
+        }
         public void genFullRandom(double aliveChance){
             for(int y=0; y < HGT; y++)
                 for(int x=0; x < WID; x++)
                     map[y][x] = (Math.random() < aliveChance) ? 1 : 0;
         }
-        public void generateDungeon(int birth, int survival, int recurs){
-            for(int i=0; i < recurs; i++)
-                calcNextGeneration(birth, survival);
-        }
         private void calcNextGeneration(int birth, int survival){
-            int[][] tmpMap = new int[HGT][WID];
+            int[][] tmpMap = map.clone();
             for(int y=0; y < HGT; y++) {
                 for (int x = 0; x < WID; x++) {
                     int aliveNbr = calcNeighbourAlive(y,x);
@@ -74,7 +74,7 @@
                         alive += 1;
                         continue;
                     }
-                    if (map[i][j] == 1) alive += 1;
+//                    if (map[i][j] == 1) alive += 1;
                 }
             }
             return alive;

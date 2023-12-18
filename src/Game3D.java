@@ -3,12 +3,13 @@ import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
 
 public class Game3D extends BaseFrame{
-    private static int WID = MainGame.WID, HGT = MainGame.HGT;
+    private static int WID = 64*8;//MainGame.WID,
+    private static int HGT = 64*8;//MainGame.HGT;
     private Dungeon dun;
     private Player p2d;
     private RayCaster rayCast;
     public Game3D(Dungeon dun, Player p2d) {
-        super("Game3D", MainGame.WID, MainGame.HGT);
+        super("Game3D", WID, HGT);
         this.dun = dun;
         this.p2d = p2d;
         this.rayCast = new RayCaster(p2d,dun);
