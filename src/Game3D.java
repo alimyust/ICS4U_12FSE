@@ -9,7 +9,7 @@ public class Game3D extends BaseFrame{
     private Player p2d;
     private RayCaster rayCast;
     public Game3D(Dungeon dun, Player p2d) {
-        super("Game3D", WID, HGT);
+        super("Game3D", 64*18, 64*8);
         this.dun = dun;
         this.p2d = p2d;
         this.rayCast = new RayCaster(p2d,dun);

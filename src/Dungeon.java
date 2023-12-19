@@ -3,7 +3,7 @@ import java.util.Arrays;
 import java.util.Random;
 
 public class Dungeon {
-    private final int DSIZE = 8;
+    private final int DSIZE = 128;
     //dungeon size. Smaller values make larger dungeons
     private final int WID = MainGame.WID / DSIZE;
     //same divisor keeps it proportional to total size of display

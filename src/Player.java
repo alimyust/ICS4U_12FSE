@@ -1,6 +1,8 @@
 import java.awt.*;
 import java.awt.event.KeyEvent;
+import java.awt.geom.Area;
 import java.awt.geom.Line2D;
+import java.util.ArrayList;
 
 
 public class Player extends ParentEntity {
@@ -9,6 +11,9 @@ public class Player extends ParentEntity {
     private double angle = 0;
     private double dX;
     private double dY;
+
+    private ArrayList<Integer> rx = new ArrayList<>();
+    private ArrayList<Integer> ry = new ArrayList<>();
     public Player(int x, int y) {
         super(x, y, 10, 10);
         dX=x;
@@ -54,8 +59,18 @@ public class Player extends ParentEntity {
 //        g2d.rotate(angle);
         g.fillRect((x - w / 2), (y - h / 2), w, h);
         g.drawLine(x, y, (int) (x + 15*Math.cos(angle)), (int) (y+15*Math.sin(angle)));
-//        g2d.rotate(-angle);
-//        g2d.translate(-x,-y);
+        for(int i = 0; i <= 60; i++)
+            try {
+                g2d.drawLine(x, y, rx.get(i), ry.get(i));//        g2d.rotate(-angle);
+            } catch (Exception ignored) {
+            }
+        rx.clear();
+        ry.clear();
+
+    }
+    public void setPlayerRay(int rx, int ry){
+        this.rx.add(rx);
+        this.ry.add(ry);
 
     }
     public double dist(double ax, double ay, double bx, double by) {

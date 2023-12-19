@@ -27,6 +27,8 @@ public class RayCaster {
     public void drawRays3d(Graphics2D g2)
     {
         int tSize = 64;//dun.getDSIZE();
+        int renderDist = 64; //amount of walls rendered when looking around
+        int distScale = 5; //how far away things look
         int px = ParentEntity.x -player.w/2;
         int py = ParentEntity.y -player.h/2;
         double pa = player.getAngle();
@@ -44,9 +46,9 @@ public class RayCaster {
             dof = 0;
             float aTan = (float) (-1 / Math.tan(ra));
             if(ra > PI) { ry = (float) (py / tSize * tSize -0.0001); rx = (py-ry)*aTan+px; yo = -tSize;xo = -yo*aTan;}
-            if(ra < PI) { ry = (float) (py / tSize * tSize + tSize); rx = (py-ry)*aTan+px; yo = tSize; xo = -yo*aTan;}
-            if(ra == 0 || ra == PI) {rx = px; ry = py; dof = tSize;}
-            while (dof < tSize)
+            if(ra < PI) { ry = (float) (py / tSize * tSize + renderDist); rx = (py-ry)*aTan+px; yo = tSize; xo = -yo*aTan;}
+            if(ra == 0 || ra == PI) {rx = px; ry = py; dof = renderDist;}
+            while (dof < renderDist)
             {
                 mx = (int) (rx) / tSize; my = (int) (ry) / tSize; mp = my*mapX + mx;
                 if(mp > 0 && mp < mapX*mapY && map[mp]==0) {hx = rx; hy = ry; distH = (float)dist(px,py,hx,hy); dof = tSize;}
@@ -59,9 +61,9 @@ public class RayCaster {
             double PI2 = Math.PI / 2;
             double PI3 = 3 * Math.PI / 2;
             if(ra > PI2 && ra < PI3) { rx = (float) (px / tSize * tSize -0.0001); ry = (px-rx)*nTan+py; xo = -tSize; yo = -xo*nTan;}
-            if(ra < PI2 || ra > PI3) { rx = (float) (px / tSize * tSize + tSize); ry = (px-rx)*nTan+py; xo = tSize; yo = -xo*nTan;}
-            if(ra == 0 || ra == PI) {rx = px; ry = py; dof = tSize;}
-            while (dof < tSize)
+            if(ra < PI2 || ra > PI3) { rx = (float) (px / tSize * tSize + renderDist); ry = (px-rx)*nTan+py; xo = tSize; yo = -xo*nTan;}
+            if(ra == 0 || ra == PI) {rx = px; ry = py; dof = renderDist;}
+            while (dof < renderDist)
             {
                 mx = (int) (rx) / tSize; my = (int) (ry) / tSize; mp = my*mapX + mx;
                 if(mp > 0 && mp < mapX*mapY && map[mp]==0) {vx = rx; vy = ry; distV = (float)dist(px,py,vx,vy); dof = tSize;}
@@ -81,13 +83,15 @@ public class RayCaster {
                 Color c2 = new Color(91, 4, 4);
                 g2.setColor(c2);
             }
+            player.setPlayerRay((int) rx, (int) ry);
+
             // Walls
             float ca = (float)pa - ra;
             if(ca < 0) {ca += 2* PI;}
             if(ca >  2* PI) {ca -= 2* PI;}
 //            System.out.println(ca);
             distT = (float) (distT *Math.cos(ca));
-            float lineH = (distT != 0) ? (mapS * HGT) / distT/1000 : 0;
+            float lineH = (distT != 0) ? (mapS * HGT) / distT/distScale : 0;
             float lineO = Math.max(0, HGT / 2 - lineH / 2);
             if (lineH > HGT)
                 lineH = HGT;
