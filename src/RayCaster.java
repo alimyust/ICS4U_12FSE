@@ -6,8 +6,6 @@ import static java.lang.Math.PI;
 
 public class RayCaster {
     private final Player player;
-    private final int wid = MainGame.WID;
-    private final int hgt = MainGame.HGT;
     private final Dungeon dun;
     private final double DR = 0.0174533;
     private final int WID = Game3D.getWID();
@@ -19,8 +17,8 @@ public class RayCaster {
     public RayCaster(Player player, Dungeon dun){
         this.player = player;
         this.dun = dun;
-        mapX = WID/64;//dun.getWID();
-        mapY = HGT/64;//dun.getHGT();
+        mapX = dun.getMap()[0].length;
+        mapY = dun.getMap().length;;//dun.getHGT();
         mapS = mapX * mapY;
         map = flatten(dun.getMap());
 //        System.out.println(Arrays.deepToString(dun.getMap()));
@@ -29,8 +27,8 @@ public class RayCaster {
     public void drawRays3d(Graphics2D g2)
     {
         int tSize = 64;//dun.getDSIZE();
-        int px = player.x-player.w/2;
-        int py = player.y-player.h/2;
+        int px = ParentEntity.x -player.w/2;
+        int py = ParentEntity.y -player.h/2;
         double pa = player.getAngle();
         int mx, my, mp, dof;
         float rx = 0, ry = 0, ra, xo = 0, yo = 0, distT = 0;
@@ -42,31 +40,31 @@ public class RayCaster {
         for (int r= 0; r < 2*fov; r++)
         {
             // Horizontal Lines
-            float distH = 1000000, hx = px, hy = py;
+            float distH = 10000000, hx = px, hy = py;
             dof = 0;
             float aTan = (float) (-1 / Math.tan(ra));
             if(ra > PI) { ry = (float) (py / tSize * tSize -0.0001); rx = (py-ry)*aTan+px; yo = -tSize;xo = -yo*aTan;}
             if(ra < PI) { ry = (float) (py / tSize * tSize + tSize); rx = (py-ry)*aTan+px; yo = tSize; xo = -yo*aTan;}
-            if(ra == 0 || ra == PI) {rx = px; ry = py; dof = 8;}
-            while (dof < 8)
+            if(ra == 0 || ra == PI) {rx = px; ry = py; dof = tSize;}
+            while (dof < tSize)
             {
                 mx = (int) (rx) / tSize; my = (int) (ry) / tSize; mp = my*mapX + mx;
-                if(mp > 0 && mp < mapX*mapY && map[mp]==0) {hx = rx; hy = ry; distH = (float)dist(px,py,hx,hy); dof = 8;}
+                if(mp > 0 && mp < mapX*mapY && map[mp]==0) {hx = rx; hy = ry; distH = (float)dist(px,py,hx,hy); dof = tSize;}
                 else  {rx += xo; ry += yo; dof += 1;}
             }
             // Vertical Lines
-            float distV = 1000000, vx = px, vy = py;
+            float distV = 10000000, vx = px, vy = py;
             dof = 0;
             float nTan = (float) (-Math.tan(ra));
             double PI2 = Math.PI / 2;
             double PI3 = 3 * Math.PI / 2;
             if(ra > PI2 && ra < PI3) { rx = (float) (px / tSize * tSize -0.0001); ry = (px-rx)*nTan+py; xo = -tSize; yo = -xo*nTan;}
             if(ra < PI2 || ra > PI3) { rx = (float) (px / tSize * tSize + tSize); ry = (px-rx)*nTan+py; xo = tSize; yo = -xo*nTan;}
-            if(ra == 0 || ra == PI) {rx = px; ry = py; dof = 8;}
-            while (dof < 8)
+            if(ra == 0 || ra == PI) {rx = px; ry = py; dof = tSize;}
+            while (dof < tSize)
             {
                 mx = (int) (rx) / tSize; my = (int) (ry) / tSize; mp = my*mapX + mx;
-                if(mp > 0 && mp < mapX*mapY && map[mp]==0) {vx = rx; vy = ry; distV = (float)dist(px,py,vx,vy); dof = 8;}
+                if(mp > 0 && mp < mapX*mapY && map[mp]==0) {vx = rx; vy = ry; distV = (float)dist(px,py,vx,vy); dof = tSize;}
                 else  {rx += xo; ry += yo; dof += 1;}
             }
             if(distV < distH) {
@@ -89,7 +87,7 @@ public class RayCaster {
             if(ca >  2* PI) {ca -= 2* PI;}
 //            System.out.println(ca);
             distT = (float) (distT *Math.cos(ca));
-            float lineH = (distT != 0) ? (mapS * HGT) / distT/10 : 0;
+            float lineH = (distT != 0) ? (mapS * HGT) / distT/1000 : 0;
             float lineO = Math.max(0, HGT / 2 - lineH / 2);
             if (lineH > HGT)
                 lineH = HGT;

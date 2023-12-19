@@ -3,8 +3,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
 
 public class Game3D extends BaseFrame{
-    private static int WID = 64*8;//MainGame.WID,
-    private static int HGT = 64*8;//MainGame.HGT;
+    private static int WID = MainGame.WID;
+    private static int HGT = MainGame.HGT/2;
     private Dungeon dun;
     private Player p2d;
     private RayCaster rayCast;

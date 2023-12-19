@@ -1,6 +1,6 @@
 public class MainGame {
     private static final Dungeon dun = new Dungeon();
-    private static final Player player = new Player(30,40);
+    private static final Player player = new Player(0,0);
     protected static final int WID = 64*16;
     protected static final int HGT= 64*16;
 
