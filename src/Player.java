@@ -59,11 +59,11 @@ public class Player extends ParentEntity {
 //        g2d.rotate(angle);
         g.fillRect((x - w / 2), (y - h / 2), w, h);
         g.drawLine(x, y, (int) (x + 15*Math.cos(angle)), (int) (y+15*Math.sin(angle)));
-        for(int i = 0; i <= 60; i++)
-            try {
-                g2d.drawLine(x, y, rx.get(i), ry.get(i));//        g2d.rotate(-angle);
-            } catch (Exception ignored) {
-            }
+//        for(int i = 0; i <= 60; i++)
+//            try {
+//                g2d.drawLine(x, y, rx.get(i), ry.get(i));//        g2d.rotate(-angle);
+//            } catch (Exception ignored) {
+//            }
         rx.clear();
         ry.clear();
 
