@@ -26,11 +26,12 @@ public class RayCaster {
     }
     public void drawRays3d(Graphics2D g2)
     {
-        int tSize = 64;//dun.getDSIZE();
-        int renderDist = 64; //amount of walls rendered when looking around
-        int distScale = 5; //how far away things look
-        int px = ParentEntity.x -player.w/2;
-        int py = ParentEntity.y -player.h/2;
+        int tSize = 32;//dun.getDSIZE();
+        int renderDist = 32; //amount of walls rendered when looking around
+        int distScale = 1000; //how far away things look
+        int px = player.x -player.w/2;
+        int py = player.y -player.h/2;
+        System.out.println(px + " , "+py);
         double pa = player.getAngle();
         int mx, my, mp, dof;
         float rx = 0, ry = 0, ra, xo = 0, yo = 0, distT = 0;

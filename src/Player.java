@@ -14,9 +14,10 @@ public class Player extends ParentEntity {
 
     private ArrayList<Integer> rx = new ArrayList<>();
     private ArrayList<Integer> ry = new ArrayList<>();
+
     public Player(int x, int y) {
         super(x, y, 10, 10);
-        dX=x;
+        dX = x;
         dY = y;
     }
 
@@ -55,9 +56,9 @@ public class Player extends ParentEntity {
 
 //        g2d.translate(x , y );
 //        g2d.rotate(angle);
-        g.fillRect((x - w / 2), (y - h / 2), w, h);
-        g.drawLine(x, y, (int) (x + 15*Math.cos(angle)), (int) (y+15*Math.sin(angle)));
-        g.drawRect(50,50,1,1);
+        g.fillRect((x - w / 2)/4, (y - h / 2)/4, w, h);
+        g.drawLine(x/4, y/4, (int) (x + 15 * Math.cos(angle)), (int) (y + 15 * Math.sin(angle)));
+        g.drawRect(50, 50, 1, 1);
 //        for(int i = 0; i <= 60; i++)
 //            try {
 //                g2d.drawLine(x, y, rx.get(i), ry.get(i));//        g2d.rotate(-angle);
@@ -67,11 +68,13 @@ public class Player extends ParentEntity {
         ry.clear();
 
     }
-    public void setPlayerRay(int rx, int ry){
+
+    public void setPlayerRay(int rx, int ry) {
         this.rx.add(rx);
         this.ry.add(ry);
 
     }
+
     public double dist(double ax, double ay, double bx, double by) {
         return Math.sqrt((bx - ax) * (bx - ax) + (by - ay) * (by - ay));
     }
