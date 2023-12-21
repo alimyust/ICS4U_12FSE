@@ -32,8 +32,6 @@ public class Player extends ParentEntity {
             if (angle > 2 * Math.PI)
                 angle -= 2 * Math.PI;
         }
-        System.out.println("dX = " + dX + "   dY = " + dY);
-        System.out.println("X = " + x + "   Y = " + y);
         if (keys[KeyEvent.VK_W]) {
             dX += Math.cos(angle) * range;
             dY += Math.sin(angle) * range;
@@ -59,6 +57,7 @@ public class Player extends ParentEntity {
 //        g2d.rotate(angle);
         g.fillRect((x - w / 2), (y - h / 2), w, h);
         g.drawLine(x, y, (int) (x + 15*Math.cos(angle)), (int) (y+15*Math.sin(angle)));
+        g.drawRect(50,50,1,1);
 //        for(int i = 0; i <= 60; i++)
 //            try {
 //                g2d.drawLine(x, y, rx.get(i), ry.get(i));//        g2d.rotate(-angle);

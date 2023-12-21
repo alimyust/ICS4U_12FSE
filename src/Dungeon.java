@@ -15,26 +15,32 @@ public class Dungeon {
     private final int DEAD = 0; // dead is wall
 
     public Dungeon() {
-//        map = automata(WID,HGT,0.55,5,4,4);
-        generateGrid(0.53);
-        automata(20, 5, 4);
-        System.out.println(Arrays.deepToString(map));
-        int[][] newMap = new int[WID][HGT];
-        floodFill(300,300,newMap);
-    }
-    private void floodFill(int cx, int cy, int[][] newMap){
-        if(newMap[cx][cy] != -1) // Has been visited
-            return;
-        if(map[cy][cx] == 0)// Is a wall
-        {
-            newMap[cy][cx] = 0;
-            return;
-        }
-        floodFill(cx+1,cy+1,newMap);
-        floodFill(cx+1,cy-1,newMap);
-        floodFill(cx-1,cy+1,newMap);
-        floodFill(cx-1,cy-1,newMap);
+        int c;
+        do {
+            generateGrid(0.48);
+            automata(20, 5, 4);
+            c = floodFill(HGT/2, WID/2, 2);
+        } while ((double)c / (double)(HGT * WID) <= 0.05);
+        //determines the minimum size in percent of alive cells compared to entire map
 
+        // Fill everything else
+        for (int i = 0; i < HGT; i++)
+            for (int j = 0; j < WID; j++)
+                if (map[i][j] != 2)
+                    map[i][j] = 0;
+        // Print the final result
+    }
+
+    private int floodFill(int cx, int cy, int mark) {
+        if (spotIsOffGrid(cx, cy) || map[cy][cx] != 1)
+            return 0;
+        map[cy][cx] = mark;
+        int count = 1;
+        count += floodFill(cx + 1, cy, mark)+
+                 floodFill(cx - 1, cy, mark)+
+                 floodFill(cx, cy + 1, mark)+
+                 floodFill(cx, cy - 1, mark);
+        return count;
     }
 
     public int[] generateRow(int width, double aliveProbability) {
