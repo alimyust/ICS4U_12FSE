@@ -22,7 +22,7 @@ public class Player extends ParentEntity {
     }
 
     public void movePlayer(boolean[] keys) {
-        int range = 1;
+        double range = 0.5;
         if (keys[KeyEvent.VK_A]) {
             angle -= 0.1;
             if (angle < 0)
@@ -56,17 +56,14 @@ public class Player extends ParentEntity {
 
 //        g2d.translate(x , y );
 //        g2d.rotate(angle);
-        g.fillRect((x - w / 2)/4, (y - h / 2)/4, w, h);
-        g.drawLine(x/4, y/4, (int) (x + 15 * Math.cos(angle)), (int) (y + 15 * Math.sin(angle)));
+        g.fillRect((x - w / 2), (y - h / 2), w, h);
+        g.drawLine(x, y, (int) (x + 15 * Math.cos(angle)), (int) (y + 15 * Math.sin(angle)));
         g.drawRect(50, 50, 1, 1);
 //        for(int i = 0; i <= 60; i++)
-//            try {
+//            if(!rx.isEmpty() && !ry.isEmpty())
 //                g2d.drawLine(x, y, rx.get(i), ry.get(i));//        g2d.rotate(-angle);
-//            } catch (Exception ignored) {
-//            }
         rx.clear();
         ry.clear();
-
     }
 
     public void setPlayerRay(int rx, int ry) {
