@@ -4,8 +4,8 @@ public class ParentEntity {
     protected int w;
     protected int h;
     public ParentEntity(int x, int y, int w, int h){
-        this.x = x;
-        this.y= y;
+        ParentEntity.x = x;
+        ParentEntity.y = y;
         this.w = w;
         this.h = h;
     }

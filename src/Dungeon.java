@@ -2,7 +2,7 @@ import java.awt.*;
 import java.util.Arrays;
 
 public class Dungeon {
-    private final int DSIZE = 8;
+    private final int DSIZE = 16;
     //dungeon size. Smaller values make larger dungeons
     private final int WID = MainGame.WID / DSIZE;
     //same divisor keeps it proportional to total size of display
@@ -17,10 +17,10 @@ public class Dungeon {
     public Dungeon() {
         int c;
         do {
-            generateGrid(0.48);
+            generateGrid(0.45);
             automata(20, 5, 4);
             c = floodFill(HGT/2, WID/2, 2);
-        } while ((double)c / (double)(HGT * WID) <= 0.05);
+        } while ((double)c / (double)(HGT * WID) <= 0.005);
         //determines the minimum size in percent of alive cells compared to entire map
 
         // Fill everything else
@@ -28,7 +28,6 @@ public class Dungeon {
             for (int j = 0; j < WID; j++)
                 if (map[i][j] != 2)
                     map[i][j] = 0;
-        // Print the final result
     }
 
     private int floodFill(int cx, int cy, int mark) {
@@ -111,7 +110,7 @@ public class Dungeon {
             for (int x = 0; x < WID; x += 1) {
                 cellCol = (map[y][x] == DEAD) ? BLACK : WHITE;
                 g.setColor(cellCol);
-                g.fillRect(x * DSIZE / 2, y * DSIZE / 2, DSIZE / 2, DSIZE / 2);
+                g.fillRect(x * DSIZE, y * DSIZE, DSIZE, DSIZE);
             }
         }
     }
@@ -122,13 +121,5 @@ public class Dungeon {
 
     public int getDSIZE() {
         return DSIZE;
-    }
-
-    public int getWID() {
-        return WID;
-    }
-
-    public int getHGT() {
-        return HGT;
     }
 }

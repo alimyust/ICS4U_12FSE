@@ -22,24 +22,25 @@ public class Player extends ParentEntity {
     }
 
     public void movePlayer(boolean[] keys) {
-        int range = 1;
+        double speed = 0.5;
+        double angleTurnSpeed = 0.05;
         if (keys[KeyEvent.VK_A]) {
-            angle -= 0.1;
+            angle -= angleTurnSpeed;
             if (angle < 0)
                 angle += 2 * Math.PI;
         }
         if (keys[KeyEvent.VK_D]) {
-            angle += 0.1;
+            angle += angleTurnSpeed;
             if (angle > 2 * Math.PI)
                 angle -= 2 * Math.PI;
         }
         if (keys[KeyEvent.VK_W]) {
-            dX += Math.cos(angle) * range;
-            dY += Math.sin(angle) * range;
+            dX += Math.cos(angle) * speed;
+            dY += Math.sin(angle) * speed;
         }
         if (keys[KeyEvent.VK_S]) {
-            dX -= Math.cos(angle) * range;
-            dY -= Math.sin(angle) * range;
+            dX -= Math.cos(angle) * speed;
+            dY -= Math.sin(angle) * speed;
         }
         x = (int) Math.round(dX);
         y = (int) Math.round(dY);
@@ -56,8 +57,8 @@ public class Player extends ParentEntity {
 
 //        g2d.translate(x , y );
 //        g2d.rotate(angle);
-        g.fillRect((x - w / 2)/4, (y - h / 2)/4, w, h);
-        g.drawLine(x/4, y/4, (int) (x + 15 * Math.cos(angle)), (int) (y + 15 * Math.sin(angle)));
+        g.fillRect((x - w / 2), (y - h / 2), w, h);
+        g.drawLine(x, y, (int) (x + 15 * Math.cos(angle)), (int) (y + 15 * Math.sin(angle)));
         g.drawRect(50, 50, 1, 1);
 //        for(int i = 0; i <= 60; i++)
 //            try {

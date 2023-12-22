@@ -4,12 +4,12 @@ import java.util.Arrays;
 
 import static java.lang.Math.PI;
 
-public class RayCaster {
+public class RayCaster{
     private final Player player;
     private final Dungeon dun;
     private final double DR = 0.0174533;
-    private final int WID = Game3D.getWID();
-    private final int HGT = Game3D.getHGT();
+    private final int WID = Game3D.getWid3d();
+    private final int HGT = Game3D.getHgt3d();
     private final int mapS;
     private final int mapX;
     private final int mapY;
@@ -26,15 +26,15 @@ public class RayCaster {
     }
     public void drawRays3d(Graphics2D g2)
     {
-        int tSize = 32;//dun.getDSIZE();
-        int renderDist = 32; //amount of walls rendered when looking around
-        int distScale = 1000; //how far away things look
-        int px = player.x -player.w/2;
-        int py = player.y -player.h/2;
-        System.out.println(px + " , "+py);
+        int tSize = dun.getDSIZE();
+        int renderDist = 64; //amount of walls rendered when looking around
+        int distScale = 1500; //how far away things look
+        int px = ParentEntity.x;// + (64*8)/2*4);
+        int py = ParentEntity.y;//+ (64*8)/2*4) ;
+        System.out.println(px + "," + py);
         double pa = player.getAngle();
         int mx, my, mp, dof;
-        float rx = 0, ry = 0, ra, xo = 0, yo = 0, distT = 0;
+        float rx = px, ry = py, ra, xo = 0, yo = 0, distT = 0;
         int fov = 30;
         ra = (float) (pa-DR*fov);
         if(ra < 0) { ra += 2 * PI; }
@@ -47,12 +47,12 @@ public class RayCaster {
             dof = 0;
             float aTan = (float) (-1 / Math.tan(ra));
             if(ra > PI) { ry = (float) (py / tSize * tSize -0.0001); rx = (py-ry)*aTan+px; yo = -tSize;xo = -yo*aTan;}
-            if(ra < PI) { ry = (float) (py / tSize * tSize + renderDist); rx = (py-ry)*aTan+px; yo = tSize; xo = -yo*aTan;}
+            if(ra < PI) { ry = (float) (py / tSize * tSize + tSize); rx = (py-ry)*aTan+px; yo = tSize; xo = -yo*aTan;}
             if(ra == 0 || ra == PI) {rx = px; ry = py; dof = renderDist;}
             while (dof < renderDist)
             {
                 mx = (int) (rx) / tSize; my = (int) (ry) / tSize; mp = my*mapX + mx;
-                if(mp > 0 && mp < mapX*mapY && map[mp]==0) {hx = rx; hy = ry; distH = (float)dist(px,py,hx,hy); dof = tSize;}
+                if(mp > 0 && mp < mapX*mapY && map[mp]==0) {hx = rx; hy = ry; distH = (float)dist(px,py,hx,hy); dof = renderDist;}
                 else  {rx += xo; ry += yo; dof += 1;}
             }
             // Vertical Lines
@@ -62,12 +62,12 @@ public class RayCaster {
             double PI2 = Math.PI / 2;
             double PI3 = 3 * Math.PI / 2;
             if(ra > PI2 && ra < PI3) { rx = (float) (px / tSize * tSize -0.0001); ry = (px-rx)*nTan+py; xo = -tSize; yo = -xo*nTan;}
-            if(ra < PI2 || ra > PI3) { rx = (float) (px / tSize * tSize + renderDist); ry = (px-rx)*nTan+py; xo = tSize; yo = -xo*nTan;}
+            if(ra < PI2 || ra > PI3) { rx = (float) (px / tSize * tSize + tSize); ry = (px-rx)*nTan+py; xo = tSize; yo = -xo*nTan;}
             if(ra == 0 || ra == PI) {rx = px; ry = py; dof = renderDist;}
             while (dof < renderDist)
             {
                 mx = (int) (rx) / tSize; my = (int) (ry) / tSize; mp = my*mapX + mx;
-                if(mp > 0 && mp < mapX*mapY && map[mp]==0) {vx = rx; vy = ry; distV = (float)dist(px,py,vx,vy); dof = tSize;}
+                if(mp > 0 && mp < mapX*mapY && map[mp]==0) {vx = rx; vy = ry; distV = (float)dist(px,py,vx,vy); dof = renderDist;}
                 else  {rx += xo; ry += yo; dof += 1;}
             }
             if(distV < distH) {
@@ -98,10 +98,10 @@ public class RayCaster {
                 lineH = HGT;
             if (lineO<0)
                 lineO = 0;
-
-            int depth = 8;//MainGame.WID/64;
-            g2.setStroke(new BasicStroke(depth*2));
-            g2.draw(new Line2D.Float(r*depth*2, lineO, r*depth*2,lineH+lineO));
+//            System.out.println(lineH + ", " + lineO);
+            int depth = 10 * 2;//MainGame.WID/64;
+            g2.setStroke(new BasicStroke(depth));
+            g2.draw(new Line2D.Float(r*depth, lineO, r*depth,lineH+lineO));
 
 
             ra += DR; if(ra < 0) { ra += 2 * PI;} if(ra > 2* PI) {ra -= 2* PI;}
