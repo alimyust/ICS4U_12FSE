@@ -7,7 +7,9 @@ import static java.lang.Math.PI;
 public class RayCaster{
     private final Player player;
     private final Dungeon dun;
-    private final double DR = 0.0174533;
+    private final double resolution = 10; //(10 is max before it's too high resolution for the display size)
+    private final double DR = 0.0174533/resolution;
+    //changes what the degree value is so that more rays are drawn without actually increasing the fov
     private final int WID = Game3D.getWid3d();
     private final int HGT = Game3D.getHgt3d();
     private final int mapS;
@@ -18,27 +20,26 @@ public class RayCaster{
         this.player = player;
         this.dun = dun;
         mapX = dun.getMap()[0].length;
-        mapY = dun.getMap().length;;//dun.getHGT();
+        mapY = dun.getMap().length;
         mapS = mapX * mapY;
         map = flatten(dun.getMap());
-//        System.out.println(Arrays.deepToString(dun.getMap()));
-//        System.out.println(Arrays.toString(map));
     }
     public void drawRays3d(Graphics2D g2)
     {
         int tSize = dun.getDSIZE();
         int renderDist = 64; //amount of walls rendered when looking around
-        int distScale = 1500; //how far away things look
-        int px = ParentEntity.x;// + (64*8)/2*4);
-        int py = ParentEntity.y;//+ (64*8)/2*4) ;
-        System.out.println(px + "," + py);
+        int distScale = 32; //how far away things look
+        int px = ParentEntity.x;
+        int py = ParentEntity.y;
         double pa = player.getAngle();
         int mx, my, mp, dof;
-        float rx = px, ry = py, ra, xo = 0, yo = 0, distT = 0;
-        int fov = 30;
+        float rx = 0, ry = 0, ra, xo = 0, yo = 0, distT = 0;
+        int fov = (int) (30 * resolution);
         ra = (float) (pa-DR*fov);
         if(ra < 0) { ra += 2 * PI; }
         if(ra > 2* PI) {ra -= 2* PI;}
+        rx = Math.round(rx);
+        ry = Math.round(ry);
 
         for (int r= 0; r < 2*fov; r++)
         {
@@ -77,7 +78,7 @@ public class RayCaster{
                 Color c1 = new Color(155, 13, 13);
                 g2.setColor(c1);
             }
-            if(distH < distV) {
+            if(distV > distH) {
                 rx = hx;
                 ry = hy;
                 distT = distH;
@@ -90,7 +91,6 @@ public class RayCaster{
             float ca = (float)pa - ra;
             if(ca < 0) {ca += 2* PI;}
             if(ca >  2* PI) {ca -= 2* PI;}
-//            System.out.println(ca);
             distT = (float) (distT *Math.cos(ca));
             float lineH = (distT != 0) ? (mapS * HGT) / distT/distScale : 0;
             float lineO = Math.max(0, HGT / 2 - lineH / 2);
@@ -99,12 +99,12 @@ public class RayCaster{
             if (lineO<0)
                 lineO = 0;
 //            System.out.println(lineH + ", " + lineO);
-            int depth = 10 * 2;//MainGame.WID/64;
+            int depth = (int) (10 * 2.0 / resolution);
             g2.setStroke(new BasicStroke(depth));
             g2.draw(new Line2D.Float(r*depth, lineO, r*depth,lineH+lineO));
 
 
-            ra += DR; if(ra < 0) { ra += 2 * PI;} if(ra > 2* PI) {ra -= 2* PI;}
+            ra += (float) DR; if(ra < 0) { ra += (float) (2 * PI);} if(ra > 2* PI) {ra -= (float) (2* PI);}
         }
     }
 

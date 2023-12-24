@@ -17,7 +17,7 @@ public class Dungeon {
     public Dungeon() {
         int c;
         do {
-            generateGrid(0.45);
+            generateGrid(0.50);
             automata(20, 5, 4);
             c = floodFill(HGT/2, WID/2, 2);
         } while ((double)c / (double)(HGT * WID) <= 0.005);
