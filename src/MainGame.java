@@ -1,7 +1,7 @@
 public class MainGame {
     private static final Dungeon dun = new Dungeon();
-    protected static final int WID = 64*8;
-    protected static final int HGT= 64*8;
+    protected static final int WID = 64*16;
+    protected static final int HGT= 64*16;
     private static final Player player = new Player(WID/2,HGT/2);
 
     public static void main(String[] args) {

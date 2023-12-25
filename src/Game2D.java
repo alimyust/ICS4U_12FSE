@@ -5,8 +5,9 @@ import java.awt.event.KeyEvent;
 public class Game2D extends BaseFrame{
     private Dungeon dun;
     private Player player;
+    private static final int dunSizeRatio = 2;
     public Game2D(Dungeon dun, Player player) {
-        super("Game2D", 64*8, 64*8);
+        super("Game2D", MainGame.WID/2, MainGame.HGT/2);
         this.dun = dun;
         this.player = player;
 
@@ -36,5 +37,9 @@ public class Game2D extends BaseFrame{
     public void keyPressed(KeyEvent e) {
         super.keyPressed(e);
 //        dun = new Dungeon();
+    }
+
+    public static int getDunSizeRatio() {
+        return dunSizeRatio;
     }
 }
