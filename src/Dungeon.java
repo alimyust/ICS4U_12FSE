@@ -23,7 +23,7 @@ public class Dungeon {
         // Fill everything else
         for (int i = 0; i < HGT; i++)
             for (int j = 0; j < WID; j++)
-                map[i][j] = new MapNode((map[i][j].getbCode() == 2) ? ALIVE : DEAD);
+                map[i][j] = new MapNode((map[i][j].getbCode() == 2) ? ALIVE : 6);
     }
 
     private int floodFill(int cx, int cy, int mark) {

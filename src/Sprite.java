@@ -35,4 +35,3 @@ public class Sprite {
         return height;
     }
 }
-}

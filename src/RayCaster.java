@@ -112,8 +112,6 @@ public class RayCaster{
             }
             player.setPlayerRay((int) rx, (int) ry);
 
-
-
             // Walls
             float ca = (float)pa - ra;
             if(ca < 0) {ca += 2* PI;}
@@ -142,10 +140,6 @@ public class RayCaster{
                 wallX = px + distT * rx;
             wallX -= Math.floor(wallX);
             int texX = (int) (wallX * texWidth);
-            if (side == 0 && rx > 0)
-                texX = texWidth - texX - 1;
-            if (side == 1 && ry < 0)
-                texX = texWidth - texX - 1;
 
             double step = 1.0 * texHeight / lineH;
             double texPos = (lineO - HGT / 2 + lineH / 2) * step;
@@ -153,11 +147,12 @@ public class RayCaster{
             for (int y = (int) lineO; y < lineH + lineO; y++) {
                 int texY = (int) texPos & (texHeight - 1);
                 texPos += step;
-                int color = texture[5][texHeight * texY + texX];
+                int color = texture[6][texHeight * texY + texX];
                 // Make color darker for y-sides: R, G, and B byte each divided through two with a "shift" and an "and"
-                if (side == 1) {
+                if (side == 1)
                     color = (color >> 1) & 8355711;
-                }
+                if(y == lineH + lineO - 1)
+                    System.out.println(color);
                 g2.setColor(new Color(color));
                 g2.drawLine(r * depth, y, r * depth, y);
             }
