@@ -2,7 +2,7 @@ import java.awt.*;
 import java.util.Arrays;
 
 public class Dungeon {
-    private final int DSIZE = 32;
+    private final int DSIZE = 8;
     private final int WID = MainGame.WID / DSIZE;
     private final int HGT = MainGame.HGT / DSIZE;
     private final Color WHITE = new Color(255, 255, 255);

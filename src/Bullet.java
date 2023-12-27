@@ -6,7 +6,7 @@ public class Bullet extends ParentMovingEntity{
     }
     public void drawBullet(Graphics g, int r){
         g.setColor(Color.GREEN);
-        System.out.println(x +","+y);
+//        System.out.println(x +","+y);
         g.drawOval(x/r,y/r,w,h);
     }
 }

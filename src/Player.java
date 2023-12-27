@@ -5,12 +5,8 @@ import java.util.ArrayList;
 
 public class Player extends ParentEntity {
 
-
-    private final ArrayList<Integer> rx = new ArrayList<>();
-    private final ArrayList<Integer> ry = new ArrayList<>();
     private final ArrayList<Bullet> pBullets = new ArrayList<>();
-
-    private double angle = 0;
+    private double angle = Math.PI;
     private double dX;
     private double dY;
 
@@ -39,28 +35,18 @@ public class Player extends ParentEntity {
             y -= (int) Math.round(dY);
         }
         if(keys[KeyEvent.VK_SPACE])
-            pBullets.add(new Bullet(x,y,dX*2,dY*2));
+            pBullets.add(new Bullet(x,y,dX,dY));
         pBullets.forEach(ParentMovingEntity::moveEntity);
+
     }
 
     public void drawPlayer(Graphics g) {
         int r = Game2D.getDunSizeRatio();
         g.setColor(Color.RED);
         g.fillRect((x/r - w / 2), (y/r - h / 2), w, h);
-//        g.setColor(Color.green);
-//        g.drawLine(x/r, y/r, (int) (x/r + 500 * Math.cos(angle)), (int) (y/r + 500 * Math.sin(angle)));
-//        g.setColor(Color.red);
-//        for (int i = 0; i <= rx.size() - 1; i++)
-//            g2d.drawLine(x/r, y/r, rx.get(i)/r, ry.get(i)/r);//        g2d.rotate(-angle);
-//        rx.clear();
-//        ry.clear();
         pBullets.forEach(b -> b.drawBullet(g, r));
     }
 
-    public void setPlayerRay(int rx, int ry) {
-        this.rx.add(rx);
-        this.ry.add(ry);
-    }
     public void fixAngle(){
         if (angle < 0)
             angle += 2 * Math.PI;
@@ -72,8 +58,5 @@ public class Player extends ParentEntity {
         return angle;
     }
 
-    public double dist(double ax, double ay, double bx, double by) {
-        return Math.sqrt((bx - ax) * (bx - ax) + (by - ay) * (by - ay));
-    }
 
 }

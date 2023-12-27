@@ -6,14 +6,14 @@ public class Game3D extends BaseFrame {
     private static final int wid3d = 64 * 18;
     private static final int hgt3d = 64 * 12;
     private final Dungeon dun;
-    private final Player p2d;
+    private final Player player;
     private final RayCaster rayCast;
 
     public Game3D(Dungeon dun, Player p2d) {
         super("Game3D", wid3d, hgt3d);
         this.setLocationRelativeTo(null);
         this.dun = dun;
-        this.p2d = p2d;
+        this.player = p2d;
         this.rayCast = new RayCaster(p2d, dun);
     }
 
@@ -36,13 +36,15 @@ public class Game3D extends BaseFrame {
         super.draw(g);
         if (rayCast != null)
             rayCast.drawRays3d(g2d);
+        repaint();  // Ensure that the frame is repainted after drawing the rays
     }
 
     @Override
     public void move() {
         super.move();
-        p2d.movePlayer(keys);
-
+        player.movePlayer(keys);
+        rayCast.updatePlayerPosition(player.x, player.y);
+        rayCast.updatePlayerDirection(Math.cos(player.getAngle()), Math.sin(player.getAngle()));
     }
 
     @Override
@@ -50,5 +52,6 @@ public class Game3D extends BaseFrame {
         super.keyPressed(e);
 //        dun = new Dungeon();
     }
+
 
 }
