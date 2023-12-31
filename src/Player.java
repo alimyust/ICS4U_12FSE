@@ -13,6 +13,7 @@ public class Player extends ParentEntity {
     private double angle = 0;
     private double dX;
     private double dY;
+    private double speed = 5;
 
     public Player(int x, int y) {
         super(x, y, 10, 10);
@@ -21,8 +22,7 @@ public class Player extends ParentEntity {
     }
 
     public void movePlayer(boolean[] keys) {
-        double speed = 5;
-        double turnAngle = 0.05;
+        double turnAngle = 0.1;
         if (keys[KeyEvent.VK_A])
             angle -= turnAngle;
         if (keys[KeyEvent.VK_D])
@@ -45,15 +45,15 @@ public class Player extends ParentEntity {
 
     public void drawPlayer(Graphics g) {
         int r = Game2D.getDunSizeRatio();
-        g.setColor(Color.RED);
+        Graphics2D g2d = (Graphics2D) g;
+        g.setColor(Color.green);
         g.fillRect((x/r - w / 2), (y/r - h / 2), w, h);
-//        g.setColor(Color.green);
-//        g.drawLine(x/r, y/r, (int) (x/r + 500 * Math.cos(angle)), (int) (y/r + 500 * Math.sin(angle)));
-//        g.setColor(Color.red);
-//        for (int i = 0; i <= rx.size() - 1; i++)
-//            g2d.drawLine(x/r, y/r, rx.get(i)/r, ry.get(i)/r);//        g2d.rotate(-angle);
-//        rx.clear();
-//        ry.clear();
+        g.drawLine(x/r, y/r, (int) (x/r + 500 * Math.cos(angle)), (int) (y/r + 500 * Math.sin(angle)));
+        g.setColor(Color.yellow);
+        for (int i = 0; i <= rx.size() - 1; i++)
+            g2d.drawLine(x/r, y/r, rx.get(i)/r, ry.get(i)/r);//        g2d.rotate(-angle);
+        rx.clear();
+        ry.clear();
         pBullets.forEach(b -> b.drawBullet(g, r));
     }
 
@@ -76,4 +76,7 @@ public class Player extends ParentEntity {
         return Math.sqrt((bx - ax) * (bx - ax) + (by - ay) * (by - ay));
     }
 
+    public double getSpeed() {
+        return speed;
+    }
 }

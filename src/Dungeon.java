@@ -2,9 +2,10 @@ import java.awt.*;
 import java.util.Arrays;
 
 public class Dungeon {
-    private final int DSIZE = 32;
-    private final int WID = MainGame.WID / DSIZE;
-    private final int HGT = MainGame.HGT / DSIZE;
+    private final int DSIZE = 16;
+    private final int dSizeMultiplier = 2;
+    private final int WID = MainGame.WID / DSIZE * dSizeMultiplier;
+    private final int HGT = MainGame.HGT / DSIZE* dSizeMultiplier;
     private final Color WHITE = new Color(255, 255, 255);
     private final Color BLACK = new Color(0, 0, 0);
     Color cellCol;
@@ -15,15 +16,15 @@ public class Dungeon {
     public Dungeon() {
         int c;
         do {
-            generateGrid(0.50);
-            automata(20, 5, 4);
-            c = floodFill(HGT / 2, WID / 2, 2);
+            generateGrid(0.55);
+            automata(5, 5, 4);
+            c = floodFill((HGT / 2)/dSizeMultiplier, (WID / 2)/dSizeMultiplier, 2);
         } while ((double) c / (double) (HGT * WID) <= 0.005);
 
         // Fill everything else
         for (int i = 0; i < HGT; i++)
             for (int j = 0; j < WID; j++)
-                map[i][j] = new MapNode((map[i][j].getbCode() == 2) ? ALIVE : 6);
+                map[i][j] = new MapNode((map[i][j].getbCode() == 2) ? ALIVE : 2);
     }
 
     private int floodFill(int cx, int cy, int mark) {
