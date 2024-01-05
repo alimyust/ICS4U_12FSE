@@ -2,8 +2,8 @@ import java.awt.*;
 import java.util.Arrays;
 
 public class Dungeon {
-    private final int DSIZE = 16;
-    private final int dSizeMultiplier = 2;
+    private final int DSIZE = 64;
+    private final int dSizeMultiplier = 4;
     private final int WID = MainGame.WID / DSIZE * dSizeMultiplier;
     private final int HGT = MainGame.HGT / DSIZE* dSizeMultiplier;
     private final Color WHITE = new Color(255, 255, 255);
@@ -16,21 +16,22 @@ public class Dungeon {
     public Dungeon() {
         int c;
         do {
-            generateGrid(0.55);
-            automata(5, 5, 4);
-            c = floodFill((HGT / 2)/dSizeMultiplier, (WID / 2)/dSizeMultiplier, 2);
+            generateGrid(0.50);
+            automata(20, 5, 4);
+            c = floodFill((HGT / 2)/dSizeMultiplier, (WID / 2)/dSizeMultiplier, -1);
         } while ((double) c / (double) (HGT * WID) <= 0.005);
 
         // Fill everything else
+        map = makeBorder(map);
         for (int i = 0; i < HGT; i++)
             for (int j = 0; j < WID; j++)
-                map[i][j] = new MapNode((map[i][j].getbCode() == 2) ? ALIVE : 2);
+                map[i][j] = new MapNode((map[i][j].getwCode() == -1) ? ALIVE : 1, 2, 2);
     }
 
     private int floodFill(int cx, int cy, int mark) {
-        if (spotIsOffGrid(cx, cy) || map[cy][cx].getbCode() != ALIVE)
+        if (spotIsOffGrid(cx, cy) || map[cy][cx].getwCode() != ALIVE)
             return 0;
-        map[cy][cx] = new MapNode(mark);
+        map[cy][cx] = new MapNode(mark, 2, 2);
         int count = 1;
         count += floodFill(cx + 1, cy, mark) +
                 floodFill(cx - 1, cy, mark) +
@@ -50,7 +51,7 @@ public class Dungeon {
         for (int i = 0; i < HGT; i++) {
             int[] row = generateRow(WID, aliveProbability);
             for (int j = 0; j < WID; j++) {
-                map[i][j] = new MapNode(row[j]);
+                map[i][j] = new MapNode(row[j], 2, 2);
             }
         }
     }
@@ -67,7 +68,7 @@ public class Dungeon {
             for (int j = Math.max(0, y - 1); j <= Math.min(y + 1, HGT - 1); j++) {
                 if (i != x || j != y) { // We only care about neighbors
                     if (spotIsOffGrid(i, j)) values[index++] = ALIVE; // Assuming out-of-bounds cells are alive
-                    else values[index++] = map[j][i].getbCode();
+                    else values[index++] = map[j][i].getwCode();
                 }
             }
         }
@@ -76,7 +77,7 @@ public class Dungeon {
     }
 
     public int newValueAtPosition(int x, int y, int birthThreshold, int survivalThreshold) {
-        int cellValue = map[y][x].getbCode();
+        int cellValue = map[y][x].getwCode();
         int[] neighborValues = neighborValues(x, y);
         long aliveNeighbors = Arrays.stream(neighborValues).filter(value -> value == ALIVE).count();
         if (cellValue == ALIVE && aliveNeighbors >= survivalThreshold)
@@ -90,7 +91,7 @@ public class Dungeon {
         MapNode[][] newGrid = new MapNode[HGT][WID];
         for (int y = 0; y < HGT; y++) {
             for (int x = 0; x < WID; x++) {
-                newGrid[y][x] = new MapNode(newValueAtPosition(x, y, birthThreshold, survivalThreshold));
+                newGrid[y][x] = new MapNode(newValueAtPosition(x, y, birthThreshold, survivalThreshold), 2, 2);
             }
         }
 
@@ -101,13 +102,24 @@ public class Dungeon {
         for (int i = 0; i < iterations; i++)
             automataIteration(birthThreshold, survivalThreshold);
     }
+    public MapNode[][] makeBorder(MapNode[][] map){
+        for(int i=0; i < map[0].length; i++){
+            map[0][i] = new MapNode(DEAD,DEAD,DEAD);
+            map[map.length-1][i] = new MapNode(DEAD,DEAD,DEAD);
+        }
+        for(int i=0; i < map.length; i++){
+            map[i][0] = new MapNode(DEAD,DEAD,DEAD);
+            map[i][map.length-1] = new MapNode(DEAD,DEAD,DEAD);
+        }
+        return map;
+    }
 
     public void drawDungeon2D(Graphics g) {
         int r = Game2D.getDunSizeRatio();
         for (int y = 0; y < HGT; y += 1) {
             for (int x = 0; x < WID; x += 1) {
-//                cellCol = (map[y][x].getbCode() == DEAD) ? BLACK : map[y][x].getCol();
-                g.setColor(map[y][x].getCol());
+                cellCol = (map[y][x].getwCode() == 0) ? WHITE : BLACK;
+                g.setColor(cellCol);
                 g.fillRect(x * DSIZE / r, y * DSIZE / r, DSIZE / r, DSIZE / r);
             }
         }
@@ -119,5 +131,9 @@ public class Dungeon {
 
     public int getDSIZE() {
         return DSIZE;
+    }
+
+    public int getdSizeMultiplier() {
+        return dSizeMultiplier;
     }
 }

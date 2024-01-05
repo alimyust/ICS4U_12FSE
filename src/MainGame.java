@@ -1,4 +1,5 @@
 import javax.imageio.ImageIO;
+import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
@@ -9,32 +10,20 @@ public class MainGame {
     protected static final int HGT= 64*16;
     private static final Player player = new Player(WID/2,HGT/2);
     protected static final String imgDir = "resources/images/";
-    protected static final int[][] imgArr = {
-            convertImageToColorArray(MainGame.imgDir + "redBrick.png"),
-            convertImageToColorArray(MainGame.imgDir + "redBrick.png"),
-            convertImageToColorArray(MainGame.imgDir + "redBrick.png"),
-            convertImageToColorArray(MainGame.imgDir + "redBrick.png"),
-            convertImageToColorArray(MainGame.imgDir + "redBrick.png"),
-            convertImageToColorArray(MainGame.imgDir + "redBrick.png"),
-            convertImageToColorArray(MainGame.imgDir + "redBrick.png"),
+    protected static final Color[][] imgArr = {
+            convertImageToColorArray(MainGame.imgDir + "dirt.png"),
+            convertImageToColorArray(MainGame.imgDir + "grass.png"),
+            convertImageToColorArray(MainGame.imgDir + "redBrick.png")
     };
-    public static int[] convertImageToColorArray(String imagePath) {
-        int[] colorArray = new int[64 * 64];
-        System.out.println("in convertImg to col");
+    public static Color [] convertImageToColorArray(String imagePath) {
+        Color[] colorArray = new Color[32*32];
         try {
             BufferedImage image = ImageIO.read(new File(imagePath));
-
-            // Check if the image is 64x64 pixels
-            if (image.getWidth() != 64 || image.getHeight() != 64)
-                throw new IllegalArgumentException("Image dimensions must be 64x64 pixels.");
-            // Iterate through each pixel and get the color
-            for (int y = 0; y < 64; y++) {
-                for (int x = 0; x < 64; x++) {
-                    int rgb = image.getRGB(x, y);
-                    colorArray[y * 64 + x] = rgb;
-                }
-            }
+            for (int y = 0; y < 32; y++)
+                for (int x = 0; x < 32; x++)
+                    colorArray[y*32 + x] = new Color(image.getRGB(x, y));
         } catch (IOException e) {
+            System.out.println("what why");
             throw new RuntimeException(e);
         }
 
