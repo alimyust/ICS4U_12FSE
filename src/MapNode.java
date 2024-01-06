@@ -13,8 +13,8 @@ public class MapNode {
     int[] texture;
     public MapNode(int wCode, int fCode, int cCode) {
         this.wCode = wCode;
-        this.fCode = 1;
-        this.cCode =2;
+        this.fCode = 2;
+        this.cCode =0;
     }
 
     public int getwCode() {

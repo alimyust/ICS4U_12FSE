@@ -19,7 +19,7 @@ public class Dungeon {
             generateGrid(0.50);
             automata(20, 5, 4);
             c = floodFill((HGT / 2)/dSizeMultiplier, (WID / 2)/dSizeMultiplier, -1);
-        } while ((double) c / (double) (HGT * WID) <= 0.005);
+        } while ((double) c / (double) (HGT * WID) <= 0.01);
 
         // Fill everything else
         map = makeBorder(map);
