@@ -13,9 +13,11 @@ public class RayCaster {
     private final int mapX;
     private final int mapY;
     private final MapNode[] mapW;
+    private final BaseEnemy testE;
     public RayCaster(Player player, Dungeon dun) {
         this.player = player;
         this.dun = dun;
+        this.testE = new BaseEnemy(64*12, 64*12, 2,10,10,0,0);
         mapX = dun.getMap()[0].length;
         mapY = dun.getMap().length;
         mapS = mapX * mapY;
@@ -77,7 +79,6 @@ public class RayCaster {
         py = player.y;
 
         for (int r = 0; r < fov * 2; r++) {
-            int hmt = 0, vmt = 0;
             // Horizontal Lines
             float distH = 1000000000, hx = px, hy = py;
             dof = 0;
@@ -222,18 +223,19 @@ public class RayCaster {
                 mp = (int)(ty / 32)*mapX + tx /32;
                 int pixel=(((int)(ty) & 31)*texSize + (tx & 31));
                 //draw floor
-                try {
+                if (mapW[mp].getfCode() != -1) {
                     g2.setColor(MainGame.imgArr[mapW[mp].getfCode()][pixel]);
-                    g2.drawLine(r*depth,y,r*depth,y);
+                    g2.drawLine(r * depth, y, r * depth, y);
+                }
+                if (mapW[mp].getcCode() != -1) {
                     g2.setColor(MainGame.imgArr[mapW[mp].getcCode()][pixel]);
-                    g2.drawLine(r*depth,HGT - y,r*depth,HGT - y);
-                }catch (IndexOutOfBoundsException ignored){
+                    g2.drawLine(r * depth, HGT - y, r * depth, HGT - y);
                 }
             }
             ra += (float) DR;
             ra = fixAng(ra);
-
         }
+        testE.drawBaseEnemy(g2,px,py,pa, HGT, WID);
     }
 
     public float fixAng(float angle) {

@@ -52,6 +52,9 @@ public class Player extends ParentEntity {
         g.setColor(Color.yellow);
         for (int i = 0; i <= rx.size() - 1; i++)
             g2d.drawLine(x/r, y/r, rx.get(i)/r, ry.get(i)/r);//        g2d.rotate(-angle);
+        g.setColor(Color.BLUE);
+        g.fillRect(64*12/r, 64*12/r,r,r);
+
         rx.clear();
         ry.clear();
         pBullets.forEach(b -> b.drawBullet(g, r));
