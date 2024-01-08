@@ -11,7 +11,7 @@ public class Player extends ParentEntity {
     private double angle = 0;
     private double dX;
     private double dY;
-    private double speed = 10;
+    private double speed = 15;
 
     public Player(int x, int y) {
         super(x, y, 10, 10);

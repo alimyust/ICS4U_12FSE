@@ -1,4 +1,5 @@
 import java.awt.*;
+import java.util.ArrayList;
 
 import static java.lang.Math.PI;
 
@@ -40,10 +41,12 @@ public class RayCaster {
         int tSize = dun.getDSIZE();
         int renderDist = 32; //amount of walls rendered when looking around
         int distScale = 50; //how far away things look
+        int darkScale =-1;
+        int darkStep = 5;
         int px = player.x;
         int py = player.y;
         double pa = player.getAngle();
-        int mx, my, mp = 0, dof;
+        int mx = 0, my = 0, mp = 0, dof;
         double rx = 0;
         double ry = 0;
         double ra;
@@ -178,7 +181,6 @@ public class RayCaster {
             }
             double lineOff = (double) HGT / 2 - (lineH / 2F); // Starting point after cutoff ( >0)
             rayDist[r] = (int) distT;
-
             //---draw walls---
             double ty = tyOff * tyStep; //texture y val
             int tx;
@@ -197,6 +199,8 @@ public class RayCaster {
                 int pixel = ((int) ty * texSize + tx);
                 if (pixel > 1023) pixel = 1023;
                 Color col = MainGame.imgArr[mapW[mp].getwCode()][pixel];
+                for (int i = 0; i < distT/darkScale; i+=darkStep)
+                    col = col.darker();
                 g2.setColor((shade != 1) ? col : col.darker().darker());
                 g2.drawLine(r * depth, (int) (y + lineOff), r * depth, (int) (y + lineOff));
                 ty += tyStep; // Adjust texture coordinate
@@ -215,12 +219,15 @@ public class RayCaster {
                 int pixel = (((int) (ty) & 31) * texSize + (tx & 31));
                 mp = fixMp(mp);
                 //draw floor
+                Color col;
                 if (mapW[mp].getfCode() != -1) {
-                    g2.setColor(MainGame.imgArr[mapW[mp].getfCode()][pixel]);
+                    col = MainGame.imgArr[mapW[mp].getfCode()][pixel];
+                    g2.setColor(col);
                     g2.drawLine(r * depth, y, r * depth, y);
                 }
                 if (mapW[mp].getcCode() != -1) {
-                    g2.setColor(MainGame.imgArr[mapW[mp].getcCode()][pixel]);
+                    col = MainGame.imgArr[mapW[mp].getcCode()][pixel];
+                    g2.setColor(col);
                     g2.drawLine(r * depth, HGT - y, r * depth, HGT - y);
                 }
             }

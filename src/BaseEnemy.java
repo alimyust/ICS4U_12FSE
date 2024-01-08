@@ -4,34 +4,35 @@ import java.util.ArrayList;
 import static java.lang.Math.PI;
 
 public class BaseEnemy extends ParentEntity{
-    private int distFromPlayer = 0;
     public BaseEnemy(int x, int y, Player player) {
         super(x, y, 64,64);
-        this.distFromPlayer = dist(x,player.x,y,player.y);
+        int distFromPlayer = dist(x, player.x, y, player.y);
     }
 
     public void drawBaseEnemy(Graphics g, Player player, int HGT, int WID, RayCaster ray) {
+        Graphics2D g2d = (Graphics2D) g;
         double angleRatio = -isPlayerLookingAt(player);
         int xPos = (int) (WID/2 * angleRatio + WID/2);
         if( xPos < 0 || xPos > WID) return;
         double eDist = Math.abs(dist(x,y, player.x,player.y));
         int scale = 200*64;
-        int rDist = ray.getRayDist()[xPos / ray.getDepth()];
         g.setColor(Color.red);
-        if (eDist < rDist) {
-            g.drawLine((int) (xPos + 1.0 / eDist * scale), HGT / 2, (int) (xPos - 1.0 / eDist * scale), HGT / 2);
-        }
-        }
-//        for(int i = 0; i < w/ray.getDepth(); i++) {
-//            int rDist = ray.getRayDist()[Math.min(xPos / ray.getDepth() + i, ray.getRayDist().length - 1)];
-//            if (eDist < rDist) {
-//                for(int j=0; j < 32; j++) {
-//                    g.setColor(MainGame.enemyImgArr[0][i * 32/(w/ray.getDepth())*32+j]);
-//                    g.drawLine(xPos + i * ray.getDepth(), HGT/2 + j*ray.getDepth(),
-//                            xPos + i * ray.getDepth(), HGT/2 + j*ray.getDepth());
-//                }
-//            }
+//        if (eDist < rDist) {
+//            g.drawLine((int) (xPos + 1.0 / eDist * scale), HGT / 2, (int) (xPos - 1.0 / eDist * scale), HGT / 2);
 //        }
+        int wid = (int) (1.0 / eDist * scale  * 2);
+        g2d.setStroke(new BasicStroke(WID/32));
+        for(int i = 0; i < wid; i++) {
+            int rDist = ray.getRayDist()[Math.min(xPos / ray.getDepth() + i, ray.getRayDist().length - 1)];
+            if (eDist < rDist) {
+                for(int j=0; j < 128; j++) {
+                    g.setColor(MainGame.enemyImgArr[0][i * 32/(wid)*32+j]);
+                    g.drawLine(xPos -wid/2 + i , HGT/2 + j,
+                            xPos -wid/2 + i , HGT/2 + j);
+                }
+            }
+        }
+    }
 
 //        if(Math.abs(dist(player.x,x,player.y,y)) < rDist)
 //            g.drawRect(xPos, HGT/2, w,h);

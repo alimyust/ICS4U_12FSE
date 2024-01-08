@@ -17,7 +17,8 @@ public class MainGame {
             convertImageToColorArray(MainGame.imgDir + "redBrick.png"),
     };
     protected static final Color[][] enemyImgArr = { //skip colour #f8028a
-            convertImageToColorArray(MainGame.imgDir + "amogus.png"),
+            convertImageToColorArray(MainGame.imgDir + "slenderman.png"),
+            convertImageToColorArray(MainGame.imgDir + "amogus.png")
     };
     public static Color [] convertImageToColorArray(String imagePath) {
         Color[] colorArray = new Color[32*32];

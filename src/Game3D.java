@@ -35,7 +35,6 @@ public class Game3D extends BaseFrame {
     public void draw(Graphics g) {
         Graphics2D g2d = (Graphics2D) g;
         super.draw(g);
-        assert rayCast != null;
         rayCast.drawRays3d(g2d);
         for (BaseEnemy e : dun.geteArr())
             e.drawBaseEnemy(g, player, HGT, WID, rayCast);
