@@ -5,20 +5,21 @@ import static java.lang.Math.PI;
 public class RayCaster {
     private final Player player;
     private final Dungeon dun;
-    private final double resolution = 4; //(10 is max before it's too high resolution for the display size)
-    private final double DR = 0.0174533 / resolution;
     private final int WID = Game3D.getWid3d();
     private final int HGT = Game3D.getHgt3d();
+    private final double resolution = 4; //(10 is max before it's too high resolution for the display size)
+    private final int fov = (int) (30 * resolution);
+    private final double DR = 0.0174533 / resolution;
+    private final int depth = (WID / (fov * 2));
     private final int mapS;
     private final int mapX;
     private final int mapY;
     private final MapNode[] mapW;
-    private int[] rayDist;
+    private final int[] rayDist = new int[fov*2];
 
     public RayCaster(Player player, Dungeon dun) {
         this.player = player;
         this.dun = dun;
-//        this.testE = new BaseEnemy(64 * 12, 64 * 12, 2, 10, 10, 0, 0);
         mapX = dun.getMap()[0].length;
         mapY = dun.getMap().length;
         mapS = mapX * mapY;
@@ -49,10 +50,7 @@ public class RayCaster {
         double xo;
         double yo;
         double distT = 0;
-        int fov = (int) (30 * resolution);
-        rayDist = new int[fov*2];
         ra = pa - DR * fov;
-        int depth = (WID / (fov * 2));
         g2.setStroke(new BasicStroke(depth));
 
         double pdx = Math.cos(pa);
@@ -161,15 +159,11 @@ public class RayCaster {
                 ry = vy;
                 distT = distV;
                 shade = 0.5F;
-//                Color c1 = new Color(155, 13, 13);
-//                g2.setColor(c1);
             }
             if (distV > distH) {
                 rx = hx;
                 ry = hy;
                 distT = distH;
-//                Color c2 = new Color(91, 4, 4);
-//                g2.setColor(c2);
             }
             player.setPlayerRay((int) rx, (int) ry);
             // drawing Setup
@@ -178,12 +172,13 @@ public class RayCaster {
             int lineH = (int) ((mapS * HGT) / distT / distScale); // line height when drawing
             double tyStep = 32 / (double) lineH;
             double tyOff = 0;
-            rayDist[r] = (int) distT;
             if (lineH > HGT) {
                 tyOff = (lineH - HGT) / 2.0F;
                 lineH = HGT;//clipping height
             }
             double lineOff = (double) HGT / 2 - (lineH / 2F); // Starting point after cutoff ( >0)
+            rayDist[r] = (int) distT;
+
             //---draw walls---
             double ty = tyOff * tyStep; //texture y val
             int tx;
@@ -253,5 +248,13 @@ public class RayCaster {
 
     public int[] getRayDist() {
         return rayDist;
+    }
+
+    public int getDepth() {
+        return depth;
+    }
+
+    public int getFov() {
+        return fov;
     }
 }

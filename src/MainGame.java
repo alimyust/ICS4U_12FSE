@@ -9,12 +9,15 @@ public class MainGame {
     protected static final int WID = 64*16;
     protected static final int HGT= 64*16;
     private static final Player player = new Player(WID/2,HGT/2);
-    private static final Dungeon dun = new Dungeon(player);
+    private static Dungeon dun = new Dungeon(player);
     protected static final String imgDir = "resources/images/";
     protected static final Color[][] imgArr = {
             convertImageToColorArray(MainGame.imgDir + "dirt.png"),
             convertImageToColorArray(MainGame.imgDir + "grass.png"),
-            convertImageToColorArray(MainGame.imgDir + "redBrick.png")
+            convertImageToColorArray(MainGame.imgDir + "redBrick.png"),
+    };
+    protected static final Color[][] enemyImgArr = { //skip colour #f8028a
+            convertImageToColorArray(MainGame.imgDir + "amogus.png"),
     };
     public static Color [] convertImageToColorArray(String imagePath) {
         Color[] colorArray = new Color[32*32];
@@ -30,8 +33,14 @@ public class MainGame {
 
         return colorArray;
     }
+
+    public static void setDun(Dungeon dun) {
+        MainGame.dun = dun;
+    }
+
     public static void main(String[] args) {
         Game3D g3d = new Game3D(dun,player);
         Game2D g2d = new Game2D(dun,player);
     }
+
 }

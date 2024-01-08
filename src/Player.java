@@ -44,9 +44,9 @@ public class Player extends ParentEntity {
         g.setColor(Color.green);
         g.fillRect((x/r - w / 2), (y/r - h / 2), w, h);
         g.drawLine(x/r, y/r, (int) (x/r + 500 * Math.cos(angle)), (int) (y/r + 500 * Math.sin(angle)));
-//        g.setColor(Color.yellow);
-//        for (int i = 0; i <= rx.size() - 1; i++)
-//            g2d.drawLine(x/r, y/r, rx.get(i)/r, ry.get(i)/r);//        g2d.rotate(-angle);
+        g.setColor(Color.yellow);
+        for (int i = 0; i <= rx.size() - 1; i++)
+            g2d.drawLine(x/r, y/r, rx.get(i)/r, ry.get(i)/r);//        g2d.rotate(-angle);
         rx.clear();
         ry.clear();
     }

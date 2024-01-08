@@ -4,15 +4,15 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="8a55d714-b0cf-47b0-bb48-82f33721ee53" name="Changes" comment="Gr12 FSE Dec 17 1 Home">
-      <change afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/uiDesigner.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ICS4U_12FSE.iml" afterDir="false" />
+    <list default="true" id="8a55d714-b0cf-47b0-bb48-82f33721ee53" name="Changes" comment="Gr12 FSE Jan 8&#10;Before rayCastNode implementation to make a buffer for drawing with layering">
+      <change afterPath="$PROJECT_DIR$/resources/images/amogus.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/BaseEnemy.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/BaseEnemy.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Game3D.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Game3D.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/MainGame.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/MainGame.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Player.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Player.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/RayCastNode.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/RayCaster.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/RayCaster.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -27,11 +27,13 @@
     </option>
   </component>
   <component name="Git.Settings">
+    <option name="PUSH_AUTO_UPDATE" value="true" />
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+    <option name="RESET_MODE" value="HARD" />
   </component>
-  <component name="ProjectColorInfo"><![CDATA[{
-  "associatedIndex": 5
-}]]></component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 5
+}</component>
   <component name="ProjectId" id="2ZbRkhgvbJDCEYHdh1QZWIXvubp" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectViewState">
@@ -44,12 +46,16 @@
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
     "git-widget-placeholder": "master",
-    "last_opened_file_path": "C:/Users/Ali/Documents/GitHub/ICS4U_12FSE/src"
+    "last_opened_file_path": "C:/Users/Ali/Documents/GitHub/ICS4U_12FSE/resources/images"
   }
 }]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\Ali\Documents\GitHub\ICS4U_12FSE\resources\images" />
       <recent name="C:\Users\Ali\Documents\GitHub\ICS4U_12FSE\src" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\Ali\Documents\GitHub\ICS4U_12FSE\resources\images" />
     </key>
   </component>
   <component name="RunManager">
@@ -83,11 +89,74 @@
       <option name="project" value="LOCAL" />
       <updated>1702861422844</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="Gr12 FSE Dec 30&#10;Textures working for 32x32 but glitches as you get closer">
+      <option name="closed" value="true" />
+      <created>1703986858859</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1703986858860</updated>
+    </task>
+    <task id="LOCAL-00003" summary="Gr12 FSE Jan 5&#10;TEXTURES FOR WALLS, FLOORS AND CEILINGS ALL WORK ALHAMDULILLAH. Time for actual game logic to go int">
+      <option name="closed" value="true" />
+      <created>1704434673759</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1704434673760</updated>
+    </task>
+    <task id="LOCAL-00004" summary="Gr12 FSE Jan 6&#10;work so far with sprites">
+      <option name="closed" value="true" />
+      <created>1704524273439</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1704524273440</updated>
+    </task>
+    <task id="LOCAL-00005" summary="Gr12 FSE Jan 8&#10;Before rayCastNode implementation to make a buffer for drawing with layering">
+      <option name="closed" value="true" />
+      <created>1704677792064</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1704677792064</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State>
+              <option name="FILTERS">
+                <map>
+                  <entry key="branch">
+                    <value>
+                      <list>
+                        <option value="origin/GPT_NewAlgorithmTest" />
+                      </list>
+                    </value>
+                  </entry>
+                </map>
+              </option>
+            </State>
+          </value>
+        </entry>
+      </map>
+    </option>
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Gr12 FSE Dec 17 1 Home" />
-    <option name="LAST_COMMIT_MESSAGE" value="Gr12 FSE Dec 17 1 Home" />
+    <MESSAGE value="Gr12 FSE Dec 30&#10;Textures working for 32x32 but glitches as you get closer" />
+    <MESSAGE value="Gr12 FSE Jan 5&#10;TEXTURES FOR WALLS, FLOORS AND CEILINGS ALL WORK ALHAMDULILLAH. Time for actual game logic to go int" />
+    <MESSAGE value="Gr12 FSE Jan 6&#10;work so far with sprites" />
+    <MESSAGE value="Gr12 FSE Jan 8&#10;Before rayCastNode implementation to make a buffer for drawing with layering" />
+    <option name="LAST_COMMIT_MESSAGE" value="Gr12 FSE Jan 8&#10;Before rayCastNode implementation to make a buffer for drawing with layering" />
+  </component>
+  <component name="XSLT-Support.FileAssociations.UIState">
+    <expand />
+    <select />
   </component>
 </project>

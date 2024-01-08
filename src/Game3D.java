@@ -6,7 +6,7 @@ import java.util.ArrayList;
 public class Game3D extends BaseFrame {
     private static final int WID = 64 * 15;
     private static final int HGT = 64 * 12;
-    private final Dungeon dun;
+    private Dungeon dun;
     private final Player player;
     private final RayCaster rayCast;
 
@@ -36,9 +36,9 @@ public class Game3D extends BaseFrame {
         Graphics2D g2d = (Graphics2D) g;
         super.draw(g);
         assert rayCast != null;
-            rayCast.drawRays3d(g2d);
-        for(BaseEnemy e: dun.geteArr())
-            e.drawBaseEnemy(g,player, HGT, WID, rayCast.getRayDist());
+        rayCast.drawRays3d(g2d);
+        for (BaseEnemy e : dun.geteArr())
+            e.drawBaseEnemy(g, player, HGT, WID, rayCast);
     }
 
     @Override
@@ -51,7 +51,6 @@ public class Game3D extends BaseFrame {
     @Override
     public void keyPressed(KeyEvent e) {
         super.keyPressed(e);
-//        dun = new Dungeon();
     }
     
 
