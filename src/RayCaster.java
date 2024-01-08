@@ -13,11 +13,12 @@ public class RayCaster {
     private final int mapX;
     private final int mapY;
     private final MapNode[] mapW;
-    private final BaseEnemy testE;
+    private int[] rayDist;
+
     public RayCaster(Player player, Dungeon dun) {
         this.player = player;
         this.dun = dun;
-        this.testE = new BaseEnemy(64*12, 64*12, 2,10,10,0,0);
+//        this.testE = new BaseEnemy(64 * 12, 64 * 12, 2, 10, 10, 0, 0);
         mapX = dun.getMap()[0].length;
         mapY = dun.getMap().length;
         mapS = mapX * mapY;
@@ -42,14 +43,15 @@ public class RayCaster {
         int py = player.y;
         double pa = player.getAngle();
         int mx, my, mp = 0, dof;
-        float rx = 0;
-        float ry = 0;
-        float ra;
-        float xo;
-        float yo;
-        float distT = 0;
+        double rx = 0;
+        double ry = 0;
+        double ra;
+        double xo;
+        double yo;
+        double distT = 0;
         int fov = (int) (30 * resolution);
-        ra = (float) (pa - DR * fov);
+        rayDist = new int[fov*2];
+        ra = pa - DR * fov;
         int depth = (WID / (fov * 2));
         g2.setStroke(new BasicStroke(depth));
 
@@ -80,17 +82,17 @@ public class RayCaster {
 
         for (int r = 0; r < fov * 2; r++) {
             // Horizontal Lines
-            float distH = 1000000000, hx = px, hy = py;
+            double distH = 1000000000, hx = px, hy = py;
             dof = 0;
-            float aTan = (float) (-1 / Math.tan(ra));
+            double aTan = -1 / Math.tan(ra);
             if (ra > PI) {
-                ry = (float) (py / tSize * tSize - 0.001);
+                ry = py / tSize * tSize - 0.001;
                 rx = (py - ry) * aTan + px;
                 yo = -tSize;
                 xo = -yo * aTan;
             }
             if (ra < PI) {
-                ry = (float) (py / tSize * tSize + tSize);
+                ry = py / tSize * tSize + tSize;
                 rx = (py - ry) * aTan + px;
                 yo = tSize;
                 xo = -yo * aTan;
@@ -107,7 +109,7 @@ public class RayCaster {
                 if (mp > 0 && mp < mapS && mapW[mp].getwCode() != 0) {
                     hx = rx; // If a wall is hit save the x and y values and end loop
                     hy = ry;
-                    distH = (float) dist(px, py, hx, hy);
+                    distH = dist(px, py, hx, hy);
                     dof = renderDist;
                 } else { // If a wall isn't found add the x and y offset
                     rx += xo;
@@ -116,19 +118,19 @@ public class RayCaster {
                 }
             }
             // Vertical Lines
-            float distV = 1000000000, vx = px, vy = py;
+            double distV = 1000000000, vx = px, vy = py;
             dof = 0;
-            float nTan = (float) (-Math.tan(ra));
+            double nTan = -Math.tan(ra);
             double PI2 = Math.PI / 2; //90
             double PI3 = 3 * Math.PI / 2; //270
             if (ra > PI2 && ra < PI3) {
-                rx = (float) (px / tSize * tSize - 0.001);
+                rx = px / tSize * tSize - 0.001;
                 ry = (px - rx) * nTan + py;
                 xo = -tSize;
                 yo = -xo * nTan;
             }
             if (ra < PI2 || ra > PI3) {
-                rx = (float) (px / tSize * tSize + tSize);
+                rx = px / tSize * tSize + tSize;
                 ry = (px - rx) * nTan + py;
                 xo = tSize;
                 yo = -xo * nTan;
@@ -142,10 +144,10 @@ public class RayCaster {
                 mx = (int) (rx) / tSize;
                 my = (int) (ry) / tSize;
                 mp = my * mapX + mx;
-                if (mp > 0 && mp <mapS && mapW[mp].getwCode() != 0) {
+                if (mp > 0 && mp < mapS && mapW[mp].getwCode() != 0) {
                     vx = rx;
                     vy = ry;
-                    distV = (float) dist(px, py, vx, vy);
+                    distV = dist(px, py, vx, vy);
                     dof = renderDist;
                 } else {
                     rx += xo;
@@ -153,75 +155,70 @@ public class RayCaster {
                     dof += 1;
                 }
             }
-            float shade = 1;
+            double shade = 1;
             if (distV < distH) {
                 rx = vx;
                 ry = vy;
                 distT = distV;
                 shade = 0.5F;
-                Color c1 = new Color(155, 13, 13);
-                g2.setColor(c1);
+//                Color c1 = new Color(155, 13, 13);
+//                g2.setColor(c1);
             }
             if (distV > distH) {
                 rx = hx;
                 ry = hy;
                 distT = distH;
-                Color c2 = new Color(91, 4, 4);
-                g2.setColor(c2);
+//                Color c2 = new Color(91, 4, 4);
+//                g2.setColor(c2);
             }
             player.setPlayerRay((int) rx, (int) ry);
             // drawing Setup
-            float ca = fixAng((float) pa - ra);
-            distT = (float) (distT * Math.cos(ca)); //player to ray distance
+            double ca = fixAng(pa - ra);
+            distT = distT * Math.cos(ca); //player to ray distance
             int lineH = (int) ((mapS * HGT) / distT / distScale); // line height when drawing
-            float tyStep = 32 / (float) lineH;
-            float tyOff = 0;
-
+            double tyStep = 32 / (double) lineH;
+            double tyOff = 0;
+            rayDist[r] = (int) distT;
             if (lineH > HGT) {
                 tyOff = (lineH - HGT) / 2.0F;
                 lineH = HGT;//clipping height
             }
-            float lineOff = (float) HGT / 2 - (lineH / 2F); // Starting point after cutoff ( >0)
+            double lineOff = (double) HGT / 2 - (lineH / 2F); // Starting point after cutoff ( >0)
             //---draw walls---
-            float ty = tyOff * tyStep; //texture y val
+            double ty = tyOff * tyStep; //texture y val
             int tx;
-            int texSize = tSize/2;
-            int texSize_1 = texSize -1 ;
+            int texSize = tSize / 2;
+            int texSize_1 = texSize - 1;
             if (shade == 1) {
                 tx = (int) ((rx / 2.0) % texSize);
-                if (ra < PI) tx = texSize_1- tx; //greater than 180
+                if (ra < PI) tx = texSize_1 - tx; //greater than 180
             } else {
-                tx = (int)((ry / 2.0) % texSize);
-                if (ra > PI2 && ra < PI3)  tx = texSize_1 - tx; //greater than 90 and less than 270
+                tx = (int) ((ry / 2.0) % texSize);
+                if (ra > PI2 && ra < PI3) tx = texSize_1 - tx; //greater than 90 and less than 270
             }
-            if(mp >= mapW.length- 1) mp = mapW.length-1;
-            if(mp < 0) mp =0;
 
+            mp = fixMp(mp);
             for (int y = 0; y < lineH; y++) {
-                int pixel=((int)ty*texSize+ tx);
+                int pixel = ((int) ty * texSize + tx);
+                if (pixel > 1023) pixel = 1023;
                 Color col = MainGame.imgArr[mapW[mp].getwCode()][pixel];
                 g2.setColor((shade != 1) ? col : col.darker().darker());
                 g2.drawLine(r * depth, (int) (y + lineOff), r * depth, (int) (y + lineOff));
                 ty += tyStep; // Adjust texture coordinate
             }
-//            float dy = y-(HGT/2);
-//            double raFix = Math.cos(fixAng(pa-ra));
-//            tx = (int) (px/2 + Math.cos(ra)*(HGT/2)*32/dy/raFix);
-//            ty = (int) (px/2 + Math.cos(ra)*(HGT/2)*32/dy/raFix); hardwood
-            float tileScale = 2F; // Adjust this value as needed
             //ceiling
-            for(int y=(int)lineOff+lineH;y<HGT;y++)
-            {
-                float dy= y - (float) HGT/2.0f; //distance from end of wall to end of screen
-                float raFix=  (float)Math.cos(fixAng(pa-ra));
+            for (int y = (int) lineOff + lineH; y < HGT; y++) {
+                double dy = y - (double) HGT / 2.0f; //distance from end of wall to end of screen
+                double raFix = Math.cos(fixAng(pa - ra));
                 // Adjust the floor tile size by scaling the texture coordinates
-                float scaledPx = px / tileScale;
-                float scaledPy = py / tileScale;
-                tx = (int) (scaledPx + Math.cos(ra) * (480)* 32 / dy / raFix);
+                double scaledPx = px / 2F;
+                double scaledPy = py / 2F;
+                tx = (int) (scaledPx + Math.cos(ra) * (480) * 32 / dy / raFix);
                 ty = (int) (scaledPy + Math.sin(ra) * (480) * 32 / dy / raFix);
                 //hours and hours of trial and error to align the floor and ceiling values for tx and ty
-                mp = (int)(ty / 32)*mapX + tx /32;
-                int pixel=(((int)(ty) & 31)*texSize + (tx & 31));
+                mp = (int) (ty / 32) * mapX + tx / 32;
+                int pixel = (((int) (ty) & 31) * texSize + (tx & 31));
+                mp = fixMp(mp);
                 //draw floor
                 if (mapW[mp].getfCode() != -1) {
                     g2.setColor(MainGame.imgArr[mapW[mp].getfCode()][pixel]);
@@ -232,21 +229,15 @@ public class RayCaster {
                     g2.drawLine(r * depth, HGT - y, r * depth, HGT - y);
                 }
             }
-            ra += (float) DR;
+            ra += DR;
             ra = fixAng(ra);
         }
-        testE.drawBaseEnemy(g2,px,py,pa, HGT, WID);
-    }
-
-    public float fixAng(float angle) {
-        if (angle < 0) angle += (float) (2 * PI);
-        if (angle > 2 * PI) angle -= (float) (2 * PI);
-        return angle;
+//        testE.drawBaseEnemy(g2, px, py, fixAng(pa), HGT, WID);
     }
 
     public double fixAng(double angle) {
-        if (angle < 0) angle += (2 * PI);
-        if (angle > 2 * PI) angle -= (2 * PI);
+        if (angle < 0) angle += 2 * PI;
+        if (angle > 2 * PI) angle -= 2 * PI;
         return angle;
     }
 
@@ -254,4 +245,13 @@ public class RayCaster {
         return Math.sqrt((bx - ax) * (bx - ax) + (by - ay) * (by - ay));
     }
 
+    private int fixMp(int mp) {
+        if (mp >= mapS) mp = mapS - 2;
+        if (mp < 0) mp = 0;
+        return mp;
+    }
+
+    public int[] getRayDist() {
+        return rayDist;
+    }
 }

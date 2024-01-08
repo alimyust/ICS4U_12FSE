@@ -1,38 +1,46 @@
 import java.awt.*;
+import java.util.ArrayList;
 
-public class BaseEnemy extends ParentMovingEntity{
-    private final int z;
-    public BaseEnemy(int x, int y,int z, int w, int h, double vx, double vy) {
-        super(x, y, w, h, vx, vy);
-        this.z =50;
+import static java.lang.Math.PI;
+
+public class BaseEnemy extends ParentEntity{
+    private int distFromPlayer = 0;
+    public BaseEnemy(int x, int y, Player player) {
+        super(x, y, 64,64);
+        this.distFromPlayer = dist(x,player.x,y,player.y);
     }
 
-    public void drawBaseEnemy(Graphics2D g, int px, int py, double pa,int HGT, int WID){
-        double slopoeEtoP = (double) (py - y) / (double)(px - x);
-        double angDiff = (Math.atan(slopoeEtoP) - pa);
-        double enemyDist = dist(px,py,x,y);
-        System.out.println(angDiff);
-        g.setColor(Color.RED);
-        g.drawRect((int) (angDiff*WID*angDiff) + WID/2 , HGT/2, 16,16);
-//        float sx = this.x - px;
-//        float sy = this.y - py;
-//        //rotation matrix
-//        float a = (float) (sy*Math.cos(pa)+sx*Math.sin(pa));
-//        float b = (float) (sx*Math.cos(pa)-sy*Math.sin(pa));
-////        sx = a; sy = b;
-//        float scale = 108;
-//        float q = (a*scale/b) +(WID/2);
-//        float p = (z*scale/b) + (HGT/2);
-//        g.setColor(Color.YELLOW);
-//        g.drawRect((int) (a), (int) (b), 30,30);
-//        g.drawRect((int) (sx), (int) (sy), 30,30);
-//        g.setColor(Color.red);
-//        g.drawRect((int) (q), (int) (p), 30,30);
-//
-
+    public void drawBaseEnemy(Graphics g, Player player, int HGT, int WID, int[] rayDist) {
+        g.setColor(Color.red);
+        double angleRatio = -isPlayerLookingAt(player);
+//        if(rayDist[dist(player.x, x, player.y, y)/64] > dist(player.x, x, player.y, y))
+        g.drawRect((int) (WID/2  *angleRatio + WID/2 - w/2), HGT/2, w,h);
+    }
+    public double isPlayerLookingAt(Player player) {
+        double angle = Math.atan2(y - player.y, x- player.x); //slope between player and enemy
+        double playerAngle = fixAng(player.getAngle());
+        double ratio =( playerAngle - angle) ;
+        if(player.y > y)
+            ratio = -(angle - playerAngle +2 * PI);
+        double angleTolerance = Math.toRadians(30);
+        return ratio/ angleTolerance;
     }
 
-    public double dist(int ax, int ay, int bx, int by) {
-        return Math.sqrt((bx - ax) * (bx - ax) + (by - ay) * (by - ay));
+    public double fixAng(double angle) {
+        if (angle < 0) angle += (2 * PI);
+        if (angle > 2 * PI) angle -= (2 * PI);
+        return angle;
+    }
+
+    public static BaseEnemy[] addEnemy(BaseEnemy[] eArr, ArrayList<Point> spots, Player player){
+        for(int i=0; i < eArr.length; i++){
+            int ind = (int) (Math.random()* (spots.size()-1));
+            Point currSpot = spots.get(ind);
+            eArr[i] = new BaseEnemy(currSpot.x*64,currSpot.y*64, player);
+        }
+        return eArr;
+    }
+    public int dist(int ax, int ay, int bx, int by) {
+        return (int) Math.sqrt((bx - ax) * (bx - ax) + (by - ay) * (by - ay));
     }
 }

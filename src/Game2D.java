@@ -5,7 +5,7 @@ import java.awt.event.KeyEvent;
 public class Game2D extends BaseFrame{
     private Dungeon dun;
     private Player player;
-    private static final int dunSizeRatio = 8;
+    private static final int dunSizeRatio = 4;
     public Game2D(Dungeon dun, Player player) {
         super("Game2D", MainGame.WID/2, MainGame.HGT/2);
         this.dun = dun;
@@ -21,10 +21,12 @@ public class Game2D extends BaseFrame{
     @Override
     public void draw(Graphics g) {
         super.draw(g);
-        if(dun != null)
-            dun.drawDungeon2D(g);
+        assert dun != null;
+        dun.drawDungeon2D(g);
         if(player != null)
             player.drawPlayer(g);
+        for(ParentEntity e: dun.geteArr())
+            e.draw2d(g, Color.MAGENTA);
     }
 
     @Override

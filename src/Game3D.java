@@ -1,28 +1,29 @@
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
+import java.util.ArrayList;
 
 public class Game3D extends BaseFrame {
-    private static final int wid3d = 64 * 18;
-    private static final int hgt3d = 64 * 12;
+    private static final int WID = 64 * 15;
+    private static final int HGT = 64 * 12;
     private final Dungeon dun;
-    private final Player p2d;
+    private final Player player;
     private final RayCaster rayCast;
 
-    public Game3D(Dungeon dun, Player p2d) {
-        super("Game3D", wid3d, hgt3d);
+    public Game3D(Dungeon dun, Player player) {
+        super("Game3D", WID, HGT);
         this.setLocationRelativeTo(null);
         this.dun = dun;
-        this.p2d = p2d;
-        this.rayCast = new RayCaster(p2d, dun);
+        this.player = player;
+        this.rayCast = new RayCaster(player, dun);
     }
 
     public static int getWid3d() {
-        return wid3d;
+        return WID;
     }
 
     public static int getHgt3d() {
-        return hgt3d;
+        return HGT;
     }
 
     @Override
@@ -34,14 +35,16 @@ public class Game3D extends BaseFrame {
     public void draw(Graphics g) {
         Graphics2D g2d = (Graphics2D) g;
         super.draw(g);
-        if (rayCast != null)
+        assert rayCast != null;
             rayCast.drawRays3d(g2d);
+        for(BaseEnemy e: dun.geteArr())
+            e.drawBaseEnemy(g,player, HGT, WID, rayCast.getRayDist());
     }
 
     @Override
     public void move() {
         super.move();
-        p2d.movePlayer(keys);
+        player.movePlayer(keys);
 
     }
 
@@ -50,5 +53,6 @@ public class Game3D extends BaseFrame {
         super.keyPressed(e);
 //        dun = new Dungeon();
     }
+    
 
 }

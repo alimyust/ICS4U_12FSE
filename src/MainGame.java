@@ -3,12 +3,13 @@ import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 
 public class MainGame {
-    private static final Dungeon dun = new Dungeon();
     protected static final int WID = 64*16;
     protected static final int HGT= 64*16;
     private static final Player player = new Player(WID/2,HGT/2);
+    private static final Dungeon dun = new Dungeon(player);
     protected static final String imgDir = "resources/images/";
     protected static final Color[][] imgArr = {
             convertImageToColorArray(MainGame.imgDir + "dirt.png"),

@@ -1,26 +1,30 @@
 import java.awt.*;
+import java.util.ArrayList;
 import java.util.Arrays;
-
+/*
+*  A Dungeon object would include everything that would be contained per level. This includes the actual dungeon and
+* what it's made of, but also the enemies, power ups, etc.
+* */
 public class Dungeon {
     private final int DSIZE = 64;
     private final int dSizeMultiplier = 4;
     private final int WID = MainGame.WID / DSIZE * dSizeMultiplier;
     private final int HGT = MainGame.HGT / DSIZE* dSizeMultiplier;
-    private final Color WHITE = new Color(255, 255, 255);
-    private final Color BLACK = new Color(0, 0, 0);
-    Color cellCol;
-    private MapNode[][] map = new MapNode[HGT][WID];
     private final int ALIVE = 0; // empty space is alive
     private final int DEAD = 1; // dead is wall
+    private MapNode[][] map = new MapNode[HGT][WID];
+    private static BaseEnemy[] eArr = new BaseEnemy[1];
+    private final ArrayList<Point> openSpaces = new ArrayList<>();
+    public Dungeon(Player player) {
 
-    public Dungeon() {
         int c;
         do {
             generateGrid(0.50);
             automata(20, 5, 4);
-            c = floodFill((HGT / 2)/dSizeMultiplier, (WID / 2)/dSizeMultiplier, -1);
-        } while ((double) c / (double) (HGT * WID) <= 0.01);
-
+            c = floodFill(HGT / 2/dSizeMultiplier, WID / 2/dSizeMultiplier, -1);
+        } while ((double) c / (double) (HGT * WID) <= 0.01); // 10 percent of map must be explorable
+        eArr = BaseEnemy.addEnemy(eArr, getOpenSpaces(), player);
+        eArr[0] = new BaseEnemy(64*10, 64*10,player);
         // Fill everything else
         map = makeBorder(map);
         for (int i = 0; i < HGT; i++)
@@ -32,6 +36,7 @@ public class Dungeon {
         if (spotIsOffGrid(cx, cy) || map[cy][cx].getwCode() != ALIVE)
             return 0;
         map[cy][cx] = new MapNode(mark, 2, 2);
+        openSpaces.add(new Point(cx,cy));
         int count = 1;
         count += floodFill(cx + 1, cy, mark) +
                 floodFill(cx - 1, cy, mark) +
@@ -118,12 +123,12 @@ public class Dungeon {
         int r = Game2D.getDunSizeRatio();
         for (int y = 0; y < HGT; y += 1) {
             for (int x = 0; x < WID; x += 1) {
-                cellCol = (map[y][x].getwCode() == 0) ? WHITE : BLACK;
-                g.setColor(cellCol);
+                g.setColor((map[y][x].getwCode() == 0) ? Color.WHITE :Color.BLACK);
                 g.fillRect(x * DSIZE / r, y * DSIZE / r, DSIZE / r, DSIZE / r);
             }
         }
     }
+
 
     public MapNode[][] getMap() {
         return map;
@@ -135,5 +140,13 @@ public class Dungeon {
 
     public int getdSizeMultiplier() {
         return dSizeMultiplier;
+    }
+
+    public ArrayList<Point> getOpenSpaces() {
+        return openSpaces;
+    }
+
+    public BaseEnemy[] geteArr() {
+        return eArr;
     }
 }

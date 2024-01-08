@@ -1,3 +1,5 @@
+import java.awt.*;
+
 public class ParentEntity {
     protected int x;
     protected int y;
@@ -10,6 +12,14 @@ public class ParentEntity {
         this.h = h;
     }
 
-    public ParentEntity() {
+    public ParentEntity(int x, int y) {
+        this.x = x;
+        this.y = y;
+    }
+
+    public void draw2d(Graphics g,Color color){
+        int r = Game2D.getDunSizeRatio();
+        g.setColor(color);
+        g.fillRect(x/r,y/r,w/r,h/r);
     }
 }
