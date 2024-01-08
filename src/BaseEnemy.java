@@ -14,21 +14,27 @@ public class BaseEnemy extends ParentEntity{
         double angleRatio = -isPlayerLookingAt(player);
         int xPos = (int) (WID/2 * angleRatio + WID/2);
         if( xPos < 0 || xPos > WID) return;
-        for(int i = 0; i < w/ray.getDepth(); i++) {
-            int rDist = ray.getRayDist()[Math.min(xPos / ray.getDepth() + i, ray.getRayDist().length - 1)];
-            if (Math.abs(dist(player.x, x, player.y, y)) < rDist) {
-                for(int j=0; j < 32; j++) {
-                    g.setColor(MainGame.enemyImgArr[0][i * 32/(w/ray.getDepth())*32+j]);
-                    g.drawLine(xPos + i * ray.getDepth(), HGT/2 + j*ray.getDepth(),
-                                xPos + i * ray.getDepth(), HGT/2 + j*ray.getDepth());
-                }
-            }
+        double eDist = Math.abs(dist(x,y, player.x,player.y));
+        int scale = 200*64;
+        int rDist = ray.getRayDist()[xPos / ray.getDepth()];
+        g.setColor(Color.red);
+        if (eDist < rDist) {
+            g.drawLine((int) (xPos + 1.0 / eDist * scale), HGT / 2, (int) (xPos - 1.0 / eDist * scale), HGT / 2);
         }
-
+        }
+//        for(int i = 0; i < w/ray.getDepth(); i++) {
+//            int rDist = ray.getRayDist()[Math.min(xPos / ray.getDepth() + i, ray.getRayDist().length - 1)];
+//            if (eDist < rDist) {
+//                for(int j=0; j < 32; j++) {
+//                    g.setColor(MainGame.enemyImgArr[0][i * 32/(w/ray.getDepth())*32+j]);
+//                    g.drawLine(xPos + i * ray.getDepth(), HGT/2 + j*ray.getDepth(),
+//                            xPos + i * ray.getDepth(), HGT/2 + j*ray.getDepth());
+//                }
+//            }
+//        }
 
 //        if(Math.abs(dist(player.x,x,player.y,y)) < rDist)
 //            g.drawRect(xPos, HGT/2, w,h);
-    }
     public double isPlayerLookingAt(Player player) {
         double angle = Math.atan2(y - player.y, x- player.x); //slope between player and enemy
         double playerAngle = fixAng(player.getAngle());
