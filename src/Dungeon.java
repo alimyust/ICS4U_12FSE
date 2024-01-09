@@ -22,7 +22,7 @@ public class Dungeon {
             generateGrid(0.50);
             automata(20, 5, 4);
             c = floodFill(HGT / 2/dSizeMultiplier, WID / 2/dSizeMultiplier, -1);
-        } while ((double) c / (double) (HGT * WID) <= 0.05); // 50 percent of map must be explorable
+        } while (!((double) c / (double) (HGT * WID) > 0.05)); // 50 percent of map must be explorable
         eArr = BaseEnemy.addEnemy(eArr, getOpenSpaces(), player);
         eArr[0] = new BaseEnemy(64*10, 64*10,player);
         // Fill everything else

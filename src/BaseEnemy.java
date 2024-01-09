@@ -15,23 +15,33 @@ public class BaseEnemy extends ParentEntity{
         int xPos = (int) (WID/2 * angleRatio + WID/2);
         if( xPos < 0 || xPos > WID) return;
         double eDist = Math.abs(dist(x,y, player.x,player.y));
-        int scale = 200*64;
+        int scale = 400*64;
         g.setColor(Color.red);
 //        if (eDist < rDist) {
 //            g.drawLine((int) (xPos + 1.0 / eDist * scale), HGT / 2, (int) (xPos - 1.0 / eDist * scale), HGT / 2);
 //        }
-        int wid = (int) (1.0 / eDist * scale  * 2);
-        g2d.setStroke(new BasicStroke(WID/32));
-        for(int i = 0; i < wid; i++) {
-            int rDist = ray.getRayDist()[Math.min(xPos / ray.getDepth() + i, ray.getRayDist().length - 1)];
-            if (eDist < rDist) {
-                for(int j=0; j < 128; j++) {
-                    g.setColor(MainGame.enemyImgArr[0][i * 32/(wid)*32+j]);
-                    g.drawLine(xPos -wid/2 + i , HGT/2 + j,
-                            xPos -wid/2 + i , HGT/2 + j);
+        int wid = 64;//(int) (1.0 / eDist * scale  * 2);
+        g2d.setStroke(new BasicStroke(1));
+        for(int y=0; y < 128; y++) {
+            for(int x = 0; x < wid; x++) {
+                int rDist = ray.getRayDist()[Math.min(xPos / ray.getDepth() + x, ray.getRayDist().length - 1)];
+                if (eDist < rDist) {
+                    g.setColor(MainGame.enemyImgArr[0][Math.min(y* 128+x,8191)]);
+                    g.drawLine(xPos -wid/2 + x , HGT/2 + y, xPos -wid/2 + x , HGT/2 + y);
                 }
-            }
         }
+
+        }
+//        for(int i = 0; i < wid; i++) {
+//            int rDist = ray.getRayDist()[Math.min(xPos / ray.getDepth() + i, ray.getRayDist().length - 1)];
+//            if (eDist < rDist) {
+//                for(int j=0; j < 128; j++) {
+//                    g.setColor(MainGame.enemyImgArr[0][Math.min(i * 128/(wid)*64+j,8191)]);
+//                    g.drawLine(xPos -wid/2 + i , HGT/2 + j,
+//                            xPos -wid/2 + i , HGT/2 + j);
+//                }
+//            }
+//        }
     }
 
 //        if(Math.abs(dist(player.x,x,player.y,y)) < rDist)

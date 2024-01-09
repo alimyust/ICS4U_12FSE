@@ -41,7 +41,7 @@ public class RayCaster {
         int tSize = dun.getDSIZE();
         int renderDist = 32; //amount of walls rendered when looking around
         int distScale = 50; //how far away things look
-        int darkScale =-1;
+        int darkScale =1000;
         int darkStep = 5;
         int px = player.x;
         int py = player.y;
@@ -199,8 +199,8 @@ public class RayCaster {
                 int pixel = ((int) ty * texSize + tx);
                 if (pixel > 1023) pixel = 1023;
                 Color col = MainGame.imgArr[mapW[mp].getwCode()][pixel];
-                for (int i = 0; i < distT/darkScale; i+=darkStep)
-                    col = col.darker();
+                double darknessFactor = 1 - Math.min(distT / darkScale, 1);
+                col = applyDarkness(col, darknessFactor);
                 g2.setColor((shade != 1) ? col : col.darker().darker());
                 g2.drawLine(r * depth, (int) (y + lineOff), r * depth, (int) (y + lineOff));
                 ty += tyStep; // Adjust texture coordinate
@@ -212,22 +212,26 @@ public class RayCaster {
                 // Adjust the floor tile size by scaling the texture coordinates
                 double scaledPx = px / 2F;
                 double scaledPy = py / 2F;
+
                 tx = (int) (scaledPx + Math.cos(ra) * (480) * 32 / dy / raFix);
                 ty = (int) (scaledPy + Math.sin(ra) * (480) * 32 / dy / raFix);
                 //hours and hours of trial and error to align the floor and ceiling values for tx and ty
                 mp = (int) (ty / 32) * mapX + tx / 32;
                 int pixel = (((int) (ty) & 31) * texSize + (tx & 31));
                 mp = fixMp(mp);
-                //draw floor
+                double tileDist = dist(px,py,getMapX(mp),getMapY(mp));
+                double darknessFactor = 1 - Math.min(Math.abs(tileDist) / darkScale, 1);
+                Color floorColor = applyDarkness(MainGame.imgArr[mapW[mp].getfCode()][pixel], darknessFactor);
+                Color ceilingColor = applyDarkness(MainGame.imgArr[mapW[mp].getcCode()][pixel], darknessFactor);
                 Color col;
                 if (mapW[mp].getfCode() != -1) {
                     col = MainGame.imgArr[mapW[mp].getfCode()][pixel];
-                    g2.setColor(col);
+                    g2.setColor(floorColor);
                     g2.drawLine(r * depth, y, r * depth, y);
                 }
                 if (mapW[mp].getcCode() != -1) {
                     col = MainGame.imgArr[mapW[mp].getcCode()][pixel];
-                    g2.setColor(col);
+                    g2.setColor(ceilingColor);
                     g2.drawLine(r * depth, HGT - y, r * depth, HGT - y);
                 }
             }
@@ -263,5 +267,23 @@ public class RayCaster {
 
     public int getFov() {
         return fov;
+    }
+    private int getMapX(int mp) {
+        return mp % mapX * 64;
+    }
+    private int getMapY(int mp) {
+        return mp / mapX * 64;
+    }
+    private Color applyDarkness(Color color, double factor) {
+        int red = (int) (color.getRed() * factor);
+        int green = (int) (color.getGreen() * factor);
+        int blue = (int) (color.getBlue() * factor);
+
+        // Ensure that the RGB values are within the valid range [0, 255]
+        red = Math.max(0, Math.min(255, red));
+        green = Math.max(0, Math.min(255, green));
+        blue = Math.max(0, Math.min(255, blue));
+
+        return new Color(red, green, blue);
     }
 }

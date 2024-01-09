@@ -21,11 +21,14 @@ public class MainGame {
             convertImageToColorArray(MainGame.imgDir + "amogus.png")
     };
     public static Color [] convertImageToColorArray(String imagePath) {
-        Color[] colorArray = new Color[32*32];
+        Color[] colorArray;
         try {
             BufferedImage image = ImageIO.read(new File(imagePath));
-            for (int y = 0; y < 32; y++)
-                for (int x = 0; x < 32; x++)
+            int imgHgt = image.getHeight();
+            int imgWid = image.getWidth();
+            colorArray = new Color[imgHgt*imgWid];
+            for (int y = 0; y < imgHgt; y++)
+                for (int x = 0; x < imgWid; x++)
                     colorArray[y*32 + x] = new Color(image.getRGB(x, y));
         } catch (IOException e) {
             System.out.println("what why");
