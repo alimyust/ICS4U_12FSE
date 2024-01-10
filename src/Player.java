@@ -19,8 +19,8 @@ public class Player extends ParentEntity {
         dY = y;
     }
 
-    public void movePlayer(boolean[] keys) {
-        double turnAngle = 0.3;
+    public void movePlayer(boolean[] keys, Dungeon dun) {
+        double turnAngle = 0.2;
         if (keys[KeyEvent.VK_A])
             angle -= turnAngle;
         if (keys[KeyEvent.VK_D])
@@ -28,11 +28,11 @@ public class Player extends ParentEntity {
         fixAngle();
         dX = Math.cos(angle) * speed;
         dY = Math.sin(angle) * speed;
-        if (keys[KeyEvent.VK_W]) {
+        if (keys[KeyEvent.VK_W] & !Game3D.isIntersectingMap((int) (x  + dX), (int) (y+ dY),w, dun.getMap())) {
             x += (int) Math.round(dX);
             y += (int) Math.round(dY);
         }
-        if (keys[KeyEvent.VK_S]) {
+        if (keys[KeyEvent.VK_S] & !Game3D.isIntersectingMap((int) (x  - dX), (int) (y- dY),w, dun.getMap())) {
             x -= (int) Math.round(dX);
             y -= (int) Math.round(dY);
         }

@@ -42,7 +42,6 @@ public class RayCaster {
         int renderDist = 32; //amount of walls rendered when looking around
         int distScale = 50; //how far away things look
         int darkScale =1000;
-        int darkStep = 5;
         int px = player.x;
         int py = player.y;
         double pa = player.getAngle();
@@ -68,18 +67,18 @@ public class RayCaster {
         } else {
             yo = 10;
         }//y offset to check map
-        int ipx = px / tSize;
-        int ipy = py / tSize;
-        int ipx_add_xo = (int) (px + xo) / tSize;
-        int ipy_add_yo = (int) (py + yo) / tSize;
-        int ipx_sub_xo = (int) (px - xo) / tSize;//x position and offset
-        int ipy_sub_yo = (int) (py - yo) / tSize;//y position and offset
-        if (mapW[ipy * mapX + ipx_add_xo].getwCode() == 0) player.x += (int) Math.round(pdx * player.getSpeed());
-        if (mapW[ipy_add_yo * mapX + ipx].getwCode() == 0) player.y += (int) Math.round(pdy * player.getSpeed());
-        if (mapW[ipy * mapX + ipx_sub_xo].getwCode() == 0) player.x -= (int) Math.round(pdx * player.getSpeed());
-        if (mapW[ipy_sub_yo * mapX + ipx].getwCode() == 0) player.y -= (int) Math.round(pdy * player.getSpeed());
-        px = player.x;
-        py = player.y;
+//        int ipx = px / tSize;
+//        int ipy = py / tSize;
+//        int ipx_add_xo = (int) (px + xo) / tSize;
+//        int ipy_add_yo = (int) (py + yo) / tSize;
+//        int ipx_sub_xo = (int) (px - xo) / tSize;//x position and offset
+//        int ipy_sub_yo = (int) (py - yo) / tSize;//y position and offset
+//        if (mapW[ipy * mapX + ipx_add_xo].getwCode() == 0) player.x += (int) Math.round(pdx * player.getSpeed());
+//        if (mapW[ipy_add_yo * mapX + ipx].getwCode() == 0) player.y += (int) Math.round(pdy * player.getSpeed());
+//        if (mapW[ipy * mapX + ipx_sub_xo].getwCode() == 0) player.x -= (int) Math.round(pdx * player.getSpeed());
+//        if (mapW[ipy_sub_yo * mapX + ipx].getwCode() == 0) player.y -= (int) Math.round(pdy * player.getSpeed());
+//        px = player.x;
+//        py = player.y;
 
         for (int r = 0; r < fov * 2; r++) {
             // Horizontal Lines

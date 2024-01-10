@@ -5,52 +5,12 @@ import static java.lang.Math.PI;
 
 public class BaseEnemy extends ParentEntity {
 
-    private final int spriteCode;
-    public BaseEnemy(int x, int y, int spriteCode) {
+    public BaseEnemy(int x, int y) {
         super(x, y, 64, 64);
-        this.spriteCode = spriteCode;
     }
-
-
-
-
-//    public void drawBaseEnemy(Graphics g, Player player, int HGT, int WID, RayCaster ray) {
-//        double angleRatio = -isPlayerLookingAt(player);
-//        Color[][] sprite = MainGame.enemyImgArr[this.spriteCode];
-//
-//        int xPos = (int) (WID / 2 * angleRatio + WID / 2);
-//        if (xPos < 0 || xPos > WID) return;
-//        double eDist = Math.abs(dist(x, y, player.x, player.y));
-//        double scaleSpeed = 18;
-//        double scaleMagnitude = 30;
-//        double scale = Math.min(3,1.0 / (eDist / scaleSpeed) *scaleMagnitude); // Apply minimum scaling factor
-//        int wid = sprite[0].length;
-//        int hgt = sprite.length;
-//        int sWid = (int) (wid * scale); // Scaled width
-//        int sHgt = (int) (hgt * scale); // Scaled height
-//
-//        // Adjust the vertical position based on the scaled height
-//        int yPos = 300 + hgt - sHgt;
-//        if(scale > 1) yPos = HGT/2 -30 - sHgt/3;
-//
-////        int yTopBound = (int) (200 - 1.0/sHgt );  int yBotBound = (int) (HGT/2-1.0/sHgt);
-////        System.out.println(yTopBound + "," + yBotBound);
-////        yPos = Math.max(yPos, yTopBound);
-////        yPos = Math.min(yPos, yBotBound);
-//        for (int x = 0; x < sWid; x++) {
-//            double wDist = ray.getRayDist()[Math.min((xPos + x) / ray.getDepth(), ray.getRayDist().length - 1)];
-//            if (wDist < eDist) continue; // draws a ray only when an enemy is closer than a wall
-//            for (int y = 0; y < sHgt; y++) {
-//                Color col = sprite[(int) (y / scale)][(int) (x / scale)];
-//                if (col.equals(Color.decode("#f8028a"))) continue;
-//                g.setColor(col);
-//                g.drawRect(xPos + x, yPos + y, 1, 1);
-//            }
-//        }
-//    }
 public void drawBaseEnemy(Graphics g, Player player, int HGT, int WID, RayCaster ray) {
-    double angleRatio = -isPlayerLookingAt(player);
-    Color[][] sprite = MainGame.enemyImgArr[this.spriteCode];
+    double angleRatio = -isPlayerLookingAt(player, 30);
+    Color[][] sprite = MainGame.enemyImgArr[0];
 
     int xPos = (int) (WID / 2 * angleRatio + WID / 2);
     if (xPos < 0 || xPos > WID) return;
@@ -66,11 +26,7 @@ public void drawBaseEnemy(Graphics g, Player player, int HGT, int WID, RayCaster
     int sHgt = (int) (hgt * scale); // Scaled height
 
     // Adjust the vertical position based on the scaled height
-    int yPos;
-    if (scale > 1)// Center vertically if the sprite is scaled up
-        yPos = HGT / 2 - sHgt / 2;
-    else// Adjust vertically based on the scaled height
-        yPos = HGT / 2 - sHgt / 2 + hgt - sHgt;
+    int yPos = HGT / 2 - sHgt / 2;
 
     for (int x = 0; x < sWid; x++) {
         double wDist = ray.getRayDist()[Math.min((xPos + x) / ray.getDepth(), ray.getRayDist().length - 1)];
@@ -85,13 +41,13 @@ public void drawBaseEnemy(Graphics g, Player player, int HGT, int WID, RayCaster
 }
 
 
-    public double isPlayerLookingAt(Player player) {
+    public double isPlayerLookingAt(Player player, int tolerance) {
         double angle = Math.atan2(y - player.y, x - player.x); //slope between player and enemy
         double playerAngle = fixAng(player.getAngle());
         double ratio = (playerAngle - angle);
         if (player.y > y)
             ratio = -(angle - playerAngle + 2 * PI);
-        double angleTolerance = Math.toRadians(30);
+        double angleTolerance = Math.toRadians(tolerance);
         return ratio / angleTolerance;
     }
 
@@ -105,7 +61,7 @@ public void drawBaseEnemy(Graphics g, Player player, int HGT, int WID, RayCaster
         for (int i = 0; i < eArr.length; i++) {
             int ind = (int) (Math.random() * (spots.size() - 1));
             Point currSpot = spots.get(ind);
-            eArr[i] = new BaseEnemy(currSpot.x * 64, currSpot.y * 64, 1);
+            eArr[i] = new BaseEnemy(currSpot.x * 64, currSpot.y * 64);
         }
         return eArr;
     }

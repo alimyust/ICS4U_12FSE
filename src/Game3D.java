@@ -1,6 +1,7 @@
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
+import java.awt.geom.Rectangle2D;
 import java.util.ArrayList;
 
 public class Game3D extends BaseFrame {
@@ -43,13 +44,22 @@ public class Game3D extends BaseFrame {
     @Override
     public void move() {
         super.move();
-        player.movePlayer(keys);
-
+        player.movePlayer(keys, dun);
+        System.out.println(isIntersectingMap(player.x,player.y,player.w,dun.getMap()));
     }
 
     @Override
     public void keyPressed(KeyEvent e) {
         super.keyPressed(e);
+    }
+    public boolean isIntersecting(int ax, int ay, int aw, int bx, int by, int bw){
+        Shape aRect = new Rectangle2D.Double(ax,ay,aw,aw);
+        return aRect.intersects(new Rectangle(bx,by,bw,bw));
+    }
+    public static boolean isIntersectingMap(int ax, int ay, int aw, MapNode[][] map){
+        int mapX = ax/64;
+        int mapY = ay/64;
+        return map[mapY][mapX].getwCode() != 0;
     }
     
 
