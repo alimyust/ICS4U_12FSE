@@ -10,7 +10,7 @@ public class RayCaster {
     private final int HGT = Game3D.getHgt3d();
     private final double resolution = 4; //(10 is max before it's too high resolution for the display size)
     private final int fov = (int) (30 * resolution);
-    private final double DR = 0.0174533 / resolution;
+    private final double DR = Math.PI/180.0/ resolution; // degree
     private final int depth = (WID / (fov * 2));
     private final int mapS;
     private final int mapX;
@@ -197,7 +197,7 @@ public class RayCaster {
             mp = fixMp(mp);
             for (int y = 0; y < lineH; y++) {
                 int pixel = ((int) ty * texSize + tx);
-                if (pixel > 1023) pixel = 1023;
+                if (pixel > 1023) pixel = 1023; if (pixel < 0) pixel = 0;
                 Color col = MainGame.imgArr[mapW[mp].getwCode()][pixel];
                 double darknessFactor = 1 - Math.min(distT / darkScale, 1);
                 col = applyDarkness(col, darknessFactor);
@@ -225,12 +225,10 @@ public class RayCaster {
                 Color ceilingColor = applyDarkness(MainGame.imgArr[mapW[mp].getcCode()][pixel], darknessFactor);
                 Color col;
                 if (mapW[mp].getfCode() != -1) {
-                    col = MainGame.imgArr[mapW[mp].getfCode()][pixel];
                     g2.setColor(floorColor);
                     g2.drawLine(r * depth, y, r * depth, y);
                 }
                 if (mapW[mp].getcCode() != -1) {
-                    col = MainGame.imgArr[mapW[mp].getcCode()][pixel];
                     g2.setColor(ceilingColor);
                     g2.drawLine(r * depth, HGT - y, r * depth, HGT - y);
                 }

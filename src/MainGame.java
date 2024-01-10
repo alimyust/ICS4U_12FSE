@@ -16,9 +16,9 @@ public class MainGame {
             convertImageToColorArray(MainGame.imgDir + "grass.png"),
             convertImageToColorArray(MainGame.imgDir + "redBrick.png"),
     };
-    protected static final Color[][] enemyImgArr = { //skip colour #f8028a
-            convertImageToColorArray(MainGame.imgDir + "slenderman.png"),
-            convertImageToColorArray(MainGame.imgDir + "amogus.png")
+    protected static final Color[][][] enemyImgArr = { //skip colour #f8028a
+            convertImageTo2DColorArray(MainGame.imgDir + "slenderman.png"),
+            convertImageTo2DColorArray(MainGame.imgDir + "amogus.png")
     };
     public static Color [] convertImageToColorArray(String imagePath) {
         Color[] colorArray;
@@ -27,19 +27,34 @@ public class MainGame {
             int imgHgt = image.getHeight();
             int imgWid = image.getWidth();
             colorArray = new Color[imgHgt*imgWid];
-            for (int y = 0; y < imgHgt; y++)
-                for (int x = 0; x < imgWid; x++)
-                    colorArray[y*32 + x] = new Color(image.getRGB(x, y));
+            for (int y = 0; y < imgHgt; y++) {
+                for (int x = 0; x < imgWid; x++) {
+                    if( y*imgHgt + x >= colorArray.length) break;
+                    colorArray[y*imgHgt + x] = new Color(image.getRGB(x, y));
+                }
+            }
         } catch (IOException e) {
             System.out.println("what why");
             throw new RuntimeException(e);
         }
-
         return colorArray;
     }
 
-    public static void setDun(Dungeon dun) {
-        MainGame.dun = dun;
+    public static Color [][] convertImageTo2DColorArray(String imagePath) {
+        Color[][] colorArray;
+        try {
+            BufferedImage image = ImageIO.read(new File(imagePath));
+            int imgHgt = image.getHeight();
+            int imgWid = image.getWidth();
+            colorArray = new Color[imgHgt][imgWid];
+            for (int y = 0; y < imgHgt; y++)
+                for (int x = 0; x < imgWid; x++)
+                    colorArray[y][x] = new Color(image.getRGB(x, y));
+        } catch (IOException e) {
+            System.out.println("what why");
+            throw new RuntimeException(e);
+        }
+        return colorArray;
     }
 
     public static void main(String[] args) {

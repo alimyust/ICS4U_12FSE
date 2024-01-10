@@ -21,10 +21,8 @@ public class Game2D extends BaseFrame{
     @Override
     public void draw(Graphics g) {
         super.draw(g);
-        assert dun != null;
         dun.drawDungeon2D(g);
-        if(player != null)
-            player.drawPlayer(g);
+        player.drawPlayer(g);
         for(ParentEntity e: dun.geteArr())
             e.draw2d(g, Color.MAGENTA);
     }
