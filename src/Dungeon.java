@@ -13,7 +13,7 @@ public class Dungeon {
     private final int ALIVE = 0; // empty space is alive
     private final int DEAD = 1; // dead is wall
     private MapNode[][] map = new MapNode[HGT][WID];
-    private static BaseEnemy[] eArr = new BaseEnemy[1];
+    private static BaseEnemy[] eArr = new BaseEnemy[8];
     private final ArrayList<Point> openSpaces = new ArrayList<>();
     public Dungeon(Player player) {
 
@@ -22,11 +22,10 @@ public class Dungeon {
             generateGrid(0.50);
             automata(20, 5, 4);
             c = floodFill(HGT / 2/dSizeMultiplier, WID / 2/dSizeMultiplier, -1);
-        } while (!((double) c / (double) (HGT * WID) > 0.05)); // 50 percent of map must be explorable
-        eArr = BaseEnemy.addEnemy(eArr, getOpenSpaces(), player);
-        eArr[0] = new BaseEnemy(64*10, 64*10,player);
+        } while (!((double) c / (double) (HGT * WID) > 0.3)); // 30 percent of map must be explorable
         // Fill everything else
         map = makeBorder(map);
+        eArr = BaseEnemy.addEnemy(eArr, getOpenSpaces());
         for (int i = 0; i < HGT; i++)
             for (int j = 0; j < WID; j++)
                 map[i][j] = new MapNode((map[i][j].getwCode() == -1) ? ALIVE : 2, 2, 2);

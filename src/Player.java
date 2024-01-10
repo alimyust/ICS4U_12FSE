@@ -11,7 +11,7 @@ public class Player extends ParentEntity {
     private double angle = 0;
     private double dX;
     private double dY;
-    private double speed = 15;
+    private double speed = 25;
 
     public Player(int x, int y) {
         super(x, y, 10, 10);
@@ -20,7 +20,7 @@ public class Player extends ParentEntity {
     }
 
     public void movePlayer(boolean[] keys) {
-        double turnAngle = 0.1;
+        double turnAngle = 0.3;
         if (keys[KeyEvent.VK_A])
             angle -= turnAngle;
         if (keys[KeyEvent.VK_D])
