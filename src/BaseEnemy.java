@@ -7,12 +7,13 @@ public class BaseEnemy extends ParentEntity {
 
     private final Color[][][] enemyImgArr;
     private int frame;
-    private boolean isAlive = true;
+    private boolean isAlive;
 
     public BaseEnemy(int x, int y, Color[][][] imgArr) {
         super(x, y, 64, 64);
         enemyImgArr = imgArr;
         this.frame = 0;
+        this.isAlive = true;
 
     }
 
@@ -49,18 +50,22 @@ public class BaseEnemy extends ParentEntity {
 
         // Adjust the vertical position based on the scaled height
         int yPos = HGT / 2 - sHgt / 2;
-
+        if(!isAlive) {
+            sprite = enemyImgArr[enemyImgArr.length - 1];
+            yPos += sHgt / 1.2;
+        }
         for (int x = 0; x < sWid; x++) {
             double wDist = ray.getRayDist()[Math.min((xPos + x) / ray.getDepth(), ray.getRayDist().length - 1)];
             if (wDist < eDist) continue; // draws a ray only when an enemy is closer than a wall
             for (int y = 0; y < sHgt; y++) {
                 Color col = sprite[(int) (y / scale)][(int) (x / scale)];
-                if (col.equals(Color.decode("#f8028a"))) continue;
+                    if (col.equals(Color.decode("#f8028a"))) continue;
                 g.setColor(col);
                 g.drawRect(xPos + x, yPos + y, 1, 1);
             }
         }
     }
+
 
     public double isPlayerLookingAt(Player player, int tolerance) {
         double angle = Math.atan2(y - player.y, x - player.x); //slope between player and enemy

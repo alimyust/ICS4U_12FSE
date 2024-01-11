@@ -28,11 +28,11 @@ public class Player extends ParentEntity {
         fixAngle();
         dX = Math.cos(angle) * speed;
         dY = Math.sin(angle) * speed;
-        if (keys[KeyEvent.VK_W] & !Game3D.isIntersectingMap((int) (x  + dX), (int) (y+ dY),w, dun.getMap())) {
+        if (keys[KeyEvent.VK_W] & Game3D.isIntersectingMap((int) (x + dX), (int) (y + dY), w, dun.getMap())) {
             x += (int) Math.round(dX);
             y += (int) Math.round(dY);
         }
-        if (keys[KeyEvent.VK_S] & !Game3D.isIntersectingMap((int) (x  - dX), (int) (y- dY),w, dun.getMap())) {
+        if (keys[KeyEvent.VK_S] & Game3D.isIntersectingMap((int) (x - dX), (int) (y - dY), w, dun.getMap())) {
             x -= (int) Math.round(dX);
             y -= (int) Math.round(dY);
         }
@@ -72,5 +72,15 @@ public class Player extends ParentEntity {
 
     public double getSpeed() {
         return speed;
+    }
+
+    public void shootEnemies(boolean[] keys, Dungeon dun) {
+        for( BaseEnemy enemy: dun.geteArr())
+            if(Math.abs(enemy.isPlayerLookingAt(this, 60)) < 1) {
+                if (keys[KeyEvent.VK_SPACE] &&) {
+                    enemy.setAlive(false);
+                    System.out.println("hit");
+                }
+            }
     }
 }

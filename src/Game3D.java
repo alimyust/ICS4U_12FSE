@@ -2,7 +2,6 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
 import java.awt.geom.Rectangle2D;
-import java.util.ArrayList;
 
 public class Game3D extends BaseFrame {
     private static final int WID = 64 * 15;
@@ -45,7 +44,7 @@ public class Game3D extends BaseFrame {
     public void move() {
         super.move();
         player.movePlayer(keys, dun);
-        System.out.println(isIntersectingMap(player.x,player.y,player.w,dun.getMap()));
+        player.shootEnemies(keys,dun);
     }
 
     @Override
@@ -59,7 +58,7 @@ public class Game3D extends BaseFrame {
     public static boolean isIntersectingMap(int ax, int ay, int aw, MapNode[][] map){
         int mapX = ax/64;
         int mapY = ay/64;
-        return map[mapY][mapX].getwCode() != 0;
+        return map[mapY][mapX].getwCode() == 0;
     }
     
 

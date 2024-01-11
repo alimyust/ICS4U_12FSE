@@ -21,6 +21,11 @@ public class Dungeon {
             MainGame.convertImageTo2DColorArray(MainGame.imgDir + "Enemies/BlueBat/blueBat2.png"),
             MainGame.convertImageTo2DColorArray(MainGame.imgDir + "Enemies/BlueBat/blueBat3.png")
     };
+    private final Color[][][] sansImgArr = {
+            MainGame.convertImageTo2DColorArray(MainGame.imgDir + "Enemies/sans/sans0.png"),
+            MainGame.convertImageTo2DColorArray(MainGame.imgDir + "Enemies/sans/sans1.png"),
+            MainGame.convertImageTo2DColorArray(MainGame.imgDir + "Enemies/sans/sans2.png")
+    };
     public Dungeon(Player player) {
 
         int c;
@@ -31,7 +36,7 @@ public class Dungeon {
         } while (!((double) c / (double) (HGT * WID) > 0.3)); // 30 percent of map must be explorable
         // Fill everything else
         map = makeBorder(map);
-        eArr = Bat.addEnemy(eArr, getOpenSpaces(), blueBatImgArr);
+        eArr = Bat.addEnemy(eArr, getOpenSpaces(), sansImgArr);
         for (int i = 0; i < HGT; i++)
             for (int j = 0; j < WID; j++)
                 map[i][j] = new MapNode((map[i][j].getwCode() == -1) ? ALIVE : 2, 2, 2);

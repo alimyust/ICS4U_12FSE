@@ -31,6 +31,7 @@ public class Game2D extends BaseFrame{
     public void move() {
         super.move();
         player.movePlayer(keys, dun);
+        player.shootEnemies(keys, dun);
     }
 
     @Override
