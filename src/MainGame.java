@@ -11,16 +11,8 @@ public class MainGame {
     private static final Player player = new Player(WID/2,HGT/2);
     private static Dungeon dun = new Dungeon(player);
     protected static final String imgDir = "resources/images/";
-    protected static final Color[][] imgArr = {
-            convertImageToColorArray(MainGame.imgDir + "dirt.png"),
-            convertImageToColorArray(MainGame.imgDir + "grass.png"),
-            convertImageToColorArray(MainGame.imgDir + "redBrick.png"),
-    };
-    protected static final Color[][][] enemyImgArr = { //skip colour #f8028a
-            convertImageTo2DColorArray(MainGame.imgDir + "slenderman.png"),
-            convertImageTo2DColorArray(MainGame.imgDir + "amogus.png")
-    };
-    public static Color [] convertImageToColorArray(String imagePath) {
+
+    protected static Color [] convertImageToColorArray(String imagePath) {
         Color[] colorArray;
         try {
             BufferedImage image = ImageIO.read(new File(imagePath));

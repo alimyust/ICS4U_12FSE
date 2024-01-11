@@ -17,6 +17,11 @@ public class RayCaster {
     private final int mapY;
     private final MapNode[] mapW;
     private final int[] rayDist = new int[fov*2];
+    private final Color[][] tileImgArr = {
+            MainGame.convertImageToColorArray(MainGame.imgDir + "dirt.png"),
+            MainGame.convertImageToColorArray(MainGame.imgDir + "grass.png"),
+            MainGame.convertImageToColorArray(MainGame.imgDir + "redBrick.png"),
+    };
 
     public RayCaster(Player player, Dungeon dun) {
         this.player = player;
@@ -49,36 +54,24 @@ public class RayCaster {
         double rx = 0;
         double ry = 0;
         double ra;
-        double xo;
-        double yo;
+        double xo = 0;
+        double yo = 0;
         double distT = 0;
         ra = pa - DR * fov;
         g2.setStroke(new BasicStroke(depth));
 
-        double pdx = Math.cos(pa);
-        double pdy = Math.sin(pa);
-        if (pdx < 0) {
-            xo = -10;
-        } else {
-            xo = 10;
-        }//x offset to check map
-        if (pdy < 0) {
-            yo = -10;
-        } else {
-            yo = 10;
-        }//y offset to check map
-//        int ipx = px / tSize;
-//        int ipy = py / tSize;
-//        int ipx_add_xo = (int) (px + xo) / tSize;
-//        int ipy_add_yo = (int) (py + yo) / tSize;
-//        int ipx_sub_xo = (int) (px - xo) / tSize;//x position and offset
-//        int ipy_sub_yo = (int) (py - yo) / tSize;//y position and offset
-//        if (mapW[ipy * mapX + ipx_add_xo].getwCode() == 0) player.x += (int) Math.round(pdx * player.getSpeed());
-//        if (mapW[ipy_add_yo * mapX + ipx].getwCode() == 0) player.y += (int) Math.round(pdy * player.getSpeed());
-//        if (mapW[ipy * mapX + ipx_sub_xo].getwCode() == 0) player.x -= (int) Math.round(pdx * player.getSpeed());
-//        if (mapW[ipy_sub_yo * mapX + ipx].getwCode() == 0) player.y -= (int) Math.round(pdy * player.getSpeed());
-//        px = player.x;
-//        py = player.y;
+//        double pdx = Math.cos(pa);
+//        double pdy = Math.sin(pa);
+//        if (pdx < 0) {
+//            xo = -10;
+//        } else {
+//            xo = 10;
+//        }//x offset to check map
+//        if (pdy < 0) {
+//            yo = -10;
+//        } else {
+//            yo = 10;
+//        }//y offset to check map
 
         for (int r = 0; r < fov * 2; r++) {
             // Horizontal Lines
@@ -197,7 +190,7 @@ public class RayCaster {
             for (int y = 0; y < lineH; y++) {
                 int pixel = ((int) ty * texSize + tx);
                 if (pixel > 1023) pixel = 1023; if (pixel < 0) pixel = 0;
-                Color col = MainGame.imgArr[mapW[mp].getwCode()][pixel];
+                Color col = this.tileImgArr[mapW[mp].getwCode()][pixel];
                 double darknessFactor = 1 - Math.min(distT / darkScale, 1);
                 col = applyDarkness(col, darknessFactor);
                 g2.setColor((shade != 1) ? col : col.darker().darker());
@@ -211,18 +204,15 @@ public class RayCaster {
                 // Adjust the floor tile size by scaling the texture coordinates
                 double scaledPx = px / 2F;
                 double scaledPy = py / 2F;
-
                 tx = (int) (scaledPx + Math.cos(ra) * (480) * 32 / dy / raFix);
                 ty = (int) (scaledPy + Math.sin(ra) * (480) * 32 / dy / raFix);
                 //hours and hours of trial and error to align the floor and ceiling values for tx and ty
-                mp = (int) (ty / 32) * mapX + tx / 32;
+                mp = fixMp((int) (ty / 32) * mapX + tx / 32);
                 int pixel = (((int) (ty) & 31) * texSize + (tx & 31));
-                mp = fixMp(mp);
                 double tileDist = dist(px,py,getMapX(mp),getMapY(mp));
                 double darknessFactor = 1 - Math.min(Math.abs(tileDist) / darkScale, 1);
-                Color floorColor = applyDarkness(MainGame.imgArr[mapW[mp].getfCode()][pixel], darknessFactor);
-                Color ceilingColor = applyDarkness(MainGame.imgArr[mapW[mp].getcCode()][pixel], darknessFactor);
-                Color col;
+                Color floorColor = applyDarkness(this.tileImgArr[mapW[mp].getfCode()][pixel], darknessFactor);
+                Color ceilingColor = applyDarkness(this.tileImgArr[mapW[mp].getcCode()][pixel], darknessFactor);
                 if (mapW[mp].getfCode() != -1) {
                     g2.setColor(floorColor);
                     g2.drawLine(r * depth, y, r * depth, y);
