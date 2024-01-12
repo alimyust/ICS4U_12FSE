@@ -2,6 +2,7 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
 import java.awt.geom.Rectangle2D;
+import java.util.Arrays;
 
 public class Game3D extends BaseFrame {
     private static final int WID = 64 * 15;
@@ -36,8 +37,7 @@ public class Game3D extends BaseFrame {
         Graphics2D g2d = (Graphics2D) g;
         super.draw(g);
         rayCast.drawRays3d(g2d);
-        for (BaseEnemy e : dun.geteArr())
-            e.drawBaseEnemy(g, player, HGT, WID, rayCast);
+        Arrays.stream(dun.geteArr()).forEach(e -> e.drawBaseEnemy(g, player, HGT, WID, rayCast));
     }
 
     @Override
@@ -45,6 +45,7 @@ public class Game3D extends BaseFrame {
         super.move();
         player.movePlayer(keys, dun);
         player.shootEnemies(keys,dun);
+        Arrays.stream(dun.geteArr()).forEach(e -> e.moveEnemy(player, dun));
     }
 
     @Override
@@ -55,7 +56,7 @@ public class Game3D extends BaseFrame {
         Shape aRect = new Rectangle2D.Double(ax,ay,aw,aw);
         return aRect.intersects(new Rectangle(bx,by,bw,bw));
     }
-    public static boolean isIntersectingMap(int ax, int ay, int aw, MapNode[][] map){
+    public static boolean notIntersectingMap(int ax, int ay, int aw, MapNode[][] map){
         int mapX = ax/64;
         int mapY = ay/64;
         return map[mapY][mapX].getwCode() == 0;

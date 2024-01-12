@@ -11,7 +11,7 @@ public class Player extends ParentEntity {
     private double angle = 0;
     private double dX;
     private double dY;
-    private double speed = 25;
+    private final double speed = 15;
 
     public Player(int x, int y) {
         super(x, y, 10, 10);
@@ -28,17 +28,28 @@ public class Player extends ParentEntity {
         fixAngle();
         dX = Math.cos(angle) * speed;
         dY = Math.sin(angle) * speed;
-        if (keys[KeyEvent.VK_W] & Game3D.isIntersectingMap((int) (x + dX), (int) (y + dY), w, dun.getMap())) {
+        if (keys[KeyEvent.VK_W] &&
+        Game3D.notIntersectingMap((int) (x + dX), (int) (y + dY), w, dun.getMap())) {
             x += (int) Math.round(dX);
             y += (int) Math.round(dY);
         }
-        if (keys[KeyEvent.VK_S] & Game3D.isIntersectingMap((int) (x - dX), (int) (y - dY), w, dun.getMap())) {
+        if (keys[KeyEvent.VK_S] &&
+        Game3D.notIntersectingMap((int) (x - dX), (int) (y - dY), w, dun.getMap())) {
             x -= (int) Math.round(dX);
             y -= (int) Math.round(dY);
         }
     }
 
-    public void drawPlayer(Graphics g) {
+    public void shootEnemies(boolean[] keys, Dungeon dun) {
+        for( BaseEnemy enemy: dun.geteArr())
+            if(Math.abs(enemy.isPlayerLookingAt(this, 10)) < 1) {
+                if (keys[KeyEvent.VK_SPACE] && dist(x,y, enemy.x ,enemy.y) < 600) {
+                    enemy.setAlive(false);
+                }
+            }
+    }
+
+    public void drawPlayer(Graphics g) { //2d
         int r = Game2D.getDunSizeRatio();
         Graphics2D g2d = (Graphics2D) g;
         g.setColor(Color.green);
@@ -50,11 +61,11 @@ public class Player extends ParentEntity {
         rx.clear();
         ry.clear();
     }
-
     public void setPlayerRay(int rx, int ry) {
         this.rx.add(rx);
         this.ry.add(ry);
     }
+
     public void fixAngle(){
         if (angle < 0)
             angle += 2 * Math.PI;
@@ -66,21 +77,7 @@ public class Player extends ParentEntity {
         return angle;
     }
 
-    public double dist(double ax, double ay, double bx, double by) {
-        return Math.sqrt((bx - ax) * (bx - ax) + (by - ay) * (by - ay));
-    }
-
-    public double getSpeed() {
-        return speed;
-    }
-
-    public void shootEnemies(boolean[] keys, Dungeon dun) {
-        for( BaseEnemy enemy: dun.geteArr())
-            if(Math.abs(enemy.isPlayerLookingAt(this, 60)) < 1) {
-                if (keys[KeyEvent.VK_SPACE] &&) {
-                    enemy.setAlive(false);
-                    System.out.println("hit");
-                }
-            }
+    public int dist(int ax, int ay, int bx, int by) {
+        return (int) Math.sqrt((bx - ax) * (bx - ax) + (by - ay) * (by - ay));
     }
 }

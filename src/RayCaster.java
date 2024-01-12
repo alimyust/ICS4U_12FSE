@@ -60,19 +60,6 @@ public class RayCaster {
         ra = pa - DR * fov;
         g2.setStroke(new BasicStroke(depth));
 
-//        double pdx = Math.cos(pa);
-//        double pdy = Math.sin(pa);
-//        if (pdx < 0) {
-//            xo = -10;
-//        } else {
-//            xo = 10;
-//        }//x offset to check map
-//        if (pdy < 0) {
-//            yo = -10;
-//        } else {
-//            yo = 10;
-//        }//y offset to check map
-
         for (int r = 0; r < fov * 2; r++) {
             // Horizontal Lines
             double distH = 1000000000, hx = px, hy = py;

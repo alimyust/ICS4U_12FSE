@@ -1,5 +1,6 @@
 import java.awt.*;
 import java.util.ArrayList;
+import java.util.Random;
 
 import static java.lang.Math.PI;
 
@@ -8,6 +9,14 @@ public class BaseEnemy extends ParentEntity {
     private final Color[][][] enemyImgArr;
     private int frame;
     private boolean isAlive;
+    private final int speed = 5;
+    private Random random = new Random();
+    private double velocityX = 0.0;  // Initial horizontal velocity
+    private double velocityY = 0.0;  // Initial vertical velocity
+    private double wanderAngle = 0.0;
+    private double wanderRadius = 50.0;  // Adjust as needed
+    private double wanderDistance = 100.0;  // Adjust as needed
+    private double wanderChangeRate = Math.toRadians(10);  // Adjust as needed
 
     public BaseEnemy(int x, int y, Color[][][] imgArr) {
         super(x, y, 64, 64);
@@ -27,7 +36,88 @@ public class BaseEnemy extends ParentEntity {
     }
 
     public void moveEnemy(Player player, Dungeon dun) {
+        if(!isAlive) return;
+//        double ang = Math.atan2(player.y-y, player.x-x);
+//        int dx = (int) (Math.cos(ang)*speed);
+//        int dy = (int) (Math.sin(ang)*speed);
+//        System.out.println(Game3D.notIntersectingMap(x+dx,y+dy, w, dun.getMap()));
+//        if(dist(player.x, player.y,x,y) < 800 & Game3D.notIntersectingMap(x+dx,y+dy, w, dun.getMap())){
+//            x+= dx;
+//            y+= dy;
+//            System.out.println("moving enemy");
+//        }
 
+        // Decide whether to wander or seek the player
+//        if (random.nextDouble() < 0.2)
+//        wander();
+//         else
+//            // Use seek behavior to move towards the player
+        seek(player);
+
+    }
+    private void seek(Player player) {
+        // Calculate the desired velocity pointing towards the player
+        double angle = Math.atan2(player.y - y, player.x - x);
+        double desiredVelocityX = speed * Math.cos(angle);
+        double desiredVelocityY = speed * Math.sin(angle);
+
+        // Calculate the steering force
+        double steeringForceX = desiredVelocityX - velocityX;
+        double steeringForceY = desiredVelocityY - velocityY;
+
+        // Apply the steering force to the enemy's velocity
+        velocityX += steeringForceX;
+        velocityY += steeringForceY;
+
+        // Limit the speed (optional)
+        double currentSpeed = Math.sqrt(velocityX * velocityX + velocityY * velocityY);
+        if (currentSpeed > speed) {
+            double scale = speed / currentSpeed;
+            velocityX *= scale;
+            velocityY *= scale;
+        }
+
+        // Update the enemy's position based on the new velocity
+        x += velocityX;
+        y += velocityY;
+    }
+    private void wander() {
+        // Update the wander angle over time
+        wanderAngle += random.nextDouble() * wanderChangeRate - wanderChangeRate * 0.5;
+
+        // Calculate the position of the wander circle center
+        double circleCenterX = x + wanderDistance * Math.cos(wanderAngle);
+        double circleCenterY = y + wanderDistance * Math.sin(wanderAngle);
+
+        // Generate a random point within the wander circle
+        double targetAngle = random.nextDouble() * 2 * Math.PI;
+        double targetX = circleCenterX + wanderRadius * Math.cos(targetAngle);
+        double targetY = circleCenterY + wanderRadius * Math.sin(targetAngle);
+
+        // Apply steering force to move towards the random point
+        double angleToTarget = Math.atan2(targetY - y, targetX - x);
+        double desiredVelocityX = speed * Math.cos(angleToTarget);
+        double desiredVelocityY = speed * Math.sin(angleToTarget);
+
+        // Calculate the steering force
+        double steeringForceX = desiredVelocityX - velocityX;
+        double steeringForceY = desiredVelocityY - velocityY;
+
+        // Apply the steering force to the enemy's velocity
+        velocityX += steeringForceX;
+        velocityY += steeringForceY;
+
+        // Limit the speed (optional)
+        double currentSpeed = Math.sqrt(velocityX * velocityX + velocityY * velocityY);
+        if (currentSpeed > speed) {
+            double scale = speed / currentSpeed;
+            velocityX *= scale;
+            velocityY *= scale;
+        }
+
+        // Update the enemy's position based on the new velocity
+        x += velocityX;
+        y += velocityY;
     }
 
     public void drawBaseEnemy(Graphics g, Player player, int HGT, int WID, RayCaster ray) {

@@ -13,7 +13,7 @@ public class Dungeon {
     private final int ALIVE = 0; // empty space is alive
     private final int DEAD = 1; // dead is wall
     private MapNode[][] map = new MapNode[HGT][WID];
-    private static BaseEnemy[] eArr = new BaseEnemy[8];
+    private static BaseEnemy[] eArr = new BaseEnemy[1];
     private final ArrayList<Point> openSpaces = new ArrayList<>();
     private final Color[][][] blueBatImgArr = {
             MainGame.convertImageTo2DColorArray(MainGame.imgDir + "Enemies/BlueBat/blueBat0.png"),
@@ -137,6 +137,9 @@ public class Dungeon {
                 g.fillRect(x * DSIZE / r, y * DSIZE / r, DSIZE / r, DSIZE / r);
             }
         }
+    }
+    public boolean isWalkable(int x, int y){
+        return map[y][x].getwCode() == 0;
     }
 
 
