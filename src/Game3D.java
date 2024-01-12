@@ -10,6 +10,7 @@ public class Game3D extends BaseFrame {
     private Dungeon dun;
     private final Player player;
     private final RayCaster rayCast;
+    private int lvl = 0;
 
     public Game3D(Dungeon dun, Player player) {
         super("Game3D", WID, HGT);
@@ -59,6 +60,7 @@ public class Game3D extends BaseFrame {
     public static boolean notIntersectingMap(int ax, int ay, int aw, MapNode[][] map){
         int mapX = ax/64;
         int mapY = ay/64;
+        if (mapX >= map[0].length || mapY >= map.length) return false;
         return map[mapY][mapX].getwCode() == 0;
     }
     

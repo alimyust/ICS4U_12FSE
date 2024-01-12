@@ -8,7 +8,7 @@ public class RayCaster {
     private final Dungeon dun;
     private final int WID = Game3D.getWid3d();
     private final int HGT = Game3D.getHgt3d();
-    private final double resolution = 4; //(10 is max before it's too high resolution for the display size)
+    private final double resolution = 2; //(10 is max before it's too high resolution for the display size)
     private final int fov = (int) (30 * resolution);
     private final double DR = Math.PI/180.0/ resolution; // degree
     private final int depth = (WID / (fov * 2));
@@ -18,6 +18,9 @@ public class RayCaster {
     private final MapNode[] mapW;
     private final int[] rayDist = new int[fov*2];
     private final Color[][] tileImgArr = {
+            MainGame.convertImageToColorArray(MainGame.imgDir + "Textures/Tech/DENTWALL.png"),
+            MainGame.convertImageToColorArray(MainGame.imgDir + "Textures/Tech/HEXAGONS.png"),
+            MainGame.convertImageToColorArray(MainGame.imgDir + "Textures/Wood/BIGTRUNK.png"),
             MainGame.convertImageToColorArray(MainGame.imgDir + "dirt.png"),
             MainGame.convertImageToColorArray(MainGame.imgDir + "grass.png"),
             MainGame.convertImageToColorArray(MainGame.imgDir + "redBrick.png"),
@@ -33,7 +36,6 @@ public class RayCaster {
     }
 
     public static MapNode[] flatten(MapNode[][] array) {
-//        System.out.println(Arrays.deepToString(array));
         int rows = array.length;
         int cols = array[0].length;
         MapNode[] flattenedArray = new MapNode[rows * cols];

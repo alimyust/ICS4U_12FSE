@@ -33,13 +33,13 @@ public class Dungeon {
             generateGrid(0.50);
             automata(20, 5, 4);
             c = floodFill(HGT / 2/dSizeMultiplier, WID / 2/dSizeMultiplier, -1);
-        } while (!((double) c / (double) (HGT * WID) > 0.3)); // 30 percent of map must be explorable
+        } while (!((double) c / (double) (HGT * WID) > 0.2)); // 30 percent of map must be explorable
         // Fill everything else
         map = makeBorder(map);
         eArr = Bat.addEnemy(eArr, getOpenSpaces(), sansImgArr);
         for (int i = 0; i < HGT; i++)
             for (int j = 0; j < WID; j++)
-                map[i][j] = new MapNode((map[i][j].getwCode() == -1) ? ALIVE : 2, 2, 2);
+                map[i][j] = new MapNode((map[i][j].getwCode() == -1) ? ALIVE : 1, 0, 2);
     }
 
     private int floodFill(int cx, int cy, int mark) {

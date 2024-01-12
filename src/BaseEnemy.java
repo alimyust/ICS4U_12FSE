@@ -36,51 +36,18 @@ public class BaseEnemy extends ParentEntity {
     }
 
     public void moveEnemy(Player player, Dungeon dun) {
-        if(!isAlive) return;
-//        double ang = Math.atan2(player.y-y, player.x-x);
-//        int dx = (int) (Math.cos(ang)*speed);
-//        int dy = (int) (Math.sin(ang)*speed);
-//        System.out.println(Game3D.notIntersectingMap(x+dx,y+dy, w, dun.getMap()));
-//        if(dist(player.x, player.y,x,y) < 800 & Game3D.notIntersectingMap(x+dx,y+dy, w, dun.getMap())){
-//            x+= dx;
-//            y+= dy;
-//            System.out.println("moving enemy");
-//        }
-
-        // Decide whether to wander or seek the player
-//        if (random.nextDouble() < 0.2)
-//        wander();
-//         else
-//            // Use seek behavior to move towards the player
-        seek(player);
-
-    }
-    private void seek(Player player) {
-        // Calculate the desired velocity pointing towards the player
-        double angle = Math.atan2(player.y - y, player.x - x);
-        double desiredVelocityX = speed * Math.cos(angle);
-        double desiredVelocityY = speed * Math.sin(angle);
-
-        // Calculate the steering force
-        double steeringForceX = desiredVelocityX - velocityX;
-        double steeringForceY = desiredVelocityY - velocityY;
-
-        // Apply the steering force to the enemy's velocity
-        velocityX += steeringForceX;
-        velocityY += steeringForceY;
-
-        // Limit the speed (optional)
-        double currentSpeed = Math.sqrt(velocityX * velocityX + velocityY * velocityY);
-        if (currentSpeed > speed) {
-            double scale = speed / currentSpeed;
-            velocityX *= scale;
-            velocityY *= scale;
+        double ang = Math.atan2(player.y - y, player.x - x);
+        int dx = (int) (Math.cos(ang) * speed);
+        int dy = (int) (Math.sin(ang) * speed);
+        if (!isAlive || !Game3D.notIntersectingMap(x + dx, y + dy, w, dun.getMap())) return;
+        if (playerEnemyDist(player) < 800) {
+            x += dx;
+            y += dy;
+        } else {
+            wander();
         }
-
-        // Update the enemy's position based on the new velocity
-        x += velocityX;
-        y += velocityY;
     }
+
     private void wander() {
         // Update the wander angle over time
         wanderAngle += random.nextDouble() * wanderChangeRate - wanderChangeRate * 0.5;
@@ -110,7 +77,7 @@ public class BaseEnemy extends ParentEntity {
         // Limit the speed (optional)
         double currentSpeed = Math.sqrt(velocityX * velocityX + velocityY * velocityY);
         if (currentSpeed > speed) {
-            double scale = speed / currentSpeed;
+            double scale = speed / currentSpeed * 4;
             velocityX *= scale;
             velocityY *= scale;
         }
@@ -140,7 +107,7 @@ public class BaseEnemy extends ParentEntity {
 
         // Adjust the vertical position based on the scaled height
         int yPos = HGT / 2 - sHgt / 2;
-        if(!isAlive) {
+        if (!isAlive) {
             sprite = enemyImgArr[enemyImgArr.length - 1];
             yPos += sHgt / 1.2;
         }
@@ -149,7 +116,7 @@ public class BaseEnemy extends ParentEntity {
             if (wDist < eDist) continue; // draws a ray only when an enemy is closer than a wall
             for (int y = 0; y < sHgt; y++) {
                 Color col = sprite[(int) (y / scale)][(int) (x / scale)];
-                    if (col.equals(Color.decode("#f8028a"))) continue;
+                if (col.equals(Color.decode("#f8028a"))) continue;
                 g.setColor(col);
                 g.drawRect(xPos + x, yPos + y, 1, 1);
             }
@@ -186,5 +153,9 @@ public class BaseEnemy extends ParentEntity {
 
     public int dist(int ax, int ay, int bx, int by) {
         return (int) Math.sqrt((bx - ax) * (bx - ax) + (by - ay) * (by - ay));
+    }
+
+    public int playerEnemyDist(Player p) {
+        return (int) Math.sqrt((p.x - x) * (p.x - x) + (p.y - y) * (p.y - y));
     }
 }
