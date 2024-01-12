@@ -51,7 +51,6 @@ public class BaseEnemy extends ParentEntity {
     private void wander() {
         // Update the wander angle over time
         wanderAngle += random.nextDouble() * wanderChangeRate - wanderChangeRate * 0.5;
-
         // Calculate the position of the wander circle center
         double circleCenterX = x + wanderDistance * Math.cos(wanderAngle);
         double circleCenterY = y + wanderDistance * Math.sin(wanderAngle);

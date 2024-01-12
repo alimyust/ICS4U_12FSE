@@ -12,6 +12,7 @@ public class Player extends ParentEntity {
     private double dX;
     private double dY;
     private final double speed = 15;
+    private final int gunFrame = 0;
 
     public Player(int x, int y) {
         super(x, y, 10, 10);
@@ -41,12 +42,16 @@ public class Player extends ParentEntity {
     }
 
     public void shootEnemies(boolean[] keys, Dungeon dun) {
-        for( BaseEnemy enemy: dun.geteArr())
-            if(Math.abs(enemy.isPlayerLookingAt(this, 10)) < 1) {
-                if (keys[KeyEvent.VK_SPACE] && dist(x,y, enemy.x ,enemy.y) < 600) {
-                    enemy.setAlive(false);
-                }
-            }
+        if (!keys[KeyEvent.VK_SPACE]) return;
+        for( BaseEnemy enemy: dun.geteArr()) {
+            if (Math.abs(enemy.isPlayerLookingAt(this, 10)) >= 1) continue;
+            if (dist(x, y, enemy.x, enemy.y) >= 600) continue;
+            enemy.setAlive(false);
+        }
+
+    }
+    public void pistolFire(Graphics g){
+
     }
 
     public void drawPlayer(Graphics g) { //2d

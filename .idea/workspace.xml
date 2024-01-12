@@ -4,83 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="8a55d714-b0cf-47b0-bb48-82f33721ee53" name="Changes" comment="Gr12 FSE Jan 10 Home&#10;Got sprite rendering almost working. Just need to adjust the scale value and boundaries until it looks nice">
-      <change afterPath="$PROJECT_DIR$/resources/images/MCGUN1.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/images/PICK1.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/images/PIST1.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/images/PIST2.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/images/Sgun.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/images/Textures/Bricks/BIGBRICKS.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/images/Textures/Bricks/CASTLEBRICKS.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/images/Textures/Bricks/CLAYBRICKS.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/images/Textures/Bricks/DUNGEONBRICKS.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/images/Textures/Bricks/DUNGEONCELL.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/images/Textures/Bricks/GOOBRICKS.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/images/Textures/Bricks/PORCELAINBRICKS.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/images/Textures/Bricks/REDBRICKS.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/images/Textures/Bricks/ROUNDBRICKS.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/images/Textures/Bricks/SLIMBRICKS.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/images/Textures/Doors/CREAKYDOOR.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/images/Textures/Doors/OFFICEDOOR.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/images/Textures/Doors/SPOOKYDOOR.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/images/Textures/Elements/BIGLEAVES.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/images/Textures/Elements/LAVA.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/images/Textures/Elements/RAPIDS.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/images/Textures/Elements/SAND.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/images/Textures/Elements/SANDMARKS.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/images/Textures/Elements/SNOW.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/images/Textures/Elements/TALLGRASS.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/images/Textures/Elements/TINYLEAVES.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/images/Textures/Elements/WATER.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/images/Textures/Industrial/CROSSCUBE.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/images/Textures/Industrial/CROSSWALL.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/images/Textures/Industrial/METALTILE.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/images/Textures/Industrial/PIPES.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/images/Textures/Industrial/STORAGE.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/images/Textures/Industrial/SUPPORT.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/images/Textures/Readme.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/images/Textures/Rocks/DIRT.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/images/Textures/Rocks/FLATSTONES.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/images/Textures/Rocks/GOLDROCKS.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/images/Textures/Rocks/GRAYROCKS.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/images/Textures/Rocks/ICEYROCKS.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/images/Textures/Rocks/LAVAROCKS.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/images/Textures/Rocks/PATHROCKS.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/images/Textures/Rocks/SLIMROCKS.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/images/Textures/Tech/BIGSQUARES.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/images/Textures/Tech/DENTWALL.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/images/Textures/Tech/DIRTHEXAGONS.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/images/Textures/Tech/DOUBLELIGHTS.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/images/Textures/Tech/HEXAGONS.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/images/Textures/Tech/HIGHTECH.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/images/Textures/Tech/HIGHTECHWALL.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/images/Textures/Tech/LONGLIGHTS.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/images/Textures/Tech/STARWALLA.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/images/Textures/Tech/STARWALLB.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/images/Textures/Tech/TECHWALLA.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/images/Textures/Tech/TECHWALLB.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/images/Textures/Tech/TINYLIGHTS.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/images/Textures/Tech/TINYSQUARES.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/images/Textures/Urban/BIGWINDOW.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/images/Textures/Urban/CHESS.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/images/Textures/Urban/GARAGE.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/images/Textures/Urban/GRAYWALL.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/images/Textures/Urban/PAVEMENT.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/images/Textures/Urban/WINDOW.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/images/Textures/Wood/BIGTRUNK.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/images/Textures/Wood/CREAKYWOOD.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/images/Textures/Wood/DARKWOOD.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/images/Textures/Wood/TRUNKS.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/images/Textures/Wood/WOODA.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/images/Textures/Wood/WOODB.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/images/Textures/Wood/WOODTILE.png" afterDir="false" />
+    <list default="true" id="8a55d714-b0cf-47b0-bb48-82f33721ee53" name="Changes" comment="Gr12 FSE Jan 10&#10;Sprites basically working. making a bat class to follow the player and working on animations and the necessary code structure to support it">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/BaseEnemy.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/BaseEnemy.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Dungeon.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Dungeon.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Game3D.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Game3D.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/RayCaster.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/RayCaster.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Sprite.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/TextureViewer.java" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
