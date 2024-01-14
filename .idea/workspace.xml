@@ -4,23 +4,23 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="8a55d714-b0cf-47b0-bb48-82f33721ee53" name="Changes" comment="Gr12 FSE Jan 10&#10;Sprites basically working. making a bat class to follow the player and working on animations and the necessary code structure to support it">
-      <change afterPath="$PROJECT_DIR$/resources/images/Player/Firing Shotgun/firingShotgun00.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/images/Player/Firing Shotgun/firingShotgun01.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/images/Player/Firing Shotgun/firingShotgun02.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/images/Player/Firing Shotgun/firingShotgun03.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/images/Player/Firing Shotgun/firingShotgun04.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Gun.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Pistol.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Shotgun.java" afterDir="false" />
+    <list default="true" id="8a55d714-b0cf-47b0-bb48-82f33721ee53" name="Changes" comment="Gr12 FSE Jan 14&#10;Both pistol and shotgun working. Abandoing reloading idea. Swapping gun works. Need to add some camera shake to the gun and the footsteps. Need to start makign the main game loop and polishing enemies. Could implement similar logic for guns by overlaoding the draw for each enemy to make it nice when enemy sizes change. Better to make a full game using sans and bats for now though. Need to also work on the mapNode texture customizations">
+      <change afterPath="$PROJECT_DIR$/resources/images/Enemies/GunMan/Running/runningGunMan0.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resources/images/Enemies/GunMan/Running/runningGunMan1.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resources/images/Enemies/GunMan/Running/runningGunMan2.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resources/images/Enemies/GunMan/Running/runningGunMan3.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resources/images/Enemies/GunMan/Running/runningGunMan4.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/GunMan.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Sans.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/images/Player/Firing Pistol/firingPistol0.png" beforeDir="false" afterPath="$PROJECT_DIR$/resources/images/Player/Firing Pistol/firingPistol0.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/images/Player/Firing Pistol/firingPistol1.png" beforeDir="false" afterPath="$PROJECT_DIR$/resources/images/Player/Firing Pistol/firingPistol1.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/images/Player/Firing Pistol/firingPistol2.png" beforeDir="false" afterPath="$PROJECT_DIR$/resources/images/Player/Firing Pistol/firingPistol2.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/images/Player/Firing Pistol/firingPistol3.png" beforeDir="false" afterPath="$PROJECT_DIR$/resources/images/Player/Firing Pistol/firingPistol3.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/BaseEnemy.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/BaseEnemy.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Bat.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Bat.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Dungeon.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Dungeon.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Game3D.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Game3D.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Gun.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Gun.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/MainGame.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/MainGame.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Player.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Player.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Pistol.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Pistol.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Shotgun.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Shotgun.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -55,26 +55,27 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;master&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/Ali/Documents/GitHub/ICS4U_12FSE/resources/images&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "git-widget-placeholder": "master",
+    "last_opened_file_path": "C:/Users/Ali/Documents/GitHub/ICS4U_12FSE/resources/images/Player/Firing Shotgun"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\Ali\Documents\GitHub\ICS4U_12FSE\resources\images\Player\Firing Shotgun" />
       <recent name="C:\Users\Ali\Documents\GitHub\ICS4U_12FSE\resources\images" />
       <recent name="C:\Users\Ali\Documents\GitHub\ICS4U_12FSE\src" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\Ali\Documents\GitHub\ICS4U_12FSE\resources\images\Enemies\GunMan\Running" />
+      <recent name="C:\Users\Ali\Documents\GitHub\ICS4U_12FSE\resources\images\Player\Reload Shotgun" />
       <recent name="C:\Users\Ali\Documents\GitHub\ICS4U_12FSE\resources\images\Player\Firing Shotgun" />
       <recent name="C:\Users\Ali\Documents\GitHub\ICS4U_12FSE\resources\images\Player" />
       <recent name="C:\Users\Ali\Documents\GitHub\ICS4U_12FSE\resources\images\Player\Firing Pistol" />
-      <recent name="C:\Users\alimy\Documents\GitHub\ICS4U_12FSE\resources\images" />
-      <recent name="C:\Users\alimy\Documents\GitHub\ICS4U_12FSE\resources\images\Textures" />
     </key>
   </component>
   <component name="RunManager">
@@ -166,7 +167,15 @@
       <option name="project" value="LOCAL" />
       <updated>1704865350780</updated>
     </task>
-    <option name="localTasksCounter" value="9" />
+    <task id="LOCAL-00009" summary="Gr12 FSE Jan 14&#10;Both pistol and shotgun working. Abandoing reloading idea. Swapping gun works. Need to add some camera shake to the gun and the footsteps. Need to start makign the main game loop and polishing enemies. Could implement similar logic for guns by overlaoding the draw for each enemy to make it nice when enemy sizes change. Better to make a full game using sans and bats for now though. Need to also work on the mapNode texture customizations">
+      <option name="closed" value="true" />
+      <created>1705211586703</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1705211586703</updated>
+    </task>
+    <option name="localTasksCounter" value="10" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -201,7 +210,8 @@
     <MESSAGE value="Gr12 FSE Jan 8&#10;Sprites almost working with amogus. Need to add scaling in the y direction and fix the render distance ripping with fog or somthn." />
     <MESSAGE value="Gr12 FSE Jan 8 Home&#10;Implemented shading fully for walls and floor/ceiling. Now working on polishing the sprite drawing and trying to get it to draw for different size sprites in the right orientation" />
     <MESSAGE value="Gr12 FSE Jan 10 Home&#10;Got sprite rendering almost working. Just need to adjust the scale value and boundaries until it looks nice" />
-    <option name="LAST_COMMIT_MESSAGE" value="Gr12 FSE Jan 10 Home&#10;Got sprite rendering almost working. Just need to adjust the scale value and boundaries until it looks nice" />
+    <MESSAGE value="Gr12 FSE Jan 14&#10;Both pistol and shotgun working. Abandoing reloading idea. Swapping gun works. Need to add some camera shake to the gun and the footsteps. Need to start makign the main game loop and polishing enemies. Could implement similar logic for guns by overlaoding the draw for each enemy to make it nice when enemy sizes change. Better to make a full game using sans and bats for now though. Need to also work on the mapNode texture customizations" />
+    <option name="LAST_COMMIT_MESSAGE" value="Gr12 FSE Jan 14&#10;Both pistol and shotgun working. Abandoing reloading idea. Swapping gun works. Need to add some camera shake to the gun and the footsteps. Need to start makign the main game loop and polishing enemies. Could implement similar logic for guns by overlaoding the draw for each enemy to make it nice when enemy sizes change. Better to make a full game using sans and bats for now though. Need to also work on the mapNode texture customizations" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

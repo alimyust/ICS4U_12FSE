@@ -60,7 +60,7 @@ public class MainGame {
 
     public static void main(String[] args) {
         Game3D g3d = new Game3D(dun,player);
-        Game2D g2d = new Game2D(dun,player);
+//        Game2D g2d = new Game2D(dun,player);
     }
 
 }

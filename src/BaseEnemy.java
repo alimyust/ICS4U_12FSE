@@ -6,31 +6,35 @@ import static java.lang.Math.PI;
 
 public class BaseEnemy extends ParentEntity {
 
-    private final Color[][][] enemyImgArr;
-    private int frame;
+    protected Color[][][] enemyImgArr;
+    private double frame;
     private boolean isAlive;
     private final int speed = 5;
-    private Random random = new Random();
-    private double velocityX = 0.0;  // Initial horizontal velocity
-    private double velocityY = 0.0;  // Initial vertical velocity
-    private double wanderAngle = 0.0;
-    private double wanderRadius = 50.0;  // Adjust as needed
-    private double wanderDistance = 100.0;  // Adjust as needed
-    private double wanderChangeRate = Math.toRadians(10);  // Adjust as needed
+    private int stopDist;
+    private int startDist;
+    private double frameRate;
 
-    public BaseEnemy(int x, int y, Color[][][] imgArr) {
+    protected static final int BAT = 0;
+    protected static final int SANS = 1;
+    protected static final int GUNMAN = 2;
+
+
+
+    public BaseEnemy(int x, int y) {
         super(x, y, 64, 64);
-        enemyImgArr = imgArr;
         this.frame = 0;
         this.isAlive = true;
-
     }
 
-    public static BaseEnemy[] addEnemy(BaseEnemy[] eArr, ArrayList<Point> spots, Color[][][] imgArr) {
-        for (int i = 0; i < eArr.length; i++) {
+    public static ArrayList<BaseEnemy> addEnemy(ArrayList<BaseEnemy> eArr, ArrayList<Point> spots, int eCount, int type) {
+        for (int i = 0; i < eCount; i++) {
             int ind = (int) (Math.random() * (spots.size() - 1));
             Point currSpot = spots.get(ind);
-            eArr[i] = new BaseEnemy(currSpot.x * 64, currSpot.y * 64, imgArr);
+            switch (type) {
+                case BAT -> eArr.add(new Bat(currSpot.x * 64, currSpot.y * 64));
+                case SANS -> eArr.add(new Sans(currSpot.x * 64, currSpot.y * 64));
+                case GUNMAN -> eArr.add(new GunMan(currSpot.x * 64, currSpot.y * 64));
+            }
         }
         return eArr;
     }
@@ -40,56 +44,16 @@ public class BaseEnemy extends ParentEntity {
         int dx = (int) (Math.cos(ang) * speed);
         int dy = (int) (Math.sin(ang) * speed);
         if (!isAlive || !Game3D.notIntersectingMap(x + dx, y + dy, w, dun.getMap())) return;
-        if (playerEnemyDist(player) < 800) {
+        if (playerEnemyDist(player) < startDist && playerEnemyDist(player) > stopDist) {
             x += dx;
             y += dy;
-        } else {
-            wander();
         }
-    }
-
-    private void wander() {
-        // Update the wander angle over time
-        wanderAngle += random.nextDouble() * wanderChangeRate - wanderChangeRate * 0.5;
-        // Calculate the position of the wander circle center
-        double circleCenterX = x + wanderDistance * Math.cos(wanderAngle);
-        double circleCenterY = y + wanderDistance * Math.sin(wanderAngle);
-
-        // Generate a random point within the wander circle
-        double targetAngle = random.nextDouble() * 2 * Math.PI;
-        double targetX = circleCenterX + wanderRadius * Math.cos(targetAngle);
-        double targetY = circleCenterY + wanderRadius * Math.sin(targetAngle);
-
-        // Apply steering force to move towards the random point
-        double angleToTarget = Math.atan2(targetY - y, targetX - x);
-        double desiredVelocityX = speed * Math.cos(angleToTarget);
-        double desiredVelocityY = speed * Math.sin(angleToTarget);
-
-        // Calculate the steering force
-        double steeringForceX = desiredVelocityX - velocityX;
-        double steeringForceY = desiredVelocityY - velocityY;
-
-        // Apply the steering force to the enemy's velocity
-        velocityX += steeringForceX;
-        velocityY += steeringForceY;
-
-        // Limit the speed (optional)
-        double currentSpeed = Math.sqrt(velocityX * velocityX + velocityY * velocityY);
-        if (currentSpeed > speed) {
-            double scale = speed / currentSpeed * 4;
-            velocityX *= scale;
-            velocityY *= scale;
-        }
-
-        // Update the enemy's position based on the new velocity
-        x += velocityX;
-        y += velocityY;
     }
 
     public void drawBaseEnemy(Graphics g, Player player, int HGT, int WID, RayCaster ray) {
-        double angleRatio = -isPlayerLookingAt(player, 30);
-        Color[][] sprite = enemyImgArr[frame % (enemyImgArr.length - 1)];
-        frame++;
+        double angleRatio = -isPlayerLookingAt(player, ray.getFov());
+        Color[][] sprite = enemyImgArr[(int) (frame % (enemyImgArr.length - 1))];
+        frame += frameRate;
 
         int xPos = (int) (WID / 2 * angleRatio + WID / 2);
         if (xPos < 0 || xPos > WID) return;
@@ -138,14 +102,6 @@ public class BaseEnemy extends ParentEntity {
         return angle;
     }
 
-    private int getMapX(int mp, int wid) {
-        return mp % wid * 64;
-    }
-
-    private int getMapY(int mp, int wid) {
-        return mp / wid * 64;
-    }
-
     public void setAlive(boolean alive) {
         isAlive = alive;
     }
@@ -153,8 +109,19 @@ public class BaseEnemy extends ParentEntity {
     public int dist(int ax, int ay, int bx, int by) {
         return (int) Math.sqrt((bx - ax) * (bx - ax) + (by - ay) * (by - ay));
     }
-
     public int playerEnemyDist(Player p) {
         return (int) Math.sqrt((p.x - x) * (p.x - x) + (p.y - y) * (p.y - y));
     }
+
+    public void setStopDist(int stopDist) {
+        this.stopDist = stopDist;
+    }
+    public void setStartDist(int startDist) {
+        this.startDist = startDist;
+    }
+
+    public void setFrameRate(double frameRate) {
+        this.frameRate = frameRate;
+    }
+
 }

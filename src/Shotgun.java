@@ -21,6 +21,7 @@ public class Shotgun extends Gun{
             ImageIO.read(new File(MainGame.imgDir +"Player/Firing Shotgun/firingShotgun12.png")),
             ImageIO.read(new File(MainGame.imgDir +"Player/Firing Shotgun/firingShotgun13.png")),
             ImageIO.read(new File(MainGame.imgDir +"Player/Firing Shotgun/firingShotgun14.png")),
+            ImageIO.read(new File(MainGame.imgDir +"Player/Firing Shotgun/firingShotgun00.png")),
     };
     private BufferedImage[] reloadFrame;
     public Shotgun(double frameRate, int aoe, int range) throws IOException {

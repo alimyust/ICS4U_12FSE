@@ -10,6 +10,10 @@ public class Pistol extends Gun{
             ImageIO.read(new File(MainGame.imgDir +"Player/Firing Pistol/firingPistol1.png")),
             ImageIO.read(new File(MainGame.imgDir +"Player/Firing Pistol/firingPistol2.png")),
             ImageIO.read(new File(MainGame.imgDir +"Player/Firing Pistol/firingPistol3.png")),
+            ImageIO.read(new File(MainGame.imgDir +"Player/Firing Pistol/firingPistol0.png")),
+            ImageIO.read(new File(MainGame.imgDir +"Player/Firing Pistol/firingPistol0.png")),
+            ImageIO.read(new File(MainGame.imgDir +"Player/Firing Pistol/firingPistol0.png")),
+
     };
     private BufferedImage[] reloadFrame;
     public Pistol(double frameRate, int aoe, int range) throws IOException {

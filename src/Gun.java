@@ -36,10 +36,6 @@ public class Gun {
         return range;
     }
 
-    public BufferedImage[] getFireFrame() {
-        return fireFrame;
-    }
-
     public BufferedImage getCurrentGunImage() {
         return currentGunImage;
     }
@@ -48,9 +44,6 @@ public class Gun {
         this.fireFrame = fireFrame;
     }
 
-    public double getframeRate() {
-        return frameRate;
-    }
 
     public void setGunFrame(double gunFrame) {
         this.gunFrame = gunFrame;

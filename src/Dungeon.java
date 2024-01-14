@@ -13,19 +13,8 @@ public class Dungeon {
     private final int ALIVE = 0; // empty space is alive
     private final int DEAD = 1; // dead is wall
     private MapNode[][] map = new MapNode[HGT][WID];
-    private static BaseEnemy[] eArr = new BaseEnemy[1];
+    private static ArrayList<BaseEnemy> eArr = new ArrayList<>();
     private final ArrayList<Point> openSpaces = new ArrayList<>();
-    private final Color[][][] blueBatImgArr = {
-            MainGame.convertImageTo2DColorArray(MainGame.imgDir + "Enemies/BlueBat/blueBat0.png"),
-            MainGame.convertImageTo2DColorArray(MainGame.imgDir + "Enemies/BlueBat/blueBat1.png"),
-            MainGame.convertImageTo2DColorArray(MainGame.imgDir + "Enemies/BlueBat/blueBat2.png"),
-            MainGame.convertImageTo2DColorArray(MainGame.imgDir + "Enemies/BlueBat/blueBat3.png")
-    };
-    private final Color[][][] sansImgArr = {
-            MainGame.convertImageTo2DColorArray(MainGame.imgDir + "Enemies/sans/sans0.png"),
-            MainGame.convertImageTo2DColorArray(MainGame.imgDir + "Enemies/sans/sans1.png"),
-            MainGame.convertImageTo2DColorArray(MainGame.imgDir + "Enemies/sans/sans2.png")
-    };
     public Dungeon(Player player) {
 
         int c;
@@ -36,7 +25,11 @@ public class Dungeon {
         } while (!((double) c / (double) (HGT * WID) > 0.2)); // 30 percent of map must be explorable
         // Fill everything else
         map = makeBorder(map);
-        eArr = Bat.addEnemy(eArr, getOpenSpaces(), sansImgArr);
+        eArr = BaseEnemy.addEnemy(eArr, getOpenSpaces(), 2, BaseEnemy.BAT);
+        eArr = BaseEnemy.addEnemy(eArr, getOpenSpaces(), 3, BaseEnemy.SANS);
+        eArr = BaseEnemy.addEnemy(eArr, getOpenSpaces(), 5, BaseEnemy.GUNMAN);
+
+
         for (int i = 0; i < HGT; i++)
             for (int j = 0; j < WID; j++)
                 map[i][j] = new MapNode((map[i][j].getwCode() == -1) ? ALIVE : 1, 0, 2);
@@ -159,7 +152,7 @@ public class Dungeon {
         return openSpaces;
     }
 
-    public BaseEnemy[] geteArr() {
+    public ArrayList<BaseEnemy> geteArr() {
         return eArr;
     }
 }
