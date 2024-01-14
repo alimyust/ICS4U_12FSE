@@ -1,5 +1,6 @@
 import java.awt.*;
 import java.awt.event.KeyEvent;
+import java.io.IOException;
 import java.util.ArrayList;
 
 
@@ -11,17 +12,28 @@ public class Player extends ParentEntity {
     private double angle = 0;
     private double dX;
     private double dY;
-    private final double speed = 15;
-    private final int gunFrame = 0;
-
-    public Player(int x, int y) {
+    private final double speed = 10;
+    private Gun curGun;
+    public Player(int x, int y) throws IOException {
         super(x, y, 10, 10);
         dX = x;
         dY = y;
+//        curGun = new Pistol(0.2,5, 600);
+        curGun = new Shotgun(0.3,20, 400);
     }
-
+    public void chooseGun(boolean[] keys){
+        try {
+            if (keys[KeyEvent.VK_Z])
+                curGun = new Pistol(0.2, 5, 600);
+            if (keys[KeyEvent.VK_X])
+                curGun = new Shotgun(0.3, 20, 400);
+        }
+        catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
     public void movePlayer(boolean[] keys, Dungeon dun) {
-        double turnAngle = 0.2;
+        double turnAngle = 0.1;
         if (keys[KeyEvent.VK_A])
             angle -= turnAngle;
         if (keys[KeyEvent.VK_D])
@@ -43,15 +55,17 @@ public class Player extends ParentEntity {
 
     public void shootEnemies(boolean[] keys, Dungeon dun) {
         if (!keys[KeyEvent.VK_SPACE]) return;
+        if (curGun.getGunFrame() != 0) return;
+        curGun.setGunFrame(1);
         for( BaseEnemy enemy: dun.geteArr()) {
-            if (Math.abs(enemy.isPlayerLookingAt(this, 10)) >= 1) continue;
-            if (dist(x, y, enemy.x, enemy.y) >= 600) continue;
+            if (Math.abs(enemy.isPlayerLookingAt(this, curGun.getAoe())) >= 1) continue;
+            if (dist(x, y, enemy.x, enemy.y) >= curGun.getRange()) continue;
             enemy.setAlive(false);
         }
 
     }
-    public void pistolFire(Graphics g){
-
+    public void shootAnimation(Graphics g){
+        curGun.drawGun(g);
     }
 
     public void drawPlayer(Graphics g) { //2d

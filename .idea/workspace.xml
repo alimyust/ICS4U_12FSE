@@ -5,8 +5,22 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="8a55d714-b0cf-47b0-bb48-82f33721ee53" name="Changes" comment="Gr12 FSE Jan 10&#10;Sprites basically working. making a bat class to follow the player and working on animations and the necessary code structure to support it">
+      <change afterPath="$PROJECT_DIR$/resources/images/Player/Firing Shotgun/firingShotgun00.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resources/images/Player/Firing Shotgun/firingShotgun01.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resources/images/Player/Firing Shotgun/firingShotgun02.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resources/images/Player/Firing Shotgun/firingShotgun03.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resources/images/Player/Firing Shotgun/firingShotgun04.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Gun.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Pistol.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Shotgun.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/BaseEnemy.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/BaseEnemy.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/images/Player/Firing Pistol/firingPistol0.png" beforeDir="false" afterPath="$PROJECT_DIR$/resources/images/Player/Firing Pistol/firingPistol0.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/images/Player/Firing Pistol/firingPistol1.png" beforeDir="false" afterPath="$PROJECT_DIR$/resources/images/Player/Firing Pistol/firingPistol1.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/images/Player/Firing Pistol/firingPistol2.png" beforeDir="false" afterPath="$PROJECT_DIR$/resources/images/Player/Firing Pistol/firingPistol2.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/images/Player/Firing Pistol/firingPistol3.png" beforeDir="false" afterPath="$PROJECT_DIR$/resources/images/Player/Firing Pistol/firingPistol3.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Game3D.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Game3D.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/MainGame.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/MainGame.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Player.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Player.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -22,6 +36,11 @@
   </component>
   <component name="Git.Settings">
     <option name="PUSH_AUTO_UPDATE" value="true" />
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="brokenBranch" />
+      </map>
+    </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
     <option name="RESET_MODE" value="HARD" />
   </component>
@@ -51,11 +70,11 @@
       <recent name="C:\Users\Ali\Documents\GitHub\ICS4U_12FSE\src" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\Ali\Documents\GitHub\ICS4U_12FSE\resources\images\Player\Firing Shotgun" />
+      <recent name="C:\Users\Ali\Documents\GitHub\ICS4U_12FSE\resources\images\Player" />
+      <recent name="C:\Users\Ali\Documents\GitHub\ICS4U_12FSE\resources\images\Player\Firing Pistol" />
       <recent name="C:\Users\alimy\Documents\GitHub\ICS4U_12FSE\resources\images" />
       <recent name="C:\Users\alimy\Documents\GitHub\ICS4U_12FSE\resources\images\Textures" />
-      <recent name="C:\Users\alimy\Documents\GitHub\ICS4U_12FSE\resources\images\Textures\Wood" />
-      <recent name="C:\Users\alimy\Documents\GitHub\ICS4U_12FSE\resources\images\Textures\Urban" />
-      <recent name="C:\Users\alimy\Documents\GitHub\ICS4U_12FSE\resources\images\Textures\Tech" />
     </key>
   </component>
   <component name="RunManager">
@@ -68,6 +87,8 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Application.MainGame" />
+        <item itemvalue="Application.MainGame" />
         <item itemvalue="Application.MainGame" />
       </list>
     </recent_temporary>
@@ -185,5 +206,8 @@
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />
     <select />
+  </component>
+  <component name="com.intellij.coverage.CoverageDataManagerImpl">
+    <SUITE FILE_PATH="coverage/ICS4U_12FSE$MainGame.ic" NAME="MainGame Coverage Results" MODIFIED="1705179511568" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
   </component>
 </project>

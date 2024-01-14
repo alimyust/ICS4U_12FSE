@@ -8,7 +8,16 @@ import java.util.ArrayList;
 public class MainGame {
     protected static final int WID = 64*16;
     protected static final int HGT= 64*16;
-    private static final Player player = new Player(WID/2,HGT/2);
+    private static final Player player;
+
+    static {
+        try {
+            player = new Player(WID/2,HGT/2);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
     private static Dungeon dun = new Dungeon(player);
     protected static final String imgDir = "resources/images/";
 

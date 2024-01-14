@@ -39,6 +39,7 @@ public class Game3D extends BaseFrame {
         super.draw(g);
         rayCast.drawRays3d(g2d);
         Arrays.stream(dun.geteArr()).forEach(e -> e.drawBaseEnemy(g, player, HGT, WID, rayCast));
+        player.shootAnimation(g);
     }
 
     @Override
@@ -46,6 +47,7 @@ public class Game3D extends BaseFrame {
         super.move();
         player.movePlayer(keys, dun);
         player.shootEnemies(keys,dun);
+        player.chooseGun(keys);
         Arrays.stream(dun.geteArr()).forEach(e -> e.moveEnemy(player, dun));
     }
 
