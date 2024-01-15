@@ -3,7 +3,6 @@ import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
-import java.util.ArrayList;
 
 public class MainGame {
     protected static final int WID = 64*16;
@@ -18,7 +17,7 @@ public class MainGame {
         }
     }
 
-    private static Dungeon dun = new Dungeon(player);
+    private static Dungeon dun = new Dungeon(new Point(3,3),new Point(0,4),new Point(0,5),"");
     protected static final String imgDir = "resources/images/";
 
     protected static Color [] convertImageToColorArray(String imagePath) {
@@ -60,7 +59,7 @@ public class MainGame {
 
     public static void main(String[] args) {
         Game3D g3d = new Game3D(dun,player);
-//        Game2D g2d = new Game2D(dun,player);
+        Game2D g2d = new Game2D(dun,player);
     }
 
 }

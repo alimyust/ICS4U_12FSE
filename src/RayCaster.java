@@ -179,7 +179,7 @@ public class RayCaster {
             for (int y = 0; y < lineH; y++) {
                 int pixel = ((int) ty * texSize + tx);
                 if (pixel > 1023) pixel = 1023; if (pixel < 0) pixel = 0;
-                Color col = this.tileImgArr[mapW[mp].getwCode()][pixel];
+                Color col = mapW[mp].getWallTexture()[pixel];
                 double darknessFactor = 1 - Math.min(distT / darkScale, 1);
                 col = applyDarkness(col, darknessFactor);
                 g2.setColor((shade != 1) ? col : col.darker().darker());
@@ -200,8 +200,8 @@ public class RayCaster {
                 int pixel = (((int) (ty) & 31) * texSize + (tx & 31));
                 double tileDist = dist(px,py,getMapX(mp),getMapY(mp));
                 double darknessFactor = 1 - Math.min(Math.abs(tileDist) / darkScale, 1);
-                Color floorColor = applyDarkness(this.tileImgArr[mapW[mp].getfCode()][pixel], darknessFactor);
-                Color ceilingColor = applyDarkness(this.tileImgArr[mapW[mp].getcCode()][pixel], darknessFactor);
+                Color floorColor = applyDarkness(mapW[mp].getCeilTexture()[pixel], darknessFactor);
+                Color ceilingColor = applyDarkness(mapW[mp].getFloorTexture()[pixel], darknessFactor);
                 if (mapW[mp].getfCode() != -1) {
                     g2.setColor(floorColor);
                     g2.drawLine(r * depth, y, r * depth, y);

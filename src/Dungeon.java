@@ -1,4 +1,5 @@
 import java.awt.*;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Arrays;
 /*
@@ -15,30 +16,42 @@ public class Dungeon {
     private MapNode[][] map = new MapNode[HGT][WID];
     private static ArrayList<BaseEnemy> eArr = new ArrayList<>();
     private final ArrayList<Point> openSpaces = new ArrayList<>();
-    public Dungeon(Player player) {
+    private final Point wallCode;
+    private final Point floorCode;
+    private final Point ceilCode;
 
+    public Dungeon(Point wallCode, Point floorCode, Point ceilCode, String pattern) {
+        this.wallCode = wallCode;
+        this.floorCode = floorCode;
+        this.ceilCode = ceilCode;
         int c;
         do {
             generateGrid(0.50);
             automata(20, 5, 4);
             c = floodFill(HGT / 2/dSizeMultiplier, WID / 2/dSizeMultiplier, -1);
-        } while (!((double) c / (double) (HGT * WID) > 0.2)); // 30 percent of map must be explorable
+        } while (!((double) c / (double) (HGT * WID) > 0.3)); // 30 percent of map must be explorable
         // Fill everything else
         map = makeBorder(map);
+        for (int i = 0; i < HGT; i++) {
+            for (int j = 0; j < WID; j++) {
+                int wCodetmp = map[i][j].getwCode();
+                if(wCodetmp == 0) wCodetmp = 2;
+                if(wCodetmp == -1) wCodetmp = 0;
+                map[i][j] = new MapNode(wallCode, floorCode, ceilCode);
+                map[i][j].setwCode(wCodetmp);
+            }
+        }
+       addEnemies();
+    }
+    private void addEnemies(){
         eArr = BaseEnemy.addEnemy(eArr, getOpenSpaces(), 2, BaseEnemy.BAT);
         eArr = BaseEnemy.addEnemy(eArr, getOpenSpaces(), 3, BaseEnemy.SANS);
         eArr = BaseEnemy.addEnemy(eArr, getOpenSpaces(), 5, BaseEnemy.GUNMAN);
-
-
-        for (int i = 0; i < HGT; i++)
-            for (int j = 0; j < WID; j++)
-                map[i][j] = new MapNode((map[i][j].getwCode() == -1) ? ALIVE : 1, 0, 2);
     }
-
     private int floodFill(int cx, int cy, int mark) {
         if (spotIsOffGrid(cx, cy) || map[cy][cx].getwCode() != ALIVE)
             return 0;
-        map[cy][cx] = new MapNode(mark, 2, 2);
+        map[cy][cx] = new MapNode(mark);
         openSpaces.add(new Point(cx,cy));
         int count = 1;
         count += floodFill(cx + 1, cy, mark) +
@@ -59,7 +72,7 @@ public class Dungeon {
         for (int i = 0; i < HGT; i++) {
             int[] row = generateRow(WID, aliveProbability);
             for (int j = 0; j < WID; j++) {
-                map[i][j] = new MapNode(row[j], 2, 2);
+                map[i][j] = new MapNode(row[j]);
             }
         }
     }

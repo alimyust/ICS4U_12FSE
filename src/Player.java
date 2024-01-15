@@ -18,14 +18,13 @@ public class Player extends ParentEntity {
         super(x, y, 10, 10);
         dX = x;
         dY = y;
-//        curGun = new Pistol(0.2,5, 600);
-        curGun = new Shotgun(0.3,20, 400);
+        curGun = new Pistol(0.2, 10, 600);
     }
     public void chooseGun(boolean[] keys){
         try {
-            if (keys[KeyEvent.VK_Z])
-                curGun = new Pistol(0.2, 5, 600);
-            if (keys[KeyEvent.VK_X])
+            if (keys[KeyEvent.VK_1])
+                curGun = new Pistol(0.2, 10, 600);
+            if (keys[KeyEvent.VK_2])
                 curGun = new Shotgun(0.3, 20, 400);
         }
         catch (IOException e) {
