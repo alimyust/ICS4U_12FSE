@@ -7,18 +7,11 @@ import java.io.IOException;
 public class MainGame {
     protected static final int WID = 64*16;
     protected static final int HGT= 64*16;
-    private static final Player player;
-
-    static {
-        try {
-            player = new Player(WID/2,HGT/2);
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-    }
-
-    private static Dungeon dun = new Dungeon(new Point(3,3),new Point(0,4),new Point(0,5),"");
+    protected static Player player = new Player(WID/2,HGT/2);;
+    protected static Dungeon dun = new Dungeon(new Point(3,3),new Point(0,4),new Point(0,5),"");
     protected static final String imgDir = "resources/images/";
+    protected  static Game3D g3d;
+    protected  static Game2D g2d;
 
     protected static Color [] convertImageToColorArray(String imagePath) {
         Color[] colorArray;
@@ -58,8 +51,8 @@ public class MainGame {
     }
 
     public static void main(String[] args) {
-        Game3D g3d = new Game3D(dun,player);
-        Game2D g2d = new Game2D(dun,player);
+        g3d = new Game3D(dun,player);
+        g2d = new Game2D(dun,player);
     }
 
 }

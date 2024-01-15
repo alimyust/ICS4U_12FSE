@@ -4,28 +4,21 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="8a55d714-b0cf-47b0-bb48-82f33721ee53" name="Changes" comment="Gr12 FSE Jan 14&#10;Both pistol and shotgun working. Abandoing reloading idea. Swapping gun works. Need to add some camera shake to the gun and the footsteps. Need to start makign the main game loop and polishing enemies. Could implement similar logic for guns by overlaoding the draw for each enemy to make it nice when enemy sizes change. Better to make a full game using sans and bats for now though. Need to also work on the mapNode texture customizations">
-      <change afterPath="$PROJECT_DIR$/resources/images/Enemies/GunMan/Running/runningGunMan0.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/images/Enemies/GunMan/Running/runningGunMan1.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/images/Enemies/GunMan/Running/runningGunMan2.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/images/Enemies/GunMan/Running/runningGunMan3.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/images/Enemies/GunMan/Running/runningGunMan4.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/GunMan.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Sans.java" afterDir="false" />
+    <list default="true" id="8a55d714-b0cf-47b0-bb48-82f33721ee53" name="Changes" comment="Gr12 FSE Jan 12&#10;Found gun sprites and began cutting them. Need to get atleast one working and make a functional game with multiple dungeons. The goal is to have that wokring by the end of this wekened, so that next week the focus will be GUI and different gamestates">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/BaseEnemy.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/BaseEnemy.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Bat.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Bat.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Dungeon.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Dungeon.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Game3D.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Game3D.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Gun.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Gun.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/MainGame.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/MainGame.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Pistol.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Pistol.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Shotgun.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Shotgun.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Player.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Player.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="CodeStyleSettingsInfer">
+    <option name="done" value="true" />
   </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
@@ -44,6 +37,12 @@
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
     <option name="RESET_MODE" value="HARD" />
   </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
+  </component>
+  <component name="ProjectCodeStyleSettingsMigration">
+    <option name="version" value="2" />
+  </component>
   <component name="ProjectColorInfo">{
   &quot;associatedIndex&quot;: 5
 }</component>
@@ -55,15 +54,15 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "git-widget-placeholder": "master",
-    "last_opened_file_path": "C:/Users/Ali/Documents/GitHub/ICS4U_12FSE/resources/images/Player/Firing Shotgun"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;master&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/Ali/Documents/GitHub/ICS4U_12FSE/resources/images/Player/Firing Shotgun&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\Users\Ali\Documents\GitHub\ICS4U_12FSE\resources\images\Player\Firing Shotgun" />

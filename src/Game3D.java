@@ -1,15 +1,16 @@
+import com.sun.tools.javac.Main;
+
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
 import java.awt.geom.Rectangle2D;
-import java.util.Arrays;
 
 public class Game3D extends BaseFrame {
     private static final int WID = 64 * 15;
     private static final int HGT = 64 * 12;
     private Dungeon dun;
-    private final Player player;
-    private final RayCaster rayCast;
+    private Player player;
+    private RayCaster rayCast;
     private int lvl = 0;
 
     public Game3D(Dungeon dun, Player player) {
@@ -49,15 +50,34 @@ public class Game3D extends BaseFrame {
         player.shootEnemies(keys,dun);
         player.chooseGun(keys);
         dun.geteArr().forEach(e -> e.moveEnemy(player,dun));
+        if(pointDist(dun.getDoorPoint(), new Point(player.x/64,player.y/64)) < 2)
+            refreshDungeon();
+    }
+
+    private void refreshDungeon() {
+        lvl++;
+        System.out.println("refresh Dungeon");
+        dun = switch (lvl){
+            case 0 -> new Dungeon(new Point(3,3),new Point(0,4),new Point(0,5),"");
+            case 1 -> new Dungeon(new Point(3,1),new Point(5,2),new Point(5,2),"");
+            case 2 -> new Dungeon(new Point(4,5),new Point(5,4),new Point(5,4),"");
+            default -> throw new IllegalStateException("Unexpected value: " + lvl);
+        };
+        player = new Player(WID/2, HGT/2);
+        rayCast = new RayCaster(player, dun);
+        MainGame.g2d = new Game2D(dun,player);
+        MainGame.g3d = new Game3D(dun,player);
+    }
+
+    private int pointDist(Point doorPoint, Point point) {
+        return (int) Math.sqrt((point.x - doorPoint.x) * (point.x - doorPoint.x) +
+                (point.y - doorPoint.y) * (point.y - doorPoint.y));
+
     }
 
     @Override
     public void keyPressed(KeyEvent e) {
         super.keyPressed(e);
-    }
-    public boolean isIntersecting(int ax, int ay, int aw, int bx, int by, int bw){
-        Shape aRect = new Rectangle2D.Double(ax,ay,aw,aw);
-        return aRect.intersects(new Rectangle(bx,by,bw,bw));
     }
     public static boolean notIntersectingMap(int ax, int ay, int aw, MapNode[][] map){
         int mapX = ax/64;

@@ -5,18 +5,27 @@ import java.io.File;
 import java.io.IOException;
 
 public class Pistol extends Gun{
-    private BufferedImage[] fireFrame = {
-            ImageIO.read(new File(MainGame.imgDir +"Player/Firing Pistol/firingPistol0.png")),
-            ImageIO.read(new File(MainGame.imgDir +"Player/Firing Pistol/firingPistol1.png")),
-            ImageIO.read(new File(MainGame.imgDir +"Player/Firing Pistol/firingPistol2.png")),
-            ImageIO.read(new File(MainGame.imgDir +"Player/Firing Pistol/firingPistol3.png")),
-            ImageIO.read(new File(MainGame.imgDir +"Player/Firing Pistol/firingPistol0.png")),
-            ImageIO.read(new File(MainGame.imgDir +"Player/Firing Pistol/firingPistol0.png")),
-            ImageIO.read(new File(MainGame.imgDir +"Player/Firing Pistol/firingPistol0.png")),
+    private BufferedImage[] fireFrame;
 
-    };
+    {
+        try {
+            fireFrame = new BufferedImage[]{
+                    ImageIO.read(new File(MainGame.imgDir +"Player/Firing Pistol/firingPistol0.png")),
+                    ImageIO.read(new File(MainGame.imgDir +"Player/Firing Pistol/firingPistol1.png")),
+                    ImageIO.read(new File(MainGame.imgDir +"Player/Firing Pistol/firingPistol2.png")),
+                    ImageIO.read(new File(MainGame.imgDir +"Player/Firing Pistol/firingPistol3.png")),
+                    ImageIO.read(new File(MainGame.imgDir +"Player/Firing Pistol/firingPistol0.png")),
+                    ImageIO.read(new File(MainGame.imgDir +"Player/Firing Pistol/firingPistol0.png")),
+                    ImageIO.read(new File(MainGame.imgDir +"Player/Firing Pistol/firingPistol0.png")),
+
+            };
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
     private BufferedImage[] reloadFrame;
-    public Pistol(double frameRate, int aoe, int range) throws IOException {
+    public Pistol(double frameRate, int aoe, int range) {
         super(frameRate, aoe, range);
         setFireFrame(fireFrame);
     }

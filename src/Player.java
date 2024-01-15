@@ -12,9 +12,8 @@ public class Player extends ParentEntity {
     private double angle = 0;
     private double dX;
     private double dY;
-    private final double speed = 10;
     private Gun curGun;
-    public Player(int x, int y) throws IOException {
+    public Player(int x, int y) {
         super(x, y, 10, 10);
         dX = x;
         dY = y;
@@ -38,6 +37,7 @@ public class Player extends ParentEntity {
         if (keys[KeyEvent.VK_D])
             angle += turnAngle;
         fixAngle();
+        double speed = 10;
         dX = Math.cos(angle) * speed;
         dY = Math.sin(angle) * speed;
         if (keys[KeyEvent.VK_W] &&

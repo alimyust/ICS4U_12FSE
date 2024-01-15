@@ -14,24 +14,44 @@ public class Dungeon {
     private final int ALIVE = 0; // empty space is alive
     private final int DEAD = 1; // dead is wall
     private MapNode[][] map = new MapNode[HGT][WID];
-    private static ArrayList<BaseEnemy> eArr = new ArrayList<>();
-    private final ArrayList<Point> openSpaces = new ArrayList<>();
+    private static ArrayList<BaseEnemy> eArr;
+    private final ArrayList<Point> openSpaces;
     private final Point wallCode;
     private final Point floorCode;
     private final Point ceilCode;
-
+    private Point doorPoint; //gateway to next level
     public Dungeon(Point wallCode, Point floorCode, Point ceilCode, String pattern) {
         this.wallCode = wallCode;
         this.floorCode = floorCode;
         this.ceilCode = ceilCode;
+        openSpaces = new ArrayList<>();
+        eArr = new ArrayList<>();
+        makeDungeon();
+        addEnemies();
+        while(true)
+        {
+            for (Point openPoint : openSpaces)
+                if (dist(openPoint.x, openPoint.y, 10, 10) > 50) {
+                    doorPoint = openPoint;
+                    break;
+                }
+            if(doorPoint != null) break;
+            makeDungeon();
+        }
+        map[doorPoint.y][doorPoint.x] = new MapNode(new Point(1,1), floorCode, ceilCode);
+        map[doorPoint.y][doorPoint.x].setwCode(5);
+    }
+    public int dist(int ax, int ay, int bx, int by) {
+        return (int) Math.sqrt((bx - ax) * (bx - ax) + (by - ay) * (by - ay));
+    }
+    private void makeDungeon(){
         int c;
         do {
             generateGrid(0.50);
             automata(20, 5, 4);
+            map = makeBorder(map);
             c = floodFill(HGT / 2/dSizeMultiplier, WID / 2/dSizeMultiplier, -1);
         } while (!((double) c / (double) (HGT * WID) > 0.3)); // 30 percent of map must be explorable
-        // Fill everything else
-        map = makeBorder(map);
         for (int i = 0; i < HGT; i++) {
             for (int j = 0; j < WID; j++) {
                 int wCodetmp = map[i][j].getwCode();
@@ -41,7 +61,6 @@ public class Dungeon {
                 map[i][j].setwCode(wCodetmp);
             }
         }
-       addEnemies();
     }
     private void addEnemies(){
         eArr = BaseEnemy.addEnemy(eArr, getOpenSpaces(), 2, BaseEnemy.BAT);
@@ -140,12 +159,10 @@ public class Dungeon {
         for (int y = 0; y < HGT; y += 1) {
             for (int x = 0; x < WID; x += 1) {
                 g.setColor((map[y][x].getwCode() == 0) ? Color.WHITE :Color.BLACK);
+                if(map[y][x].getwCode() == 5) g.setColor(Color.GREEN);
                 g.fillRect(x * DSIZE / r, y * DSIZE / r, DSIZE / r, DSIZE / r);
             }
         }
-    }
-    public boolean isWalkable(int x, int y){
-        return map[y][x].getwCode() == 0;
     }
 
 
@@ -157,8 +174,8 @@ public class Dungeon {
         return DSIZE;
     }
 
-    public int getdSizeMultiplier() {
-        return dSizeMultiplier;
+    public Point getDoorPoint() {
+        return doorPoint;
     }
 
     public ArrayList<Point> getOpenSpaces() {
