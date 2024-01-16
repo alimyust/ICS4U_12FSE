@@ -106,11 +106,6 @@ public class MapNode {
     public MapNode(int wCode) {
         this.wCode = wCode;
     }
-    public MapNode(int wCode, Point fCode, Point cCode) {
-        this.wCode = wCode;
-        this.floorTexture =allTextures[fCode.x][fCode.y];
-        this.ceilTexture =allTextures[cCode.x][cCode.y];
-    }
     public MapNode(Point wCode, Point fCode, Point cCode) {
         this.wallTexture =allTextures[wCode.x][wCode.y];
         this.floorTexture =allTextures[fCode.x][fCode.y];

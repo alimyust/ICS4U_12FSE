@@ -2,6 +2,8 @@ import java.awt.*;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.stream.IntStream;
+
 /*
 *  A Dungeon object would include everything that would be contained per level. This includes the actual dungeon and
 * what it's made of, but also the enemies, power ups, etc.
@@ -66,6 +68,21 @@ public class Dungeon {
         eArr = BaseEnemy.addEnemy(eArr, getOpenSpaces(), 2, BaseEnemy.BAT);
         eArr = BaseEnemy.addEnemy(eArr, getOpenSpaces(), 3, BaseEnemy.SANS);
         eArr = BaseEnemy.addEnemy(eArr, getOpenSpaces(), 5, BaseEnemy.GUNMAN);
+    }
+    public void applyBlotch(int centerX, int centerY, int radius,  Point wallCode,Point floorCode, Point ceilCode) {
+        for (int i = -radius; i <= radius; i++) {
+            for (int j = -radius; j <= radius; j++) {
+                int newX = centerX + i;
+                int newY = centerY + j;
+                if (newX >= 0 && newX < map.length && newY >= 0 && newY < map[0].length) {
+                    if (i * i + j * j <= radius * radius) {
+                        int wCode = map[newY][newX].getwCode();
+                        map[newY][newX] = new MapNode(wallCode, floorCode, ceilCode);
+                        map[newY][newX].setwCode(wCode);
+                    }
+                }
+            }
+        }
     }
     private int floodFill(int cx, int cy, int mark) {
         if (spotIsOffGrid(cx, cy) || map[cy][cx].getwCode() != ALIVE)
@@ -180,6 +197,9 @@ public class Dungeon {
 
     public ArrayList<Point> getOpenSpaces() {
         return openSpaces;
+    }
+    public Point getRandomOpenPoint(){
+        return openSpaces.get((int) (Math.random() * (openSpaces.size()-1)));
     }
 
     public ArrayList<BaseEnemy> geteArr() {

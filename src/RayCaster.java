@@ -165,7 +165,7 @@ public class RayCaster {
             //---draw walls---
             double ty = tyOff * tyStep; //texture y val
             int tx;
-            int texSize = tSize / 2;
+            int texSize = 32;
             int texSize_1 = texSize - 1;
             if (shade == 1) {
                 tx = (int) ((rx / 2.0) % texSize);
@@ -180,12 +180,19 @@ public class RayCaster {
                 int pixel = ((int) ty * texSize + tx);
                 if (pixel > 1023) pixel = 1023; if (pixel < 0) pixel = 0;
                 Color col = mapW[mp].getWallTexture()[pixel];
-                double darknessFactor = 1 - Math.min(distT / darkScale, 1);
+                float shading = 1;//(float) y / lineH;
+                col = new Color(
+                        (int) (col.getRed() * shading),
+                        (int) (col.getGreen() * shading),
+                        (int) (col.getBlue() * shading)
+                );
+                double darknessFactor = 1 - Math.min(distT/ darkScale, 1);
                 col = applyDarkness(col, darknessFactor);
                 g2.setColor((shade != 1) ? col : col.darker().darker());
                 g2.drawLine(r * depth, (int) (y + lineOff), r * depth, (int) (y + lineOff));
                 ty += tyStep; // Adjust texture coordinate
             }
+            if(mapW[mp].getwCode() == -1) continue;
             //ceiling
             for (int y = (int) lineOff + lineH; y < HGT; y++) {
                 double dy = y - (double) HGT / 2.0f; //distance from end of wall to end of screen
@@ -200,16 +207,11 @@ public class RayCaster {
                 int pixel = (((int) (ty) & 31) * texSize + (tx & 31));
                 double tileDist = dist(px,py,getMapX(mp),getMapY(mp));
                 double darknessFactor = 1 - Math.min(Math.abs(tileDist) / darkScale, 1);
-                Color floorColor = applyDarkness(mapW[mp].getCeilTexture()[pixel], darknessFactor);
-                Color ceilingColor = applyDarkness(mapW[mp].getFloorTexture()[pixel], darknessFactor);
-                if (mapW[mp].getfCode() != -1) {
-                    g2.setColor(floorColor);
-                    g2.drawLine(r * depth, y, r * depth, y);
-                }
-                if (mapW[mp].getcCode() != -1) {
-                    g2.setColor(ceilingColor);
-                    g2.drawLine(r * depth, HGT - y, r * depth, HGT - y);
-                }
+                g2.setColor(applyDarkness(mapW[mp].getCeilTexture()[pixel], darknessFactor));
+                g2.drawLine(r * depth, y, r * depth, y);
+                g2.setColor(applyDarkness(mapW[mp].getFloorTexture()[pixel], darknessFactor));
+                g2.drawLine(r * depth, HGT - y, r * depth, HGT - y);
+
             }
             ra += DR;
             ra = fixAng(ra);

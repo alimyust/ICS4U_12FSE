@@ -8,7 +8,8 @@ public class MainGame {
     protected static final int WID = 64*16;
     protected static final int HGT= 64*16;
     protected static Player player = new Player(WID/2,HGT/2);;
-    protected static Dungeon dun = new Dungeon(new Point(3,3),new Point(0,4),new Point(0,5),"");
+    protected static Dungeon dun;
+
     protected static final String imgDir = "resources/images/";
     protected  static Game3D g3d;
     protected  static Game2D g2d;
@@ -51,7 +52,7 @@ public class MainGame {
     }
 
     public static void main(String[] args) {
-        g3d = new Game3D(dun,player);
+        g3d = new Game3D();
         g2d = new Game2D(dun,player);
     }
 

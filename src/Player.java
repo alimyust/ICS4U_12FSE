@@ -37,7 +37,7 @@ public class Player extends ParentEntity {
         if (keys[KeyEvent.VK_D])
             angle += turnAngle;
         fixAngle();
-        double speed = 10;
+        double speed = 20;
         dX = Math.cos(angle) * speed;
         dY = Math.sin(angle) * speed;
         if (keys[KeyEvent.VK_W] &&
