@@ -13,10 +13,12 @@ public class Player extends ParentEntity {
     private double dX;
     private double dY;
     private Gun curGun;
+    private int playerHealth;
     public Player(int x, int y) {
         super(x, y, 10, 10);
         dX = x;
         dY = y;
+        this.playerHealth =  100;
         curGun = new Pistol(0.2, 10, 600);
     }
     public void chooseGun(boolean[] keys){
@@ -29,6 +31,10 @@ public class Player extends ParentEntity {
         catch (IOException e) {
             throw new RuntimeException(e);
         }
+    }
+    public void drawPlayerGUI(Graphics g){
+        g.setColor(Color.RED);
+        g.fillRect(0,0, playerHealth, 20);
     }
     public void movePlayer(boolean[] keys, Dungeon dun) {
         double turnAngle = 0.1;

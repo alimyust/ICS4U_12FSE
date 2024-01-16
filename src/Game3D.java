@@ -56,28 +56,28 @@ public class Game3D extends BaseFrame {
 
     public void refreshDungeon() {
         System.out.println("refresh Dungeon");
-        lvl = 1;
         switch (lvl) {
-            case 0:
+            case 0 -> {
                 MainGame.dun = new Dungeon(new Point(7, 0), new Point(7, 6), new Point(7, 6), "");
                 for (int i = 0; i < 8; i++) {
                     Point randPoint = MainGame.dun.getRandomOpenPoint();
-                    MainGame.dun.applyBlotch(randPoint.x,randPoint.y,(int) (Math.random() * 5 + 2),
+                    MainGame.dun.applyBlotch(randPoint.x, randPoint.y, (int) (Math.random() * 5 + 2),
                             new Point(3, 3), new Point(7, 6), new Point(7, 6));
                 }
-                break;
-            case 1:
-                MainGame.dun = new Dungeon(new Point(0, 8), new Point(0, 3), new Point(0,3), "");
-                break;
-            case 2:
-                MainGame.dun = new Dungeon(new Point(4, 5), new Point(5, 4), new Point(5, 4), "");
-                break;
-            default:
-                lvl = 0;
+            }
+            case 1 -> MainGame.dun = new Dungeon(new Point(0, 8), new Point(0, 3), new Point(0, 3), "");
+            case 2 -> MainGame.dun = new Dungeon(new Point(4, 5), new Point(5, 4), new Point(5, 4), "");
+            default -> lvl = 0;
         }
         MainGame.player = new Player(512, 512);
         rayCast = new RayCaster(MainGame.player,MainGame.dun);
         lvl++;
+    }
+
+    private void winGame() {
+        System.out.println("YOOO WIN");
+        lvl = 0;
+        refreshDungeon();
     }
 
     private int pointDist(Point doorPoint, Point point) {

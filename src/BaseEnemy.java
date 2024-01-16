@@ -54,27 +54,22 @@ public class BaseEnemy extends ParentEntity {
         double angleRatio = -isPlayerLookingAt(player, ray.getFov());
         Color[][] sprite = enemyImgArr[(int) (frame % (enemyImgArr.length - 1))];
         frame += frameRate;
-
         int xPos = (int) (WID / 2 * angleRatio + WID / 2) - sprite.length/2;
         if (xPos < 0 || xPos > WID) return;
-
         double eDist = Math.abs(dist(x, y, player.x, player.y));
         double scaleSpeed = 18;
         double scaleMagnitude = 30;
         double scale = Math.min(3, 1.0 / (eDist / scaleSpeed) * scaleMagnitude); // Apply minimum scaling factor
-
         int wid = sprite[0].length;
         int hgt = sprite.length;
         int sWid = (int) (wid * scale); // Scaled width
         int sHgt = (int) (hgt * scale); // Scaled height
-
-        // Adjust the vertical position based on the scaled he
-        // ight
         int yPos = HGT / 2 - sHgt / 2;
         if (!isAlive) {
             sprite = enemyImgArr[enemyImgArr.length - 1];
             yPos += sHgt / 1.2;
         }
+//        Graphics2D g2d = (Graphics2D) g;
         for (int x = 0; x < sWid; x++) {
             double wDist = ray.getRayDist()[Math.min((xPos + x) / ray.getDepth(), ray.getRayDist().length - 1)];
             if (wDist < eDist) continue; // draws a ray only when an enemy is closer than a wall
@@ -82,11 +77,14 @@ public class BaseEnemy extends ParentEntity {
                 Color col = sprite[(int) (y / scale)][(int) (x / scale)];
                 if (col.equals(Color.decode("#f8028a"))) continue;
                 g.setColor(col);
+//                g2d.setStroke(new BasicStroke(1));
                 g.drawRect(xPos + x, yPos + y, 1, 1);
             }
         }
     }
+    public void damagePlayer(){
 
+    }
 
     public double isPlayerLookingAt(Player player, int tolerance) {
         double angle = Math.atan2(y - player.y, x - player.x); //slope between player and enemy
