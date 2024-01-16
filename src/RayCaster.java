@@ -17,15 +17,6 @@ public class RayCaster {
     private final int mapY;
     private final MapNode[] mapW;
     private final int[] rayDist = new int[fov*2];
-    private final Color[][] tileImgArr = {
-            MainGame.convertImageToColorArray(MainGame.imgDir + "Textures/Tech/DENTWALL.png"),
-            MainGame.convertImageToColorArray(MainGame.imgDir + "Textures/Tech/HEXAGONS.png"),
-            MainGame.convertImageToColorArray(MainGame.imgDir + "Textures/Wood/BIGTRUNK.png"),
-            MainGame.convertImageToColorArray(MainGame.imgDir + "dirt.png"),
-            MainGame.convertImageToColorArray(MainGame.imgDir + "grass.png"),
-            MainGame.convertImageToColorArray(MainGame.imgDir + "redBrick.png"),
-    };
-
     public RayCaster(Player player, Dungeon dun) {
         this.player = player;
         this.dun = dun;
