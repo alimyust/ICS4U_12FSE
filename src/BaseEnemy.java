@@ -55,7 +55,7 @@ public class BaseEnemy extends ParentEntity {
         Color[][] sprite = enemyImgArr[(int) (frame % (enemyImgArr.length - 1))];
         frame += frameRate;
 
-        int xPos = (int) (WID / 2 * angleRatio + WID / 2);
+        int xPos = (int) (WID / 2 * angleRatio + WID / 2) - sprite.length/2;
         if (xPos < 0 || xPos > WID) return;
 
         double eDist = Math.abs(dist(x, y, player.x, player.y));
@@ -68,7 +68,8 @@ public class BaseEnemy extends ParentEntity {
         int sWid = (int) (wid * scale); // Scaled width
         int sHgt = (int) (hgt * scale); // Scaled height
 
-        // Adjust the vertical position based on the scaled height
+        // Adjust the vertical position based on the scaled he
+        // ight
         int yPos = HGT / 2 - sHgt / 2;
         if (!isAlive) {
             sprite = enemyImgArr[enemyImgArr.length - 1];

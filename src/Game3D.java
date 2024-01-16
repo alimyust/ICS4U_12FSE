@@ -8,16 +8,12 @@ import java.awt.geom.Rectangle2D;
 public class Game3D extends BaseFrame {
     private static final int WID = 64 * 15;
     private static final int HGT = 64 * 12;
-    private Dungeon dun;
-    private Player player;
     private RayCaster rayCast;
     private int lvl = 0;
 
     public Game3D(Dungeon dun, Player player) {
         super("Game3D", WID, HGT);
         this.setLocationRelativeTo(null);
-        this.dun = dun;
-        this.player = player;
         this.rayCast = new RayCaster(player, dun);
     }
 
@@ -39,34 +35,32 @@ public class Game3D extends BaseFrame {
         Graphics2D g2d = (Graphics2D) g;
         super.draw(g);
         rayCast.drawRays3d(g2d);
-        dun.geteArr().forEach(e -> e.drawBaseEnemy(g, player, HGT, WID, rayCast));
-        player.shootAnimation(g);
+        MainGame.dun.geteArr().forEach(e -> e.drawBaseEnemy(g, MainGame.player, HGT, WID, rayCast));
+        MainGame.player.shootAnimation(g);
     }
 
     @Override
     public void move() {
         super.move();
-        player.movePlayer(keys, dun);
-        player.shootEnemies(keys,dun);
-        player.chooseGun(keys);
-        dun.geteArr().forEach(e -> e.moveEnemy(player,dun));
-        if(pointDist(dun.getDoorPoint(), new Point(player.x/64,player.y/64)) < 2)
+        MainGame.player.movePlayer(keys, MainGame.dun);
+        MainGame.player.shootEnemies(keys,MainGame.dun);
+        MainGame.player.chooseGun(keys);
+        MainGame.dun.geteArr().forEach(e -> e.moveEnemy(MainGame.player,MainGame.dun));
+        if(pointDist(MainGame.dun.getDoorPoint(), new Point(MainGame.player.x/64,MainGame.player.y/64)) < 2)
             refreshDungeon();
     }
 
     private void refreshDungeon() {
         lvl++;
         System.out.println("refresh Dungeon");
-        dun = switch (lvl){
+        MainGame.dun = switch (lvl){
             case 0 -> new Dungeon(new Point(3,3),new Point(0,4),new Point(0,5),"");
             case 1 -> new Dungeon(new Point(3,1),new Point(5,2),new Point(5,2),"");
             case 2 -> new Dungeon(new Point(4,5),new Point(5,4),new Point(5,4),"");
             default -> throw new IllegalStateException("Unexpected value: " + lvl);
         };
-        player = new Player(WID/2, HGT/2);
-        rayCast = new RayCaster(player, dun);
-        MainGame.g2d = new Game2D(dun,player);
-        MainGame.g3d = new Game3D(dun,player);
+        MainGame.player = new Player(WID/2, HGT/2);
+        rayCast = new RayCaster(MainGame.player,MainGame.dun);
     }
 
     private int pointDist(Point doorPoint, Point point) {
