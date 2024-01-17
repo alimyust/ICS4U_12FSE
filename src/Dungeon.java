@@ -114,7 +114,7 @@ public class Dungeon {
     }
 
     public boolean spotIsOffGrid(int x, int y) {
-        return (x < 0 || x >= WID || y < 0 || y >= HGT);
+        return (x < 0 || x > WID || y < 0 || y > HGT);
     }
 
     public int[] neighborValues(int x, int y) {
@@ -189,6 +189,18 @@ public class Dungeon {
 
     public int getDSIZE() {
         return DSIZE;
+    }
+
+    public int getdSizeMultiplier() {
+        return dSizeMultiplier;
+    }
+
+    public int getWID() {
+        return WID;
+    }
+
+    public int getHGT() {
+        return HGT;
     }
 
     public Point getDoorPoint() {

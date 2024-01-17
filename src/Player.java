@@ -35,6 +35,8 @@ public class Player extends ParentEntity {
             g.setColor(Color.white);
             g.drawPolygon(healthBar[0], healthBar[1],8);
         }
+        if(health == 0)
+            Game3D.setGameState("gameOver");
 
     }
     public void chooseGun(boolean[] keys){

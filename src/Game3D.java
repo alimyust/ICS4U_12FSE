@@ -23,11 +23,14 @@ public class Game3D extends BaseFrame {
         this.lvl = 0;
         refreshDungeon();
         titleInit();
-        this.rayCast = new RayCaster(MainGame.player, MainGame.dun);
+        this.rayCast = new RayCaster();
 
     }
     private void titleInit(){
+
         titleButtons.add(new TitleButtons(30,60,400,20,"Start Game", "game"));
+        titleButtons.add(new TitleButtons(30,100,400,20,"Start Game", "Controls"));
+
     }
 
     @Override
@@ -81,7 +84,9 @@ public class Game3D extends BaseFrame {
                 lvl = -1;
         }
         MainGame.player = new Player(512, 512);
-        rayCast = new RayCaster(MainGame.player,MainGame.dun);
+        rayCast = new RayCaster();
+        if(lvl == 3)
+            Game3D.setGameState("win");
         lvl++;
     }
 

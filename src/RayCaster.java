@@ -1,11 +1,10 @@
 import java.awt.*;
 import java.util.ArrayList;
+import java.util.Arrays;
 
 import static java.lang.Math.PI;
 
 public class RayCaster {
-    private final Player player;
-    private final Dungeon dun;
     private final int WID = Game3D.getWid3d();
     private final int HGT = Game3D.getHgt3d();
     private final double resolution = 2; //(10 is max before it's too high resolution for the display size)
@@ -18,13 +17,11 @@ public class RayCaster {
     private final MapNode[] mapW;
     private final int[] rayDist = new int[fov*2];
 
-    public RayCaster(Player player, Dungeon dun) {
-        this.player = player;
-        this.dun = dun;
-        mapX = dun.getMap()[0].length;
-        mapY = dun.getMap().length;
+    public RayCaster() {
+        mapX = MainGame.dun.getMap()[0].length;
+        mapY = MainGame.dun.getMap().length;
         mapS = mapX * mapY;
-        mapW = flatten(dun.getMap());
+        mapW = flatten(MainGame.dun.getMap());
     }
 
     public static MapNode[] flatten(MapNode[][] array) {
@@ -37,13 +34,13 @@ public class RayCaster {
     }
 
     public void drawRays3d(Graphics2D g2) {
-        int tSize = dun.getDSIZE();
+        int tSize = MainGame.dun.getDSIZE();
         int renderDist = 32; //amount of walls rendered when looking around
         int distScale = 50; //how far away things look
         int darkScale =1000;
-        int px = player.x;
-        int py = player.y;
-        double pa = player.getAngle();
+        int px = MainGame.player.x;
+        int py = MainGame.player.y;
+        double pa = MainGame.player.getAngle();
         int mx = 0, my = 0, mp = 0, dof;
         double rx = 0;
         double ry = 0;
@@ -77,8 +74,8 @@ public class RayCaster {
                 dof = renderDist;
             }
             while (dof < renderDist) {
-                mx = (int) (rx) / tSize;
-                my = (int) (ry) / tSize;
+                mx = (int) ((rx) / tSize);
+                my = (int) ((ry) / tSize);
                 mp = my * mapX + mx;
                 if (mp > 0 && mp < mapS && mapW[mp].getwCode() != 0) {
                     hx = rx; // If a wall is hit save the x and y values and end loop
@@ -141,7 +138,7 @@ public class RayCaster {
                 ry = hy;
                 distT = distH;
             }
-            player.setPlayerRay((int) rx, (int) ry);
+            MainGame.player.setPlayerRay((int) rx, (int) ry);
             // drawing Setup
             double ca = fixAng(pa - ra);
             distT = distT * Math.cos(ca); //player to ray distance
@@ -222,7 +219,7 @@ public class RayCaster {
     }
 
     private int fixMp(int mp) {
-        if (mp >= mapS) mp = mapS - 2;
+        if (mp >= mapS) mp = mapS - 1;
         if (mp < 0) mp = 0;
         return mp;
     }

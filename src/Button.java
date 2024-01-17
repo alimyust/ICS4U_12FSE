@@ -43,6 +43,7 @@ public class Button {
     public int getWidth() {
         return width;
     }
+    public String getText(){return text;}
 
     public int getHeight() {
         return height;
