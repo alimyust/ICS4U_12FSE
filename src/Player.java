@@ -14,7 +14,8 @@ public class Player extends ParentEntity {
     private double dY;
     private Gun curGun;
     private double health;
-    private int[][] healthBar= {
+    private boolean isMoving;
+    private final int[][] healthBar= {
             {20, 195, 235, 400, 380, 245, 205, 0},
             {60, 60, 20, 20, 40, 40, 80, 80}
     };
@@ -60,17 +61,20 @@ public class Player extends ParentEntity {
         double speed = 20;
         dX = Math.cos(angle) * speed;
         dY = Math.sin(angle) * speed;
+        isMoving = false;
         if (keys[KeyEvent.VK_W] &&
         Game3D.notIntersectingMap((int) (x + dX), (int) (y + dY), dun.getMap()) &&
                 !checkCollisionWithEnemies(x+dX,y+dY, dun.geteArr() )) {
             x += (int) Math.round(dX);
             y += (int) Math.round(dY);
+            isMoving = true;
         }
         if (keys[KeyEvent.VK_S] &&
         Game3D.notIntersectingMap((int) (x - dX), (int) (y - dY), dun.getMap())&&
                 !checkCollisionWithEnemies(x-dX,y-dY, dun.geteArr() )) {
             x -= (int) Math.round(dX);
             y -= (int) Math.round(dY);
+            isMoving = true;
         }
     }
     private boolean checkCollisionWithEnemies(double nextX, double nextY, ArrayList<BaseEnemy> enemies) {

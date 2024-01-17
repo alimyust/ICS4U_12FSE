@@ -21,7 +21,7 @@ public class Dungeon {
     private final Point wallCode;
     private final Point floorCode;
     private final Point ceilCode;
-    private Point doorPoint; //gateway to next level
+    private Point doorPoint = new Point(0,0); //gateway to next level
     public Dungeon(Point wallCode, Point floorCode, Point ceilCode, String pattern) {
         this.wallCode = wallCode;
         this.floorCode = floorCode;
@@ -29,17 +29,19 @@ public class Dungeon {
         openSpaces = new ArrayList<>();
         eArr = new ArrayList<>();
         makeDungeon();
-        addEnemies();
         while(true)
         {
-            for (Point openPoint : openSpaces)
+            boolean breakOut = false;
+            for (Point openPoint : openSpaces) {
                 if (dist(openPoint.x, openPoint.y, 10, 10) > 50) {
                     doorPoint = openPoint;
-                    break;
+                    breakOut = true;
                 }
-            if(doorPoint != null) break;
+            }
+            if(breakOut) break;
             makeDungeon();
         }
+        addEnemies();
         map[doorPoint.y][doorPoint.x] = new MapNode(new Point(1,1), floorCode, ceilCode);
         map[doorPoint.y][doorPoint.x].setwCode(5);
     }
@@ -49,6 +51,7 @@ public class Dungeon {
     private void makeDungeon(){
         int c;
         do {
+            openSpaces.clear();
             generateGrid(0.50);
             automata(20, 5, 4);
             map = makeBorder(map);
@@ -65,7 +68,7 @@ public class Dungeon {
         }
     }
     private void addEnemies(){
-        eArr = BaseEnemy.addEnemy(eArr, getOpenSpaces(), 1, BaseEnemy.BAT);
+        eArr = BaseEnemy.addEnemy(eArr, getOpenSpaces(),2+ (int) Math.log(10*Game3D.getLvl()), BaseEnemy.BAT);
 //        eArr = BaseEnemy.addEnemy(eArr, getOpenSpaces(), 3, BaseEnemy.SANS);
 //        eArr = BaseEnemy.addEnemy(eArr, getOpenSpaces(), 5, BaseEnemy.GUNMAN);
     }

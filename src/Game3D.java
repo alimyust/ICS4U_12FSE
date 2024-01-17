@@ -12,7 +12,7 @@ public class Game3D extends BaseFrame {
     private static final int WID = 64 * 15;
     private static final int HGT = 64 * 12;
     private RayCaster rayCast;
-    private int lvl;
+    private static int lvl;
     private static String gameState = "";
     private final ArrayList<Button> titleButtons = new ArrayList<>();
 
@@ -20,7 +20,7 @@ public class Game3D extends BaseFrame {
         super("Game3D", WID, HGT);
         this.setLocationRelativeTo(null);
         gameState = "title";
-        this.lvl = 0;
+        lvl = 0;
         refreshDungeon();
         titleInit();
         this.rayCast = new RayCaster();
@@ -54,6 +54,7 @@ public class Game3D extends BaseFrame {
     @Override
     public void move() {
         super.move();
+        if(MainGame.dun == null) return;
         MainGame.player.movePlayer(keys, MainGame.dun);
         MainGame.player.shootEnemies(keys,MainGame.dun);
         MainGame.player.chooseGun(keys);
@@ -63,30 +64,30 @@ public class Game3D extends BaseFrame {
     }
 
     public void refreshDungeon() {
+        //                for (int i = 0; i < 5; i++) {
+//                    Point randPoint = MainGame.dun.getRandomOpenPoint();
+//                    MainGame.dun.applyBlotch(randPoint.x, randPoint.y, (int) (Math.random() * 5 + 2),
+//                            new Point(3, 3), new Point(7, 6), new Point(7, 6));
+//                }
         System.out.println("refresh Dungeon");
         switch (lvl) {
-            case 0:
-                System.out.println("new");
-                MainGame.dun = new Dungeon(new Point(7, 0), new Point(7, 6), new Point(7, 6), "");
-                for (int i = 0; i < 5; i++) {
-                    Point randPoint = MainGame.dun.getRandomOpenPoint();
-                    MainGame.dun.applyBlotch(randPoint.x,randPoint.y,(int) (Math.random() * 5 + 2),
-                            new Point(3, 3), new Point(7, 6), new Point(7, 6));
-                }
-                break;
-            case 1:
-                MainGame.dun = new Dungeon(new Point(3, 1), new Point(5, 2), new Point(5, 2), "");
-                break;
-            case 2:
-                MainGame.dun = new Dungeon(new Point(4, 5), new Point(5, 4), new Point(5, 4), "");
-                break;
-            default:
-                lvl = -1;
+            case 0 -> MainGame.dun = new Dungeon(new Point(7, 0), new Point(7, 6), new Point(7, 6), "");
+            case 1 -> MainGame.dun = new Dungeon(new Point(3, 1), new Point(5, 2), new Point(5, 2), "");
+            case 2 -> MainGame.dun = new Dungeon(new Point(4, 5), new Point(5, 4), new Point(5, 4), "");
+            case 3 -> MainGame.dun = new Dungeon(new Point(3, 1), new Point(6, 2), new Point(6, 5), "");
+            case 4 -> MainGame.dun = new Dungeon(new Point(4, 1), new Point(5, 2), new Point(4, 1), "");
+            case 5 -> MainGame.dun = new Dungeon(new Point(5, 2), new Point(6, 1), new Point(2, 3), "");
+            case 6 -> MainGame.dun = new Dungeon(new Point(0, 3), new Point(6, 3), new Point(3, 5), "");
+            case 7 -> MainGame.dun = new Dungeon(new Point(5, 2), new Point(2, 3), new Point(4, 1), "");
+            case 8 -> MainGame.dun = new Dungeon(new Point(2, 2), new Point(2, 4), new Point(3, 0), "");
+            case 9 -> MainGame.dun = new Dungeon(new Point(3, 4), new Point(5, 2), new Point(5, 2), "");
+
+            default -> lvl = -1;
         }
         MainGame.player = new Player(512, 512);
         rayCast = new RayCaster();
-        if(lvl == 3)
-            Game3D.setGameState("win");
+//        if(lvl == 3)
+//            Game3D.setGameState("win");
         lvl++;
     }
 
@@ -102,6 +103,10 @@ public class Game3D extends BaseFrame {
 
     public static int getHgt3d() {
         return HGT;
+    }
+
+    public static int getLvl() {
+        return lvl;
     }
 
     public static boolean notIntersectingMap(int ax, int ay, MapNode[][] map){
