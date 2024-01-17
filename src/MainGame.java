@@ -53,7 +53,7 @@ public class MainGame {
 
     public static void main(String[] args) {
         g3d = new Game3D();
-        g2d = new Game2D(dun,player);
+        g2d = new Game2D();
     }
 
 }

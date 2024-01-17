@@ -3,13 +3,9 @@ import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
 
 public class Game2D extends BaseFrame{
-    private Dungeon dun;
-    private Player player;
     private static final int dunSizeRatio = 8;
-    public Game2D(Dungeon dun, Player player) {
+    public Game2D() {
         super("Game2D", MainGame.WID/2, MainGame.HGT/2);
-        this.dun = dun;
-        this.player = player;
 
     }
 
@@ -21,17 +17,18 @@ public class Game2D extends BaseFrame{
     @Override
     public void draw(Graphics g) {
         super.draw(g);
-        dun.drawDungeon2D(g);
-        player.drawPlayer(g);
-        for(ParentEntity e: dun.geteArr())
+        MainGame.dun.drawDungeon2D(g);
+        MainGame.player.drawPlayer(g);
+        for(ParentEntity e: MainGame.dun.geteArr())
             e.draw2d(g, Color.MAGENTA);
+
     }
 
     @Override
     public void move() {
         super.move();
-        player.movePlayer(keys, dun);
-        player.shootEnemies(keys, dun);
+        MainGame.player.movePlayer(keys, MainGame.dun);
+        MainGame.player.shootEnemies(keys, MainGame.dun);
     }
 
     @Override

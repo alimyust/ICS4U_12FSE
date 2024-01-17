@@ -65,9 +65,9 @@ public class Dungeon {
         }
     }
     private void addEnemies(){
-        eArr = BaseEnemy.addEnemy(eArr, getOpenSpaces(), 2, BaseEnemy.BAT);
-        eArr = BaseEnemy.addEnemy(eArr, getOpenSpaces(), 3, BaseEnemy.SANS);
-        eArr = BaseEnemy.addEnemy(eArr, getOpenSpaces(), 5, BaseEnemy.GUNMAN);
+        eArr = BaseEnemy.addEnemy(eArr, getOpenSpaces(), 1, BaseEnemy.BAT);
+//        eArr = BaseEnemy.addEnemy(eArr, getOpenSpaces(), 3, BaseEnemy.SANS);
+//        eArr = BaseEnemy.addEnemy(eArr, getOpenSpaces(), 5, BaseEnemy.GUNMAN);
     }
     public void applyBlotch(int centerX, int centerY, int radius,  Point wallCode,Point floorCode, Point ceilCode) {
         for (int i = -radius; i <= radius; i++) {

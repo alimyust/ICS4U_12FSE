@@ -1,6 +1,5 @@
 import java.awt.*;
 import java.util.ArrayList;
-import java.util.Random;
 
 import static java.lang.Math.PI;
 
@@ -13,7 +12,7 @@ public class BaseEnemy extends ParentEntity {
     private int stopDist;
     private int startDist;
     private double frameRate;
-
+    private double damage;
     protected static final int BAT = 0;
     protected static final int SANS = 1;
     protected static final int GUNMAN = 2;
@@ -43,19 +42,24 @@ public class BaseEnemy extends ParentEntity {
         double ang = Math.atan2(player.y - y, player.x - x);
         int dx = (int) (Math.cos(ang) * speed);
         int dy = (int) (Math.sin(ang) * speed);
-        if (!isAlive || !Game3D.notIntersectingMap(x + dx, y + dy, w, dun.getMap())) return;
-        if (playerEnemyDist(player) < startDist && playerEnemyDist(player) > stopDist) {
+        if (!isAlive || !Game3D.notIntersectingMap(x + dx, y + dy, dun.getMap())) return;
+        if (playerEnemyDist(player) >= startDist) return;
+        if (playerEnemyDist(player) > stopDist) {
             x += dx;
             y += dy;
+            return;
         }
+        if((int)frame % 3 == 0) player.setHealth(player.getHealth() - damage);
+        System.out.println(player.getHealth());
+
     }
 
     public void drawBaseEnemy(Graphics g, Player player, int HGT, int WID, RayCaster ray) {
-        double angleRatio = -isPlayerLookingAt(player, ray.getFov());
+        double angleRatio = -isPlayerLookingAt(player, ray.getFov()/2);
         Color[][] sprite = enemyImgArr[(int) (frame % (enemyImgArr.length - 1))];
         frame += frameRate;
 
-        int xPos = (int) (WID / 2 * angleRatio + WID / 2) - sprite.length/2;
+        int xPos = (int) (WID / 2 * angleRatio + WID / 2);
         if (xPos < 0 || xPos > WID) return;
 
         double eDist = Math.abs(dist(x, y, player.x, player.y));
@@ -89,10 +93,10 @@ public class BaseEnemy extends ParentEntity {
 
 
     public double isPlayerLookingAt(Player player, int tolerance) {
-        double angle = Math.atan2(y - player.y, x - player.x); //slope between player and enemy
+        double angle = Math.atan2((y +h/2.0)- player.y, (x+w/2.0) - player.x); //slope between player and enemy
         double playerAngle = fixAng(player.getAngle());
         double ratio = (playerAngle - angle);
-        if (player.y > y) ratio = -(angle - playerAngle + 2 * PI);
+        if (player.y > (y +h/2.0)) ratio = -(angle - playerAngle + 2 * PI);
         double angleTolerance = Math.toRadians(tolerance);
         return ratio / angleTolerance;
     }
@@ -114,6 +118,9 @@ public class BaseEnemy extends ParentEntity {
         return (int) Math.sqrt((p.x - x) * (p.x - x) + (p.y - y) * (p.y - y));
     }
 
+    public void setDamage(double damage) {
+        this.damage = damage;
+    }
     public void setStopDist(int stopDist) {
         this.stopDist = stopDist;
     }

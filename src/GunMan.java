@@ -6,6 +6,8 @@ public class GunMan extends BaseEnemy{
         setStartDist(1200);
         setStopDist(400);
         setFrameRate(0.1);
+        setDamage(2);
+
         enemyImgArr = new Color[][][] {
                 MainGame.convertImageTo2DColorArray(MainGame.imgDir + "Enemies/GunMan/Running/runningGunMan0.png"),
                 MainGame.convertImageTo2DColorArray(MainGame.imgDir + "Enemies/GunMan/Running/runningGunMan1.png"),

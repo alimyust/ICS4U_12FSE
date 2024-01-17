@@ -6,6 +6,7 @@ public class Sans extends BaseEnemy{
         setStartDist(900);
         setStopDist(200);
         setFrameRate(0.1);
+        setDamage(2);
         enemyImgArr = new Color[][][] {
                 MainGame.convertImageTo2DColorArray(MainGame.imgDir + "Enemies/sans/sans0.png"),
                 MainGame.convertImageTo2DColorArray(MainGame.imgDir + "Enemies/sans/sans1.png"),
