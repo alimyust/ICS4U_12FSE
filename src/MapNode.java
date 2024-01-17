@@ -92,17 +92,9 @@ public class MapNode {
     };
 
     private int wCode;
-    private int fCode;
-    private int cCode;
     private Color[] wallTexture;
     private Color[] floorTexture;
     private Color[] ceilTexture;
-    public MapNode(int wCode, int fCode, int cCode) {
-        this.wCode = wCode;
-        this.fCode = fCode;
-        this.cCode =cCode;
-    }
-
     public MapNode(int wCode) {
         this.wCode = wCode;
     }
@@ -132,12 +124,5 @@ public class MapNode {
         this.wCode = wCode;
     }
 
-    public int getfCode() {
-        return fCode;
-    }
-
-    public int getcCode() {
-        return cCode;
-    }
 
 }

@@ -148,7 +148,7 @@ public class Dungeon {
         MapNode[][] newGrid = new MapNode[HGT][WID];
         for (int y = 0; y < HGT; y++) {
             for (int x = 0; x < WID; x++) {
-                newGrid[y][x] = new MapNode(newValueAtPosition(x, y, birthThreshold, survivalThreshold), 2, 2);
+                newGrid[y][x] = new MapNode(newValueAtPosition(x, y, birthThreshold, survivalThreshold));
             }
         }
 
@@ -161,12 +161,12 @@ public class Dungeon {
     }
     public MapNode[][] makeBorder(MapNode[][] map){
         for(int i=0; i < map[0].length; i++){
-            map[0][i] = new MapNode(DEAD,DEAD,DEAD);
-            map[map.length-1][i] = new MapNode(DEAD,DEAD,DEAD);
+            map[0][i] = new MapNode(DEAD);
+            map[map.length-1][i] = new MapNode(DEAD);
         }
         for(int i=0; i < map.length; i++){
-            map[i][0] = new MapNode(DEAD,DEAD,DEAD);
-            map[i][map.length-1] = new MapNode(DEAD,DEAD,DEAD);
+            map[i][0] = new MapNode(DEAD);
+            map[i][map.length-1] = new MapNode(DEAD);
         }
         return map;
     }
