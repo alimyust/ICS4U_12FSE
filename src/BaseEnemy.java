@@ -50,7 +50,7 @@ public class BaseEnemy extends ParentEntity {
             return;
         }
         if((int)frame % 3 == 0) player.setHealth(player.getHealth() - damage);
-        System.out.println(player.getHealth());
+//        System.out.println(player.getHealth());
 
     }
 

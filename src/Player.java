@@ -14,7 +14,7 @@ public class Player extends ParentEntity {
     private double dY;
     private Gun curGun;
     private double health;
-    private boolean isMoving;
+    private static boolean isMoving;
     private final int[][] healthBar= {
             {20, 195, 235, 400, 380, 245, 205, 0},
             {60, 60, 20, 20, 40, 40, 80, 80}
@@ -132,6 +132,10 @@ public class Player extends ParentEntity {
 
     public void setHealth(double health) {
         this.health = health;
+    }
+
+    public static boolean isMoving() {
+        return isMoving;
     }
 
     public int dist(int ax, int ay, int bx, int by) {
