@@ -68,7 +68,8 @@ public class Dungeon {
         }
     }
     private void addEnemies(){
-        eArr = BaseEnemy.addEnemy(eArr, getOpenSpaces(),2+ (int) Math.log(10*Game3D.getLvl()), BaseEnemy.BAT);
+        eArr= BaseEnemy.addEnemy(eArr, getOpenSpaces(), 5, BaseEnemy.GOBLINSLINGER);
+//        eArr = BaseEnemy.addEnemy(eArr, getOpenSpaces(),2+ (int) Math.log(10*Game3D.getLvl()), BaseEnemy.BAT);
 //        eArr = BaseEnemy.addEnemy(eArr, getOpenSpaces(), 3, BaseEnemy.SANS);
 //        eArr = BaseEnemy.addEnemy(eArr, getOpenSpaces(), 5, BaseEnemy.GUNMAN);
     }

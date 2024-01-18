@@ -5,7 +5,7 @@ import static java.lang.Math.PI;
 
 public class BaseEnemy extends ParentEntity {
 
-    protected Color[][][] enemyImgArr;
+    protected Color[][][][] enemyImgArr;
     private double frame;
     private boolean isAlive;
     private final int speed = 5;
@@ -17,7 +17,14 @@ public class BaseEnemy extends ParentEntity {
     protected static final int SANS = 1;
     protected static final int GUNMAN = 2;
 
+    protected static final int GOBLINSLINGER= 3;
 
+    private final int IDLE =0;
+    private final int RUN =1;
+    private final int ATTACK =2;
+    private final int HURT =3;
+    private final int DEAD =4;
+    private int enemyState;
 
     public BaseEnemy(int x, int y) {
         super(x, y, 64, 64);
@@ -30,9 +37,10 @@ public class BaseEnemy extends ParentEntity {
             int ind = (int) (Math.random() * (spots.size() - 1));
             Point currSpot = spots.get(ind);
             switch (type) {
-                case BAT -> eArr.add(new Bat(currSpot.x * 64, currSpot.y * 64));
-                case SANS -> eArr.add(new Sans(currSpot.x * 64, currSpot.y * 64));
-                case GUNMAN -> eArr.add(new GunMan(currSpot.x * 64, currSpot.y * 64));
+//                case BAT -> eArr.add(new Bat(currSpot.x * 64, currSpot.y * 64));
+//                case SANS -> eArr.add(new Sans(currSpot.x * 64, currSpot.y * 64));
+//                case GUNMAN -> eArr.add(new GunMan(currSpot.x * 64, currSpot.y * 64));
+                case GOBLINSLINGER ->eArr.add(new GoblinSlinger(currSpot.x * 64, currSpot.y * 64));
             }
         }
         return eArr;
@@ -47,16 +55,16 @@ public class BaseEnemy extends ParentEntity {
         if (playerEnemyDist(player) > stopDist) {
             x += dx;
             y += dy;
+            enemyState = RUN;
             return;
         }
-        if((int)frame % 3 == 0) player.setHealth(player.getHealth() - damage);
-//        System.out.println(player.getHealth());
-
+        enemyState = ATTACK;
+        if((int)(Math.random()*3) == 3) player.setHealth(player.getHealth() - damage);
     }
 
     public void drawBaseEnemy(Graphics g, Player player, int HGT, int WID, RayCaster ray) {
         double angleRatio = -isPlayerLookingAt(player, ray.getFov()/2);
-        Color[][] sprite = enemyImgArr[(int) (frame % (enemyImgArr.length - 1))];
+        Color[][] sprite = enemyImgArr[enemyState][(int) (frame % (enemyImgArr[enemyState].length - 1))];
         frame += frameRate;
 
         int xPos = (int) (WID / 2 * angleRatio + WID / 2);
@@ -76,7 +84,7 @@ public class BaseEnemy extends ParentEntity {
         // ight
         int yPos = HGT / 2 - sHgt / 2;
         if (!isAlive) {
-            sprite = enemyImgArr[enemyImgArr.length - 1];
+            sprite = enemyImgArr[enemyState][enemyImgArr.length - 1];
             yPos += sHgt / 1.2;
         }
         for (int x = 0; x < sWid; x++) {
@@ -126,6 +134,14 @@ public class BaseEnemy extends ParentEntity {
     }
     public void setStartDist(int startDist) {
         this.startDist = startDist;
+    }
+
+    public int getEnemyState() {
+        return enemyState;
+    }
+
+    public void setEnemyState(int enemyState) {
+        this.enemyState = enemyState;
     }
 
     public void setFrameRate(double frameRate) {
