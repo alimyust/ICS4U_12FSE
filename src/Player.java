@@ -78,11 +78,16 @@ public class Player extends ParentEntity {
         }
     }
     private boolean checkCollisionWithEnemies(double nextX, double nextY, ArrayList<BaseEnemy> enemies) {
-        for (BaseEnemy enemy : enemies)
-            if (dist((int) nextX, (int) nextY, enemy.x, enemy.y) < (w + enemy.w) / 2)
-                return true;
-        return false;
+        boolean colliding = false;
+        for (BaseEnemy enemy : enemies) {
+            if(!enemy.isAlive()) return false;
+            Rectangle playerRect = new Rectangle((int) nextX, (int) nextY, w, h);
+            if (playerRect.intersects(new Rectangle(enemy.x, enemy.y, enemy.w, enemy.h)))
+                colliding = true;
+        }
+        return colliding;
     }
+
     public void shootEnemies(boolean[] keys, Dungeon dun) {
         if (!keys[KeyEvent.VK_SPACE]) return;
         if (curGun.getGunFrame() != 0) return;
@@ -90,7 +95,8 @@ public class Player extends ParentEntity {
         for( BaseEnemy enemy: dun.geteArr()) {
             if (Math.abs(enemy.isPlayerLookingAt(this, curGun.getAoe())) >= 1) continue;
             if (dist(x, y, enemy.x, enemy.y) >= curGun.getRange()) continue;
-            enemy.setAlive(false);
+            enemy.setHurtState();
+            if(enemy.getHealth() <= 0) enemy.setDeadState();
         }
 
     }

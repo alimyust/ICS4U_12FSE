@@ -56,8 +56,8 @@ public class Game3D extends BaseFrame {
         super.move();
         if(MainGame.dun == null) return;
         MainGame.player.movePlayer(keys, MainGame.dun);
-        MainGame.player.shootEnemies(keys,MainGame.dun);
         MainGame.player.chooseGun(keys);
+        MainGame.player.shootEnemies(keys,MainGame.dun);
         MainGame.dun.geteArr().forEach(e -> e.moveEnemy(MainGame.player,MainGame.dun));
         if(pointDist(MainGame.dun.getDoorPoint(), new Point(MainGame.player.x/64,MainGame.player.y/64)) < 2)
             refreshDungeon();

@@ -48,15 +48,15 @@ public class GoblinSlinger extends BaseEnemy {
         MainGame.convertImageTo2DColorArray(MainGame.imgDir + "Enemies/GoblinSlinger/GoblinSlingerDeath/GoblinSlingerDeath5.png"),
         MainGame.convertImageTo2DColorArray(MainGame.imgDir + "Enemies/GoblinSlinger/GoblinSlingerDeath/GoblinSlingerDeath6.png"),
         MainGame.convertImageTo2DColorArray(MainGame.imgDir + "Enemies/GoblinSlinger/GoblinSlingerDeath/GoblinSlingerDeath7.png"),
-        MainGame.convertImageTo2DColorArray(MainGame.imgDir + "Enemies/GoblinSlinger/GoblinSlingerDeath/GoblinSlingerDeath8.png"),
 
     }};
     public GoblinSlinger(int x, int y) {
         super(x, y);
         setStartDist(1500);
-        setStopDist(600);
-        setFrameRate(0.1);
+        setStopDist(400);
+        setFrameRate(0.5);
         setDamage(4);
+        setHealth(4);
         enemyImgArr = imgArr;
 }
 }

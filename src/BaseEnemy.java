@@ -13,12 +13,15 @@ public class BaseEnemy extends ParentEntity {
     private int startDist;
     private double frameRate;
     private double damage;
+    private double health;
     protected static final int BAT = 0;
     protected static final int SANS = 1;
     protected static final int GUNMAN = 2;
-
     protected static final int GOBLINSLINGER= 3;
-
+    private int previousState;
+    private int hurtCooldown = 300; // Adjust the cooldown time as needed
+    private long lastHurtTime;
+    private double lastHurtFrame;
     private final int IDLE =0;
     private final int RUN =1;
     private final int ATTACK =2;
@@ -50,7 +53,8 @@ public class BaseEnemy extends ParentEntity {
         double ang = Math.atan2(player.y - y, player.x - x);
         int dx = (int) (Math.cos(ang) * speed);
         int dy = (int) (Math.sin(ang) * speed);
-        if (!isAlive || !Game3D.notIntersectingMap(x + dx, y + dy, dun.getMap())) return;
+        if(health <= 0) isAlive = false;
+        if (!isAlive ||enemyState == HURT|| !Game3D.notIntersectingMap(x + dx, y + dy, dun.getMap())) return;
         if (playerEnemyDist(player) >= startDist) return;
         if (playerEnemyDist(player) > stopDist) {
             x += dx;
@@ -59,21 +63,45 @@ public class BaseEnemy extends ParentEntity {
             return;
         }
         enemyState = ATTACK;
-        if((int)(Math.random()*3) == 3) player.setHealth(player.getHealth() - damage);
+        if(Math.random() < 0.2) player.setHealth(player.getHealth() - damage);
     }
 
     public void drawBaseEnemy(Graphics g, Player player, int HGT, int WID, RayCaster ray) {
-        double angleRatio = -isPlayerLookingAt(player, ray.getFov()/2);
+        if(!isAlive) enemyState = DEAD;
         Color[][] sprite = enemyImgArr[enemyState][(int) (frame % (enemyImgArr[enemyState].length - 1))];
-        frame += frameRate;
+        System.out.println(enemyState);
+        if (enemyState == HURT) {
+            // Check if hurt cooldown is over
+            if (System.currentTimeMillis() - lastHurtTime >= hurtCooldown) {
+                enemyState = previousState; // Return to previous state
 
+            } else {
+                // Display the entire hurt animation during the cooldown
+                sprite = enemyImgArr[HURT][(int) (lastHurtFrame % enemyImgArr[enemyState].length)];
+                lastHurtFrame += frameRate;
+            }
+        }
+        if(enemyState == DEAD){
+            if(System.currentTimeMillis() - lastHurtTime >= hurtCooldown) {
+                sprite = enemyImgArr[DEAD][(enemyImgArr[enemyState].length - 1)];
+            } else {
+                sprite = enemyImgArr[DEAD][(int) (lastHurtFrame % enemyImgArr[enemyState].length)];
+                lastHurtFrame += frameRate;
+            }
+        }
+
+//        if(!isAlive)
+//            sprite = enemyImgArr[enemyState][enemyImgArr[DEAD].length - 1];
+
+        double angleRatio = -isPlayerLookingAt(player, ray.getFov()/2);
         int xPos = (int) (WID / 2 * angleRatio + WID / 2);
-        if (xPos < 0 || xPos > WID) return;
+        if (xPos - w < 0 || xPos > WID) return;
 
         double eDist = Math.abs(dist(x, y, player.x, player.y));
         double scaleSpeed = 18;
         double scaleMagnitude = 30;
         double scale = Math.min(3, 1.0 / (eDist / scaleSpeed) * scaleMagnitude); // Apply minimum scaling factor
+
 
         int wid = sprite[0].length;
         int hgt = sprite.length;
@@ -83,10 +111,6 @@ public class BaseEnemy extends ParentEntity {
         // Adjust the vertical position based on the scaled he
         // ight
         int yPos = HGT / 2 - sHgt / 2;
-        if (!isAlive) {
-            sprite = enemyImgArr[enemyState][enemyImgArr.length - 1];
-            yPos += sHgt / 1.2;
-        }
         for (int x = 0; x < sWid; x++) {
             double wDist = ray.getRayDist()[Math.min((xPos + x) / ray.getDepth(), ray.getRayDist().length - 1)];
             if (wDist < eDist) continue; // draws a ray only when an enemy is closer than a wall
@@ -97,6 +121,8 @@ public class BaseEnemy extends ParentEntity {
                 g.drawRect(xPos + x, yPos + y, 1, 1);
             }
         }
+        frame += frameRate;
+
     }
 
 
@@ -115,8 +141,30 @@ public class BaseEnemy extends ParentEntity {
         return angle;
     }
 
+    public void setHurtState() {
+        // Save the previous state and frame
+            health --;
+            previousState = enemyState;
+            lastHurtFrame = frame;
+            lastHurtTime = System.currentTimeMillis();
+            // Set the enemy to the hurt state
+            enemyState = HURT;
+
+    }
+    public void setDeadState() {
+        // Save the previous state and frame
+        lastHurtTime = System.currentTimeMillis();
+        enemyState = DEAD;
+
+    }
+
+
     public void setAlive(boolean alive) {
         isAlive = alive;
+    }
+
+    public boolean isAlive() {
+        return isAlive;
     }
 
     public int dist(int ax, int ay, int bx, int by) {
@@ -134,6 +182,14 @@ public class BaseEnemy extends ParentEntity {
     }
     public void setStartDist(int startDist) {
         this.startDist = startDist;
+    }
+
+    public double getHealth() {
+        return health;
+    }
+
+    public void setHealth(double health) {
+        this.health = health;
     }
 
     public int getEnemyState() {

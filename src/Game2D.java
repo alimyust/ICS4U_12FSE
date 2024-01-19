@@ -27,8 +27,8 @@ public class Game2D extends BaseFrame{
     @Override
     public void move() {
         super.move();
-        MainGame.player.movePlayer(keys, MainGame.dun);
-        MainGame.player.shootEnemies(keys, MainGame.dun);
+//        MainGame.player.movePlayer(keys, MainGame.dun);
+//        MainGame.player.shootEnemies(keys, MainGame.dun);
     }
 
     @Override
