@@ -36,6 +36,10 @@ public class Skeleton extends BaseEnemy{
                     MainGame.convertImageTo2DColorArray(MainGame.imgDir + "Enemies/Skeleton/SkeletonDeath/SkeletonDeath5.png"),
                     MainGame.convertImageTo2DColorArray(MainGame.imgDir + "Enemies/Skeleton/SkeletonDeath/SkeletonDeath6.png"),
                     MainGame.convertImageTo2DColorArray(MainGame.imgDir + "Enemies/Skeleton/SkeletonDeath/SkeletonDeath7.png"),
+                    MainGame.convertImageTo2DColorArray(MainGame.imgDir + "Enemies/Skeleton/SkeletonDeath/SkeletonDeath7.png"),
+                    MainGame.convertImageTo2DColorArray(MainGame.imgDir + "Enemies/Skeleton/SkeletonDeath/SkeletonDeath7.png"),
+                    MainGame.convertImageTo2DColorArray(MainGame.imgDir + "Enemies/Skeleton/SkeletonDeath/SkeletonDeath7.png"),
+
             }};
 
     public Skeleton(int x, int y) {

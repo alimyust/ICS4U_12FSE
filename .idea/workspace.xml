@@ -1,15 +1,73 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="ArtifactsWorkspaceSettings">
+    <artifacts-to-build>
+      <artifact name="ICS4U_12FSE:jar" />
+    </artifacts-to-build>
+  </component>
   <component name="AutoImportSettings">
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="8a55d714-b0cf-47b0-bb48-82f33721ee53" name="Changes" comment="Gr12 FSE Jan 15 School&#10;Shaking gamestate working with one random door spawning. lots of lag when on second and third levels so need to fix that. Openspaces doesn't seem to work 100% consistently either so have to remedy that as well.">
+    <list default="true" id="8a55d714-b0cf-47b0-bb48-82f33721ee53" name="Changes" comment="Gr12 FSE Jan 17&#10;Changed the way enemies are displayed so multiple enemy animations are supported. Need to make all enemies pink first though. Work on gui as well. As score, then should be good.">
+      <change afterPath="$PROJECT_DIR$/resources/images/Enemies/GoblinBerserker/GoblinBerserkerAttack/GoblinBerserkerAttack00.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resources/images/Enemies/GoblinBerserker/GoblinBerserkerAttack/GoblinBerserkerAttack01.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resources/images/Enemies/GoblinBerserker/GoblinBerserkerAttack/GoblinBerserkerAttack02.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resources/images/Enemies/GoblinBerserker/GoblinBerserkerAttack/GoblinBerserkerAttack03.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resources/images/Enemies/GoblinBerserker/GoblinBerserkerAttack/GoblinBerserkerAttack04.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resources/images/Enemies/GoblinBerserker/GoblinBerserkerAttack/GoblinBerserkerAttack05.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resources/images/Enemies/GoblinBerserker/GoblinBerserkerAttack/GoblinBerserkerAttack06.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resources/images/Enemies/GoblinBerserker/GoblinBerserkerAttack/GoblinBerserkerAttack07.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resources/images/Enemies/GoblinBerserker/GoblinBerserkerAttack/GoblinBerserkerAttack08.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resources/images/Enemies/GoblinBerserker/GoblinBerserkerAttack/GoblinBerserkerAttack09.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resources/images/Enemies/GoblinBerserker/GoblinBerserkerDeath/GoblinBerserkerDeath0.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resources/images/Enemies/GoblinBerserker/GoblinBerserkerDeath/GoblinBerserkerDeath1.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resources/images/Enemies/GoblinBerserker/GoblinBerserkerDeath/GoblinBerserkerDeath2.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resources/images/Enemies/GoblinBerserker/GoblinBerserkerDeath/GoblinBerserkerDeath3.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resources/images/Enemies/GoblinBerserker/GoblinBerserkerDeath/GoblinBerserkerDeath4.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resources/images/Enemies/GoblinBerserker/GoblinBerserkerDeath/GoblinBerserkerDeath5.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resources/images/Enemies/GoblinBerserker/GoblinBerserkerDeath/GoblinBerserkerDeath6.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resources/images/Enemies/GoblinBerserker/GoblinBerserkerDeath/GoblinBerserkerDeath7.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resources/images/Enemies/GoblinBerserker/GoblinBerserkerDeath/GoblinBerserkerDeath8.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resources/images/Enemies/GoblinBerserker/GoblinBerserkerHurt/GoblinBerserkerHurt0.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resources/images/Enemies/GoblinBerserker/GoblinBerserkerHurt/GoblinBerserkerHurt1.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resources/images/Enemies/GoblinBerserker/GoblinBerserkerHurt/GoblinBerserkerHurt2.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resources/images/Enemies/GoblinBerserker/GoblinBerserkerHurt/GoblinBerserkerHurt3.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resources/images/Enemies/GoblinBerserker/GoblinBerserkerRun/GoblinBerserkerRun0.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resources/images/Enemies/GoblinBerserker/GoblinBerserkerRun/GoblinBerserkerRun1.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resources/images/Enemies/GoblinBerserker/GoblinBerserkerRun/GoblinBerserkerRun2.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resources/images/Enemies/GoblinBerserker/GoblinBerserkerRun/GoblinBerserkerRun3.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resources/images/Enemies/GoblinBerserker/GoblinBerserkerRun/GoblinBerserkerRun4.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resources/images/Enemies/GoblinBerserker/GoblinBerserkerRun/GoblinBerserkerRun5.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Enemies/GoblinBerserker.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/META-INF/MANIFEST.MF" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/MenuItems/GameOverButton.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Dungeon.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Dungeon.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Game3D.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Game3D.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Gun.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Gun.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Player.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Player.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/images/Enemies/GoblinSlinger/GoblinSlingerDeath/GoblinSlingerDeath0.png" beforeDir="false" afterPath="$PROJECT_DIR$/resources/images/Enemies/GoblinSlinger/GoblinSlingerDeath/GoblinSlingerDeath0.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/images/Enemies/GoblinSlinger/GoblinSlingerDeath/GoblinSlingerDeath1.png" beforeDir="false" afterPath="$PROJECT_DIR$/resources/images/Enemies/GoblinSlinger/GoblinSlingerDeath/GoblinSlingerDeath1.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/images/Enemies/GoblinSlinger/GoblinSlingerDeath/GoblinSlingerDeath2.png" beforeDir="false" afterPath="$PROJECT_DIR$/resources/images/Enemies/GoblinSlinger/GoblinSlingerDeath/GoblinSlingerDeath2.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/images/Enemies/GoblinSlinger/GoblinSlingerDeath/GoblinSlingerDeath3.png" beforeDir="false" afterPath="$PROJECT_DIR$/resources/images/Enemies/GoblinSlinger/GoblinSlingerDeath/GoblinSlingerDeath3.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/images/Enemies/GoblinSlinger/GoblinSlingerDeath/GoblinSlingerDeath4.png" beforeDir="false" afterPath="$PROJECT_DIR$/resources/images/Enemies/GoblinSlinger/GoblinSlingerDeath/GoblinSlingerDeath4.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/images/Enemies/GoblinSlinger/GoblinSlingerDeath/GoblinSlingerDeath5.png" beforeDir="false" afterPath="$PROJECT_DIR$/resources/images/Enemies/GoblinSlinger/GoblinSlingerDeath/GoblinSlingerDeath5.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/images/Enemies/GoblinSlinger/GoblinSlingerDeath/GoblinSlingerDeath6.png" beforeDir="false" afterPath="$PROJECT_DIR$/resources/images/Enemies/GoblinSlinger/GoblinSlingerDeath/GoblinSlingerDeath6.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/images/Enemies/GoblinSlinger/GoblinSlingerDeath/GoblinSlingerDeath7.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/images/Enemies/GoblinSlinger/GoblinSlingerDeath/GoblinSlingerDeath8.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Enemies/BaseEnemy.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Enemies/BaseEnemy.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Enemies/GoblinSlinger.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Enemies/GoblinSlinger.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Enemies/Skeleton.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Enemies/Skeleton.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/MainGame/Game2D.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/MainGame/Game2D.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/MainGame/Game3D.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/MainGame/Game3D.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/MainGame/MainGame.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/MainGame/MainGame.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Map/Dungeon.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Map/Dungeon.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Map/DungeonDrawer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Map/DungeonDrawer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/MenuItems/Button.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/MenuItems/Button.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/MenuItems/TitleButtons.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/MenuItems/TitleButtons.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ParentEntity/ParentEntity.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ParentEntity/ParentEntity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Player/Gun.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Player/Gun.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Player/Pistol.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Player/Pistol.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Player/Player.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Player/Player.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Player/Shotgun.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Player/Shotgun.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -53,14 +111,20 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;master&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/Ali/Documents/GitHub/ICS4U_12FSE/resources/images/Player/Firing Shotgun&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "Application.MainGame.MainGame.executor": "Run",
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "git-widget-placeholder": "master",
+    "kotlin-language-version-configured": "true",
+    "last_opened_file_path": "C:/Users/Ali/Documents/GitHub/ICS4U_12FSE/resources/images/Player/Firing Shotgun",
+    "project.structure.last.edited": "Artifacts",
+    "project.structure.proportion": "0.15",
+    "project.structure.side.proportion": "0.2"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\Users\Ali\Documents\GitHub\ICS4U_12FSE\resources\images\Player\Firing Shotgun" />
@@ -68,14 +132,14 @@
       <recent name="C:\Users\Ali\Documents\GitHub\ICS4U_12FSE\src" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
-      <recent name="C:\Users\Ali\Documents\GitHub\ICS4U_12FSE\resources\images\Enemies\GunMan\Running" />
-      <recent name="C:\Users\Ali\Documents\GitHub\ICS4U_12FSE\resources\images\Player\Reload Shotgun" />
-      <recent name="C:\Users\Ali\Documents\GitHub\ICS4U_12FSE\resources\images\Player\Firing Shotgun" />
-      <recent name="C:\Users\Ali\Documents\GitHub\ICS4U_12FSE\resources\images\Player" />
-      <recent name="C:\Users\Ali\Documents\GitHub\ICS4U_12FSE\resources\images\Player\Firing Pistol" />
+      <recent name="C:\Users\Ali\Documents\GitHub\ICS4U_12FSE\resources\images\Enemies\GoblinBerserker\GoblinBerserkerRun" />
+      <recent name="C:\Users\Ali\Documents\GitHub\ICS4U_12FSE\resources\images\Enemies\GoblinBerserker\GoblinBerserkerHurt" />
+      <recent name="C:\Users\Ali\Documents\GitHub\ICS4U_12FSE\resources\images\Enemies\GoblinBerserker\GoblinBerserkerDeath" />
+      <recent name="C:\Users\Ali\Documents\GitHub\ICS4U_12FSE\resources\images\Enemies\GoblinBerserker\GoblinBerserkerAttack" />
+      <recent name="C:\Users\Ali\Documents\GitHub\ICS4U_12FSE\resources\images\Enemies\GoblinSlinger\GoblinSlingerDeath" />
     </key>
   </component>
-  <component name="RunManager" selected="Application.MainGame">
+  <component name="RunManager" selected="Application.MainGame.MainGame">
     <configuration name="DungeonDrawer" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="DungeonDrawer" />
       <module name="ICS4U_12FSE" />
@@ -90,14 +154,37 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration name="MainGame.MainGame" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="MainGame.MainGame" />
+      <module name="ICS4U_12FSE" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="MainGame.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Application.MainGame.MainGame" />
         <item itemvalue="Application.MainGame" />
         <item itemvalue="Application.DungeonDrawer" />
         <item itemvalue="Application.MainGame" />
         <item itemvalue="Application.MainGame" />
       </list>
     </recent_temporary>
+  </component>
+  <component name="SharedIndexes">
+    <attachedChunks>
+      <set>
+        <option value="jdk-1.8.0_402-corretto-1.8.0_402-4caba194b151-ae57be32" />
+        <option value="jdk-21.0.1-openjdk-21.0.1-4caba194b151-23eed401" />
+        <option value="jdk-21.0.2-openjdk-21.0.2-4caba194b151-4f524021" />
+      </set>
+    </attachedChunks>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">

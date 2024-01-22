@@ -44,12 +44,19 @@ public class GoblinSlinger extends BaseEnemy {
     },  new Color[][][]{ //dead
         MainGame.convertImageTo2DColorArray(MainGame.imgDir + "Enemies/GoblinSlinger/GoblinSlingerDeath/GoblinSlingerDeath0.png"),
         MainGame.convertImageTo2DColorArray(MainGame.imgDir + "Enemies/GoblinSlinger/GoblinSlingerDeath/GoblinSlingerDeath1.png"),
+        MainGame.convertImageTo2DColorArray(MainGame.imgDir + "Enemies/GoblinSlinger/GoblinSlingerDeath/GoblinSlingerDeath1.png"),
         MainGame.convertImageTo2DColorArray(MainGame.imgDir + "Enemies/GoblinSlinger/GoblinSlingerDeath/GoblinSlingerDeath2.png"),
+        MainGame.convertImageTo2DColorArray(MainGame.imgDir + "Enemies/GoblinSlinger/GoblinSlingerDeath/GoblinSlingerDeath3.png"),
         MainGame.convertImageTo2DColorArray(MainGame.imgDir + "Enemies/GoblinSlinger/GoblinSlingerDeath/GoblinSlingerDeath3.png"),
         MainGame.convertImageTo2DColorArray(MainGame.imgDir + "Enemies/GoblinSlinger/GoblinSlingerDeath/GoblinSlingerDeath4.png"),
         MainGame.convertImageTo2DColorArray(MainGame.imgDir + "Enemies/GoblinSlinger/GoblinSlingerDeath/GoblinSlingerDeath5.png"),
         MainGame.convertImageTo2DColorArray(MainGame.imgDir + "Enemies/GoblinSlinger/GoblinSlingerDeath/GoblinSlingerDeath6.png"),
-        MainGame.convertImageTo2DColorArray(MainGame.imgDir + "Enemies/GoblinSlinger/GoblinSlingerDeath/GoblinSlingerDeath7.png"),
+        MainGame.convertImageTo2DColorArray(MainGame.imgDir + "Enemies/GoblinSlinger/GoblinSlingerDeath/GoblinSlingerDeath6.png"),
+        MainGame.convertImageTo2DColorArray(MainGame.imgDir + "Enemies/GoblinSlinger/GoblinSlingerDeath/GoblinSlingerDeath5.png"),
+        MainGame.convertImageTo2DColorArray(MainGame.imgDir + "Enemies/GoblinSlinger/GoblinSlingerDeath/GoblinSlingerDeath5.png"),
+        MainGame.convertImageTo2DColorArray(MainGame.imgDir + "Enemies/GoblinSlinger/GoblinSlingerDeath/GoblinSlingerDeath6.png"),
+        MainGame.convertImageTo2DColorArray(MainGame.imgDir + "Enemies/GoblinSlinger/GoblinSlingerDeath/GoblinSlingerDeath6.png"),
+
 
     }};
     public GoblinSlinger(int x, int y) {

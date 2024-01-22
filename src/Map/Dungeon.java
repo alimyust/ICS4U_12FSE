@@ -70,8 +70,12 @@ public class Dungeon {
         }
     }
     private void addEnemies(){
-        eArr= BaseEnemy.addEnemy(eArr, getOpenSpaces(), 3 + Game3D.getLvl()/2, BaseEnemy.GOBLINSLINGER);
-        eArr= BaseEnemy.addEnemy(eArr, getOpenSpaces(), 3+ Game3D.getLvl()/3, BaseEnemy.SKELETON);}
+        eArr= BaseEnemy.addEnemy(eArr, getOpenSpaces(), 1 + Game3D.getLvl()/2, BaseEnemy.GOBLINSLINGER);
+        eArr= BaseEnemy.addEnemy(eArr, getOpenSpaces(), 3+ Game3D.getLvl()/2, BaseEnemy.SKELETON);
+        eArr= BaseEnemy.addEnemy(eArr, getOpenSpaces(), 1 + Game3D.getLvl()/4, BaseEnemy.GOBLINBERSERKER);
+
+    } // java.awt.Point[x=6,y=3], java.awt.Point[x=6,y=3], java.awt.Point[x=6,y=1]
+
     public void applyBlotch(int centerX, int centerY, int radius,  Point wallCode,Point floorCode, Point ceilCode) {
         for (int i = -radius; i <= radius; i++) {
             for (int j = -radius; j <= radius; j++) {
@@ -174,13 +178,12 @@ public class Dungeon {
         return map;
     }
 
-    public void drawDungeon2D(Graphics g) {
-        int r = Game2D.getDunSizeRatio();
+    public void drawDungeon2D(Graphics g, int xOff,int yOff,int rVal) {
         for (int y = 0; y < HGT; y += 1) {
             for (int x = 0; x < WID; x += 1) {
                 g.setColor((map[y][x].getwCode() == 0) ? Color.WHITE :Color.BLACK);
                 if(map[y][x].getwCode() == 5) g.setColor(Color.GREEN);
-                g.fillRect(x * DSIZE / r, y * DSIZE / r, DSIZE / r, DSIZE / r);
+                g.fillRect(xOff +x * DSIZE / rVal, yOff +y * DSIZE / rVal, DSIZE / rVal, DSIZE / rVal);
             }
         }
     }

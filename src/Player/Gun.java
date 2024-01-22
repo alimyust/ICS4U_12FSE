@@ -4,6 +4,7 @@ import java.awt.*;
 import java.awt.image.BufferedImage;
 
 public class Gun {
+    public double damage;
     private BufferedImage[] fireFrame;
     BufferedImage[] reloadFrame;
     private double gunFrame = 0;
@@ -17,15 +18,16 @@ public class Gun {
     private double offSpeed;
     private BufferedImage currentGunImage;  // Declare it as a field
 
-    public Gun( double frameRate, int aoe, int range) {
+    public Gun( double frameRate, int aoe, int range, int damage) {
         this.frameRate = frameRate;
         this.aoe = aoe;
         this.range = range;
+        this.damage = damage;
         this.offSpeed = 0.1;
     }
 
     public void drawGun(Graphics g){
-        if(Math.abs(offCount)> 1.5) {
+        if(Math.abs(offCount)> 1) {
             offSpeed = -offSpeed;
             offCount += offSpeed;
         }
@@ -63,17 +65,8 @@ public class Gun {
         return offCount;
     }
 
-    public double getOffSpeed() {
-        return offSpeed;
-    }
-
-    public void setOffSpeed(double offSpeed) {
-        this.offSpeed = offSpeed;
-    }
-
-    public void setOffCount(double offCount) {
-
-        this.offCount = offCount;
+    public double getDamage() {
+        return damage;
     }
 
     public void setGunFrame(double gunFrame) {

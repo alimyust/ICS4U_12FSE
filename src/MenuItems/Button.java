@@ -6,10 +6,10 @@ import java.awt.*;
 import java.awt.event.MouseEvent;
 
 public class Button {
-    private int x, y, width, height;
-    private String text;
-    private Rectangle bounds;
-    private String newGameState;
+    private final int x, y, width, height;
+    private final String text;
+    private final Rectangle bounds;
+    private final String newGameState;
     public Button(int x, int y, int width, int height, String text, String newGameState) {
         this.x = x;
         this.y = y;
@@ -20,8 +20,7 @@ public class Button {
         this.bounds = new Rectangle(x, y, width, height);
     }
 
-    public void draw(Graphics g, int mx, int my) {
-
+    public void draw(Graphics g, int mx, int my, int mb) {
     }
 
     public boolean isMouseOver(int mouseX, int mouseY) {

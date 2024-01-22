@@ -14,7 +14,7 @@ public class DungeonDrawer extends JPanel {
     @Override
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
-        dungeon.drawDungeon2D(g);
+//        dungeon.drawDungeon2D(g);
     }
 
     public static void main(String[] args) {

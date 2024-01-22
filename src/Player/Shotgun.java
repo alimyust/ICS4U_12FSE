@@ -38,8 +38,8 @@ public class Shotgun extends Gun {
 
     private BufferedImage[] reloadFrame;
 
-    public Shotgun(double frameRate, int aoe, int range) {
-        super(frameRate, aoe, range);
+    public Shotgun(double frameRate, int aoe, int range, int damage) {
+        super(frameRate, aoe, range,damage);
         setFireFrame(fireFrame);
     }
 

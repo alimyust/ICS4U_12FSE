@@ -19,8 +19,8 @@ public class Player extends ParentEntity {
     private double dX;
     private double dY;
     private Gun curGun;
-    private Pistol pistol  = new Pistol(0.5, 10, 700);
-    private Shotgun shotgun = new Shotgun(0.5, 10, 700);
+    private Pistol pistol  = new Pistol(0.5, 15, 700, 1);
+    private Shotgun shotgun = new Shotgun(0.5, 30, 500, 2);
 
     private double health;
     private static boolean isMoving;
@@ -33,7 +33,7 @@ public class Player extends ParentEntity {
         dX = x;
         dY = y;
         health = 100;
-        curGun = new Pistol(0.5, 10, 700);
+        curGun = pistol;
     }
     public void drawPlayerGUI(Graphics g){
         Graphics2D g2d = (Graphics2D) g;
@@ -44,9 +44,10 @@ public class Player extends ParentEntity {
             g.fillRect(i*4,20,4,80);
             g.setColor(Color.white);
             g.drawPolygon(healthBar[0], healthBar[1],8);
+            g2d.setClip(0,0,MainGame.WID, MainGame.HGT);
         }
         if(health == 0)
-            Game3D.setGameState("gameOver");
+            Game3D.setGameState("gameover");
 
     }
     public void chooseGun(boolean[] keys){
@@ -62,7 +63,7 @@ public class Player extends ParentEntity {
         if (keys[KeyEvent.VK_D])
             angle += turnAngle;
         fixAngle();
-        double speed = 20;
+        double speed = 10;
         dX = Math.cos(angle) * speed;
         dY = Math.sin(angle) * speed;
         isMoving = false;
@@ -99,24 +100,19 @@ public class Player extends ParentEntity {
         for( BaseEnemy enemy: dun.geteArr()) {
             if (Math.abs(enemy.isPlayerLookingAt(this, curGun.getAoe())) >= 1) continue;
             if (dist(x, y, enemy.x, enemy.y) >= curGun.getRange()) continue;
-            enemy.setHurtState();
+            enemy.setHealth( enemy.getHealth() - curGun.damage);
             if(enemy.getHealth() <= 0) enemy.setDeadState();
+            else enemy.setHurtState();
+            return;
         }
-
     }
     public void shootAnimation(Graphics g){
         curGun.drawGun(g);
     }
 
-    public void drawPlayer(Graphics g) { //2d
-        int r = Game2D.getDunSizeRatio();
-        Graphics2D g2d = (Graphics2D) g;
+    public void drawPlayer(Graphics g,int xOff, int yOff, int r) { //2d
         g.setColor(Color.green);
-        g.fillRect((x/r - w / 2), (y/r - h / 2), w, h);
-        g.drawLine(x/r, y/r, (int) (x/r + 500 * Math.cos(angle)), (int) (y/r + 500 * Math.sin(angle)));
-        g.setColor(Color.yellow);
-        for (int i = 0; i <= rx.size() - 1; i++)
-            g2d.drawLine(x/r, y/r, rx.get(i)/r, ry.get(i)/r);//        g2d.rotate(-angle);
+        g.fillRect(xOff+(x/r - w / 2), yOff+(y/r - h / 2), w, h);
         rx.clear();
         ry.clear();
     }

@@ -20,13 +20,14 @@ public class BaseEnemy extends ParentEntity {
     private double damage;
     private double health;
     public static final int BAT = 0;
-    public static final int SANS = 1;
+    public static final int GOBLINBERSERKER = 1;
     public static final int SKELETON = 2;
     public static final int GOBLINSLINGER= 3;
     private int previousState;
-    private int hurtCooldown = 300; // Adjust the cooldown time as needed
     private long lastHurtTime;
+    private long lastDeadTime;
     private double lastHurtFrame;
+    private double lastDeadFrame;
     private final int IDLE =0;
     private final int RUN =1;
     private final int ATTACK =2;
@@ -45,6 +46,7 @@ public class BaseEnemy extends ParentEntity {
             int ind = (int) (Math.random() * (spots.size() - 1));
             Point currSpot = spots.get(ind);
             switch (type) {
+                case GOBLINBERSERKER -> eArr.add(new GoblinBerserker(currSpot.x * 64, currSpot.y * 64));
                 case SKELETON -> eArr.add(new Skeleton(currSpot.x * 64, currSpot.y * 64));
                 case GOBLINSLINGER ->eArr.add(new GoblinSlinger(currSpot.x * 64, currSpot.y * 64));
             }
@@ -56,8 +58,7 @@ public class BaseEnemy extends ParentEntity {
         double ang = Math.atan2(player.y - y, player.x - x);
         int dx = (int) (Math.cos(ang) * speed);
         int dy = (int) (Math.sin(ang) * speed);
-        if(health <= 0) isAlive = false;
-        if (!isAlive ||enemyState == HURT|| !Game3D.notIntersectingMap(x + dx, y + dy, dun.getMap())) return;
+        if (enemyState == DEAD ||enemyState == HURT|| !Game3D.notIntersectingMap(x + dx, y + dy, dun.getMap())) return;
         if (playerEnemyDist(player) >= startDist) return;
         if (playerEnemyDist(player) > stopDist) {
             x += dx;
@@ -70,41 +71,34 @@ public class BaseEnemy extends ParentEntity {
     }
 
     public void drawBaseEnemy(Graphics g, Player player, int HGT, int WID, RayCaster ray) {
-        if(!isAlive) enemyState = DEAD;
+        if(!isAlive) return; // only draw when alive
         Color[][] sprite = enemyImgArr[enemyState][(int) (frame % (enemyImgArr[enemyState].length - 1))];
-        System.out.println(enemyState);
-        if (enemyState == HURT) {
-            // Check if hurt cooldown is over
-            if (System.currentTimeMillis() - lastHurtTime >= hurtCooldown) {
-                enemyState = previousState; // Return to previous state
-
+        if (enemyState == HURT) {            // Check if hurt cooldown is over
+            if (System.currentTimeMillis() - lastHurtTime >= 300) {
+                enemyState = RUN;
             } else {
-                // Display the entire hurt animation during the cooldown
                 sprite = enemyImgArr[HURT][(int) (lastHurtFrame % enemyImgArr[enemyState].length)];
-                lastHurtFrame += frameRate;
+                lastHurtFrame += frameRate;  // Display the entire hurt animation during the cooldown
             }
         }
         if(enemyState == DEAD){
-            if(System.currentTimeMillis() - lastHurtTime >= hurtCooldown) {
+            if(System.currentTimeMillis() - lastDeadTime >= 1000) {
+                isAlive = false;
                 return;
             } else {
-                sprite = enemyImgArr[DEAD][(int) (lastHurtFrame % enemyImgArr[enemyState].length)];
-                lastHurtFrame += frameRate;
+                sprite = enemyImgArr[DEAD][(int) (lastDeadFrame % enemyImgArr[enemyState].length)];
+                lastDeadFrame = Math.min(frameRate + lastDeadFrame,enemyImgArr[enemyState].length-1);
             }
         }
 
-//        if(!isAlive)
-//            sprite = enemyImgArr[enemyState][enemyImgArr[DEAD].length - 1];
-
         double angleRatio = -isPlayerLookingAt(player, ray.getFov()/2);
         int xPos = (int) (WID / 2 * angleRatio + WID / 2);
-        if (xPos - w < 0 || xPos > WID) return;
-
+//        System.out.println(angleRatio);
+        if (xPos < -96 || xPos > WID) return;
         double eDist = Math.abs(dist(x, y, player.x, player.y));
         double scaleSpeed = 18;
         double scaleMagnitude = 30;
-        double scale = Math.min(3, 1.0 / (eDist / scaleSpeed) * scaleMagnitude); // Apply minimum scaling factor
-
+        double scale = Math.min(3.5, 1.0 / (eDist / scaleSpeed) * scaleMagnitude); // Apply minimum scaling factor
 
         int wid = sprite[0].length;
         int hgt = sprite.length;
@@ -113,8 +107,10 @@ public class BaseEnemy extends ParentEntity {
         // Adjust the vertical position based on the scaled he
         // ight
         int yPos = HGT / 2 - sHgt / 2;
+        double wDist;
         for (int x = 0; x < sWid; x++) {
-            double wDist = ray.getRayDist()[Math.min((xPos + x) / ray.getDepth(), ray.getRayDist().length - 1)];
+            if(xPos + x<0) continue;
+            wDist = ray.getRayDist()[Math.min((xPos + x) / ray.getDepth(), ray.getRayDist().length - 1)];
             if (wDist < eDist) continue; // draws a ray only when an enemy is closer than a wall
             for (int y = 0; y < sHgt; y++) {
                 Color col = sprite[(int) (y / scale)][(int) (x / scale)];
@@ -129,34 +125,40 @@ public class BaseEnemy extends ParentEntity {
 
 
     public double isPlayerLookingAt(Player player, int tolerance) {
-        double angle = Math.atan2((y +h/2.0)- player.y, (x+w/2.0) - player.x); //slope between player and enemy
-        double playerAngle = fixAng(player.getAngle());
-        double ratio = (playerAngle - angle);
-        if (player.y > (y +h/2.0)) ratio = -(angle - playerAngle + 2 * PI);
+        double angle = Math.atan2(player.y + 32 - (y + 48), player.x + 32 - (x + 48));
+        double playerAngle = player.getAngle();
+
+        // Calculate the smallest angle difference considering circular nature
+        double angleDifference = fixAng(playerAngle - angle) - Math.PI;
+        System.out.println(Math.toDegrees(angleDifference));
         double angleTolerance = Math.toRadians(tolerance);
-        return ratio / angleTolerance;
+        return angleDifference / angleTolerance;
     }
 
-    public double fixAng(double angle) {
-        if (angle < 0) angle += (2 * PI);
-        if (angle > 2 * PI) angle -= (2 * PI);
+    // Assuming fixAng function looks like this:
+    private double fixAng(double angle) {
+        // Normalize angle to the range [0, 2π)
+        while (angle < 0) {
+            angle += 2 * Math.PI;
+        }
+        while (angle >= 2 * Math.PI) {
+            angle -= 2 * Math.PI;
+        }
         return angle;
     }
 
     public void setHurtState() {
         // Save the previous state and frame
-            health --;
-            previousState = enemyState;
-            lastHurtFrame = frame;
-            lastHurtTime = System.currentTimeMillis();
-            // Set the enemy to the hurt state
-            enemyState = HURT;
+        enemyState = HURT;
+//        previousState = enemyState;
+        lastHurtFrame = frame;
+        lastHurtTime = System.currentTimeMillis();
 
     }
     public void setDeadState() {
-        // Save the previous state and frame
-        lastHurtTime = System.currentTimeMillis();
+        if(enemyState == DEAD) return;
         enemyState = DEAD;
+        lastDeadTime = System.currentTimeMillis();
 
     }
 
