@@ -13,8 +13,8 @@ import java.util.Arrays;
 public class Dungeon {
     private final int DSIZE = 64;
     private final int dSizeMultiplier = 4;
-    private final int WID = MainGame.WID / DSIZE * dSizeMultiplier;
-    private final int HGT = MainGame.HGT / DSIZE* dSizeMultiplier;
+    private final int WID = MainGame.getWID() / DSIZE * dSizeMultiplier;
+    private final int HGT = MainGame.getHGT() / DSIZE* dSizeMultiplier;
     private final int ALIVE = 0; // empty space is alive
     private final int DEAD = 1; // dead is wall
     private MapNode[][] map = new MapNode[HGT][WID];

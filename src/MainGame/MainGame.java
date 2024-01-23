@@ -10,12 +10,12 @@ import java.io.File;
 import java.io.IOException;
 
 public class MainGame {
-    public static final int WID = 64*16;
-    public static final int HGT= 64*16;
+    private static final int WID = 64*16;
+    private static final int HGT= 64*16;
     public static Player player = new Player(WID/2,HGT/2);;
     public static Dungeon dun = new Dungeon(new Point(7, 0), new Point(7, 6), new Point(7, 6), "");;
-
-    public static final String imgDir = "resources/images/";
+    private static final String imgDir = "resources/images/";
+    public static Game3D g3D;
 
     public static Color [] convertImageToColorArray(String imagePath) {
         Color[] colorArray;
@@ -53,9 +53,19 @@ public class MainGame {
         }
         return colorArray;
     }
+    public static String getImgDir() {
+        return imgDir;
+    }
+    public static int getWID() {
+        return WID;
+    }
+
+    public static int getHGT() {
+        return HGT;
+    }
 
     public static void main(String[] args) {
-        new Game3D();
+        g3D = new Game3D();
     }
 
 }

@@ -130,7 +130,6 @@ public class BaseEnemy extends ParentEntity {
 
         // Calculate the smallest angle difference considering circular nature
         double angleDifference = fixAng(playerAngle - angle) - Math.PI;
-        System.out.println(Math.toDegrees(angleDifference));
         double angleTolerance = Math.toRadians(tolerance);
         return angleDifference / angleTolerance;
     }

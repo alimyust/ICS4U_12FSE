@@ -1,95 +1,97 @@
 package Map;
 import MainGame.MainGame;
 import java.awt.*;
+import static MainGame.MainGame.getImgDir;
 
 public class MapNode {
+
     private static final Color[][][] allTextures = {
             // Bricks
             {
-                    MainGame.convertImageToColorArray(MainGame.imgDir + "Textures/Bricks/BIGBRICKS.png"),
-                    MainGame.convertImageToColorArray(MainGame.imgDir + "Textures/Bricks/CASTLEBRICKS.png"),
-                    MainGame.convertImageToColorArray(MainGame.imgDir + "Textures/Bricks/CLAYBRICKS.png"),
-                    MainGame.convertImageToColorArray(MainGame.imgDir + "Textures/Bricks/DUNGEONBRICKS.png"),
-                    MainGame.convertImageToColorArray(MainGame.imgDir + "Textures/Bricks/DUNGEONCELL.png"),
-                    MainGame.convertImageToColorArray(MainGame.imgDir + "Textures/Bricks/GOOBRICKS.png"),
-                    MainGame.convertImageToColorArray(MainGame.imgDir + "Textures/Bricks/PORCELAINBRICKS.png"),
-                    MainGame.convertImageToColorArray(MainGame.imgDir + "Textures/Bricks/REDBRICKS.png"),
-                    MainGame.convertImageToColorArray(MainGame.imgDir + "Textures/Bricks/ROUNDBRICKS.png"),
-                    MainGame.convertImageToColorArray(MainGame.imgDir + "Textures/Bricks/SLIMBRICKS.png")
+                    MainGame.convertImageToColorArray(getImgDir() + "Textures/Bricks/BIGBRICKS.png"),
+                    MainGame.convertImageToColorArray(getImgDir() + "Textures/Bricks/CASTLEBRICKS.png"),
+                    MainGame.convertImageToColorArray(getImgDir() + "Textures/Bricks/CLAYBRICKS.png"),
+                    MainGame.convertImageToColorArray(getImgDir() + "Textures/Bricks/DUNGEONBRICKS.png"),
+                    MainGame.convertImageToColorArray(getImgDir() + "Textures/Bricks/DUNGEONCELL.png"),
+                    MainGame.convertImageToColorArray(getImgDir() + "Textures/Bricks/GOOBRICKS.png"),
+                    MainGame.convertImageToColorArray(getImgDir() + "Textures/Bricks/PORCELAINBRICKS.png"),
+                    MainGame.convertImageToColorArray(getImgDir() + "Textures/Bricks/REDBRICKS.png"),
+                    MainGame.convertImageToColorArray(getImgDir() + "Textures/Bricks/ROUNDBRICKS.png"),
+                    MainGame.convertImageToColorArray(getImgDir() + "Textures/Bricks/SLIMBRICKS.png")
             },
             // Doors
             {
-                    MainGame.convertImageToColorArray(MainGame.imgDir + "Textures/Doors/CREAKYDOOR.png"),
-                    MainGame.convertImageToColorArray(MainGame.imgDir + "Textures/Doors/OFFICEDOOR.png"),
-                    MainGame.convertImageToColorArray(MainGame.imgDir + "Textures/Doors/SPOOKYDOOR.png")
+                    MainGame.convertImageToColorArray(getImgDir() + "Textures/Doors/CREAKYDOOR.png"),
+                    MainGame.convertImageToColorArray(getImgDir() + "Textures/Doors/OFFICEDOOR.png"),
+                    MainGame.convertImageToColorArray(getImgDir() + "Textures/Doors/SPOOKYDOOR.png")
             },
             // Elements
             {
-                    MainGame.convertImageToColorArray(MainGame.imgDir + "Textures/Elements/BIGLEAVES.png"),
-                    MainGame.convertImageToColorArray(MainGame.imgDir + "Textures/Elements/LAVA.png"),
-                    MainGame.convertImageToColorArray(MainGame.imgDir + "Textures/Elements/RAPIDS.png"),
-                    MainGame.convertImageToColorArray(MainGame.imgDir + "Textures/Elements/SAND.png"),
-                    MainGame.convertImageToColorArray(MainGame.imgDir + "Textures/Elements/SANDMARKS.png"),
-                    MainGame.convertImageToColorArray(MainGame.imgDir + "Textures/Elements/SNOW.png"),
-                    MainGame.convertImageToColorArray(MainGame.imgDir + "Textures/Elements/TALLGRASS.png"),
-                    MainGame.convertImageToColorArray(MainGame.imgDir + "Textures/Elements/TINYLEAVES.png"),
-                    MainGame.convertImageToColorArray(MainGame.imgDir + "Textures/Elements/WATER.png")
+                    MainGame.convertImageToColorArray(getImgDir() + "Textures/Elements/BIGLEAVES.png"),
+                    MainGame.convertImageToColorArray(getImgDir() + "Textures/Elements/LAVA.png"),
+                    MainGame.convertImageToColorArray(getImgDir() + "Textures/Elements/RAPIDS.png"),
+                    MainGame.convertImageToColorArray(getImgDir() + "Textures/Elements/SAND.png"),
+                    MainGame.convertImageToColorArray(getImgDir() + "Textures/Elements/SANDMARKS.png"),
+                    MainGame.convertImageToColorArray(getImgDir() + "Textures/Elements/SNOW.png"),
+                    MainGame.convertImageToColorArray(getImgDir() + "Textures/Elements/TALLGRASS.png"),
+                    MainGame.convertImageToColorArray(getImgDir() + "Textures/Elements/TINYLEAVES.png"),
+                    MainGame.convertImageToColorArray(getImgDir() + "Textures/Elements/WATER.png")
             },
             // Industrial
             {
-                    MainGame.convertImageToColorArray(MainGame.imgDir + "Textures/Industrial/CROSSCUBE.png"),
-                    MainGame.convertImageToColorArray(MainGame.imgDir + "Textures/Industrial/CROSSWALL.png"),
-                    MainGame.convertImageToColorArray(MainGame.imgDir + "Textures/Industrial/METALTILE.png"),
-                    MainGame.convertImageToColorArray(MainGame.imgDir + "Textures/Industrial/PIPES.png"),
-                    MainGame.convertImageToColorArray(MainGame.imgDir + "Textures/Industrial/STORAGE.png"),
-                    MainGame.convertImageToColorArray(MainGame.imgDir + "Textures/Industrial/SUPPORT.png")
+                    MainGame.convertImageToColorArray(getImgDir() + "Textures/Industrial/CROSSCUBE.png"),
+                    MainGame.convertImageToColorArray(getImgDir() + "Textures/Industrial/CROSSWALL.png"),
+                    MainGame.convertImageToColorArray(getImgDir() + "Textures/Industrial/METALTILE.png"),
+                    MainGame.convertImageToColorArray(getImgDir() + "Textures/Industrial/PIPES.png"),
+                    MainGame.convertImageToColorArray(getImgDir() + "Textures/Industrial/STORAGE.png"),
+                    MainGame.convertImageToColorArray(getImgDir() + "Textures/Industrial/SUPPORT.png")
             },
             // Rocks
             {
-                    MainGame.convertImageToColorArray(MainGame.imgDir + "Textures/Rocks/DIRT.png"),
-                    MainGame.convertImageToColorArray(MainGame.imgDir + "Textures/Rocks/FLATSTONES.png"),
-                    MainGame.convertImageToColorArray(MainGame.imgDir + "Textures/Rocks/GOLDROCKS.png"),
-                    MainGame.convertImageToColorArray(MainGame.imgDir + "Textures/Rocks/GRAYROCKS.png"),
-                    MainGame.convertImageToColorArray(MainGame.imgDir + "Textures/Rocks/ICEYROCKS.png"),
-                    MainGame.convertImageToColorArray(MainGame.imgDir + "Textures/Rocks/LAVAROCKS.png"),
-                    MainGame.convertImageToColorArray(MainGame.imgDir + "Textures/Rocks/PATHROCKS.png"),
-                    MainGame.convertImageToColorArray(MainGame.imgDir + "Textures/Rocks/SLIMROCKS.png")
+                    MainGame.convertImageToColorArray(getImgDir() + "Textures/Rocks/DIRT.png"),
+                    MainGame.convertImageToColorArray(getImgDir() + "Textures/Rocks/FLATSTONES.png"),
+                    MainGame.convertImageToColorArray(getImgDir() + "Textures/Rocks/GOLDROCKS.png"),
+                    MainGame.convertImageToColorArray(getImgDir() + "Textures/Rocks/GRAYROCKS.png"),
+                    MainGame.convertImageToColorArray(getImgDir() + "Textures/Rocks/ICEYROCKS.png"),
+                    MainGame.convertImageToColorArray(getImgDir() + "Textures/Rocks/LAVAROCKS.png"),
+                    MainGame.convertImageToColorArray(getImgDir() + "Textures/Rocks/PATHROCKS.png"),
+                    MainGame.convertImageToColorArray(getImgDir() + "Textures/Rocks/SLIMROCKS.png")
             },
             // Tech
             {
-                    MainGame.convertImageToColorArray(MainGame.imgDir + "Textures/Tech/BIGSQUARES.png"),
-                    MainGame.convertImageToColorArray(MainGame.imgDir + "Textures/Tech/DENTWALL.png"),
-                    MainGame.convertImageToColorArray(MainGame.imgDir + "Textures/Tech/DIRTHEXAGONS.png"),
-                    MainGame.convertImageToColorArray(MainGame.imgDir + "Textures/Tech/DOUBLELIGHTS.png"),
-                    MainGame.convertImageToColorArray(MainGame.imgDir + "Textures/Tech/HEXAGONS.png"),
-                    MainGame.convertImageToColorArray(MainGame.imgDir + "Textures/Tech/HIGHTECH.png"),
-                    MainGame.convertImageToColorArray(MainGame.imgDir + "Textures/Tech/HIGHTECHWALL.png"),
-                    MainGame.convertImageToColorArray(MainGame.imgDir + "Textures/Tech/LONGLIGHTS.png"),
-                    MainGame.convertImageToColorArray(MainGame.imgDir + "Textures/Tech/STARWALLA.png"),
-                    MainGame.convertImageToColorArray(MainGame.imgDir + "Textures/Tech/STARWALLB.png"),
-                    MainGame.convertImageToColorArray(MainGame.imgDir + "Textures/Tech/TECHWALLA.png"),
-                    MainGame.convertImageToColorArray(MainGame.imgDir + "Textures/Tech/TECHWALLB.png"),
-                    MainGame.convertImageToColorArray(MainGame.imgDir + "Textures/Tech/TINYLIGHTS.png"),
-                    MainGame.convertImageToColorArray(MainGame.imgDir + "Textures/Tech/TINYSQUARES.png")
+                    MainGame.convertImageToColorArray(getImgDir() + "Textures/Tech/BIGSQUARES.png"),
+                    MainGame.convertImageToColorArray(getImgDir() + "Textures/Tech/DENTWALL.png"),
+                    MainGame.convertImageToColorArray(getImgDir() + "Textures/Tech/DIRTHEXAGONS.png"),
+                    MainGame.convertImageToColorArray(getImgDir() + "Textures/Tech/DOUBLELIGHTS.png"),
+                    MainGame.convertImageToColorArray(getImgDir() + "Textures/Tech/HEXAGONS.png"),
+                    MainGame.convertImageToColorArray(getImgDir() + "Textures/Tech/HIGHTECH.png"),
+                    MainGame.convertImageToColorArray(getImgDir() + "Textures/Tech/HIGHTECHWALL.png"),
+                    MainGame.convertImageToColorArray(getImgDir() + "Textures/Tech/LONGLIGHTS.png"),
+                    MainGame.convertImageToColorArray(getImgDir() + "Textures/Tech/STARWALLA.png"),
+                    MainGame.convertImageToColorArray(getImgDir() + "Textures/Tech/STARWALLB.png"),
+                    MainGame.convertImageToColorArray(getImgDir() + "Textures/Tech/TECHWALLA.png"),
+                    MainGame.convertImageToColorArray(getImgDir() + "Textures/Tech/TECHWALLB.png"),
+                    MainGame.convertImageToColorArray(getImgDir() + "Textures/Tech/TINYLIGHTS.png"),
+                    MainGame.convertImageToColorArray(getImgDir() + "Textures/Tech/TINYSQUARES.png")
             },
             // Urban
             {
-                    MainGame.convertImageToColorArray(MainGame.imgDir + "Textures/Urban/BIGWINDOW.png"),
-                    MainGame.convertImageToColorArray(MainGame.imgDir + "Textures/Urban/CHESS.png"),
-                    MainGame.convertImageToColorArray(MainGame.imgDir + "Textures/Urban/GARAGE.png"),
-                    MainGame.convertImageToColorArray(MainGame.imgDir + "Textures/Urban/GRAYWALL.png"),
-                    MainGame.convertImageToColorArray(MainGame.imgDir + "Textures/Urban/PAVEMENT.png"),
-                    MainGame.convertImageToColorArray(MainGame.imgDir + "Textures/Urban/WINDOW.png")
+                    MainGame.convertImageToColorArray(getImgDir() + "Textures/Urban/BIGWINDOW.png"),
+                    MainGame.convertImageToColorArray(getImgDir() + "Textures/Urban/CHESS.png"),
+                    MainGame.convertImageToColorArray(getImgDir() + "Textures/Urban/GARAGE.png"),
+                    MainGame.convertImageToColorArray(getImgDir() + "Textures/Urban/GRAYWALL.png"),
+                    MainGame.convertImageToColorArray(getImgDir() + "Textures/Urban/PAVEMENT.png"),
+                    MainGame.convertImageToColorArray(getImgDir() + "Textures/Urban/WINDOW.png")
             },
             // Wood
             {
-                    MainGame.convertImageToColorArray(MainGame.imgDir + "Textures/Wood/BIGTRUNK.png"),
-                    MainGame.convertImageToColorArray(MainGame.imgDir + "Textures/Wood/CREAKYWOOD.png"),
-                    MainGame.convertImageToColorArray(MainGame.imgDir + "Textures/Wood/DARKWOOD.png"),
-                    MainGame.convertImageToColorArray(MainGame.imgDir + "Textures/Wood/TRUNKS.png"),
-                    MainGame.convertImageToColorArray(MainGame.imgDir + "Textures/Wood/WOODA.png"),
-                    MainGame.convertImageToColorArray(MainGame.imgDir + "Textures/Wood/WOODB.png"),
-                    MainGame.convertImageToColorArray(MainGame.imgDir + "Textures/Wood/WOODTILE.png")
+                    MainGame.convertImageToColorArray(getImgDir() + "Textures/Wood/BIGTRUNK.png"),
+                    MainGame.convertImageToColorArray(getImgDir() + "Textures/Wood/CREAKYWOOD.png"),
+                    MainGame.convertImageToColorArray(getImgDir() + "Textures/Wood/DARKWOOD.png"),
+                    MainGame.convertImageToColorArray(getImgDir() + "Textures/Wood/TRUNKS.png"),
+                    MainGame.convertImageToColorArray(getImgDir() + "Textures/Wood/WOODA.png"),
+                    MainGame.convertImageToColorArray(getImgDir() + "Textures/Wood/WOODB.png"),
+                    MainGame.convertImageToColorArray(getImgDir() + "Textures/Wood/WOODTILE.png")
             }
     };
 

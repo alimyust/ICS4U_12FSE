@@ -7,7 +7,6 @@ import Player.Player;
 
 import java.awt.*;
 import java.awt.event.KeyEvent;
-import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 import java.util.Objects;
 
@@ -18,29 +17,40 @@ public class Game3D extends BaseFrame {
     private static int lvl;
     private static String gameState = "";
     private final ArrayList<Button> titleButtons = new ArrayList<>();
+    private final ArrayList<Button> gameOverButtons = new ArrayList<>();
+
     private int score;
-    private int deathAnimationCounter;
+    private static int deathAnimationCounter;
     private boolean displayMap;
 
     public Game3D() {
         super("MainGame.Game3D", WID, HGT);
         this.setLocationRelativeTo(null);
+        game3Dinit();
+    }
+    public void game3Dinit(){
         gameState = "title";
         displayMap = false;
         lvl = 0;
         score= 0;
         deathAnimationCounter= 0;
-        refreshDungeon();
+        MainGame.player = new Player(WID/2,HGT/2);;
+        MainGame.dun = new Dungeon(new Point(7, 0), new Point(7, 6), new Point(7, 6), "");;
         this.rayCast = new RayCaster();
-        titleInit();
-
+        refreshDungeon();
+        buttonInit();
     }
-    private void titleInit(){
+    public static int getDeathAnimationCounter() {
+        return deathAnimationCounter;
+    }
+
+    private void buttonInit(){
         int butPlace = 500;
         titleButtons.add(new TitleButtons(30,butPlace,400,20,"Start Game", "game"));
         titleButtons.add(new TitleButtons(30,butPlace+25,400,20,"Endless", "endless"));
         titleButtons.add(new TitleButtons(30,butPlace+50,400,20,"Controls", "controls"));
         titleButtons.add(new TitleButtons(30,butPlace+75,400,20,"Exit", "exit"));
+        gameOverButtons.add(new GameOverButton(WID/2-75, 600, 150,60,"Menu", "title"));
 
     }
 
@@ -67,17 +77,21 @@ public class Game3D extends BaseFrame {
         }
 
         if(Objects.equals(gameState, "gameover")){
-            deathAnimationCounter += 10;
-            deathAnimation(g);
-            if(deathAnimationCounter >= WID) {
+            deathAnimationCounter += 30;
+//            deathAnimation(g);
+            if(deathAnimationCounter >= WID + 30) {
                 g.setColor(Color.BLACK);
-                g.drawRect(0, 0, WID, HGT);
+                g.fillRect(0, 0, WID, HGT);
                 g.setColor(new Color(117, 1, 1));
-                g.setFont(new Font("Arial", Font.BOLD | Font.ITALIC,50));
-                g2d.drawString("Game Over", 400,300);
+                for(Button but: gameOverButtons){
+                    but.draw(g,mx,my, mb);
+                    but.changeGameState(mx,my,mb);
+                }
+                g.setFont(new Font("Doom 2016 Text", Font.BOLD | Font.ITALIC,150));
+                g2d.drawString("Game Over", 250,300);
                 g.setFont(new Font("Arial", Font.BOLD | Font.ITALIC,25));
                 if(deathAnimationCounter >= WID+500)
-                    g2d.drawString("Score: " + score,430,360);
+                    g2d.drawString("Score: " + score,430 - 10 *  (""+score).length(),360);
             }
         }
 
@@ -88,7 +102,8 @@ public class Game3D extends BaseFrame {
 
     private void deathAnimation(Graphics g) {
         g.setColor(Color.BLACK);
-        g.fillRect(0, 0,deathAnimationCounter,HGT);
+//        g.fillRect(0, 0,deathAnimationCounter,HGT);
+        g.drawOval(WID/2, HGT/2, WID - deathAnimationCounter, HGT- deathAnimationCounter);
     }
 
     @Override

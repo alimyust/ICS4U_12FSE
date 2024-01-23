@@ -31,8 +31,10 @@ public class Button {
         return isMouseOver(mx, my) && mb == MouseEvent.BUTTON1;
     }
     public void changeGameState(int mx, int my, int mb){
-        if(isClicked(mx,my,mb))
-            Game3D.setGameState(newGameState);
+    }
+
+    public String getNewGameState() {
+        return newGameState;
     }
 
     public int getX() {

@@ -1,13 +1,15 @@
 package MainGame;
-import ParentEntity.ParentEntity;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
 
+import static MainGame.MainGame.getHGT;
+import static MainGame.MainGame.getWID;
+
 public class Game2D extends BaseFrame{
     private static final int dunSizeRatio = 8;
     public Game2D() {
-        super("MainGame.Game2D", MainGame.WID/2, MainGame.HGT/2);
+        super("MainGame.Game2D", getWID()/2, getHGT()/2);
 
     }
 

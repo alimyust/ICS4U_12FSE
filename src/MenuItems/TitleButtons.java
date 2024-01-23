@@ -1,5 +1,7 @@
 package MenuItems;
 
+import MainGame.Game3D;
+
 import java.awt.*;
 
 public class TitleButtons extends Button {
@@ -34,5 +36,12 @@ public class TitleButtons extends Button {
         g.setFont(new Font("Arial", Font.ITALIC, 20));
         g.drawString(getText(), getX() + 10, getY() + 18);
 
+    }
+
+    @Override
+    public void changeGameState(int mx, int my, int mb) {
+        super.changeGameState(mx, my, mb);
+        if(isClicked(mx,my,mb))
+            Game3D.setGameState(getNewGameState());
     }
 }

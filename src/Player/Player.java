@@ -6,8 +6,10 @@ import Map.Dungeon;
 
 import java.awt.*;
 import java.awt.event.KeyEvent;
-import java.io.IOException;
 import java.util.ArrayList;
+
+import static MainGame.MainGame.getHGT;
+import static MainGame.MainGame.getWID;
 
 
 public class Player extends ParentEntity {
@@ -44,7 +46,7 @@ public class Player extends ParentEntity {
             g.fillRect(i*4,20,4,80);
             g.setColor(Color.white);
             g.drawPolygon(healthBar[0], healthBar[1],8);
-            g2d.setClip(0,0,MainGame.WID, MainGame.HGT);
+            g2d.setClip(0,0,getWID(), getHGT());
         }
         if(health == 0)
             Game3D.setGameState("gameover");

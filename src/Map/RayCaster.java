@@ -37,7 +37,7 @@ public class RayCaster {
         int tSize = MainGame.dun.getDSIZE();
         int renderDist = 32; //amount of walls rendered when looking around
         int distScale = 50; //how far away things look
-        int darkScale =1000;
+        int darkScale =Math.max(1000 -Game3D.getDeathAnimationCounter(), 0);
         int px = MainGame.player.x;
         int py = MainGame.player.y;
         double pa = MainGame.player.getAngle();
