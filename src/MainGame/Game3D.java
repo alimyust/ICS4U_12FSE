@@ -5,8 +5,12 @@ import Map.*;
 import MenuItems.Button;
 import Player.Player;
 
+import javax.imageio.ImageIO;
 import java.awt.*;
 import java.awt.event.KeyEvent;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Objects;
 
@@ -18,6 +22,20 @@ public class Game3D extends BaseFrame {
     private static String gameState = "";
     private final ArrayList<Button> titleButtons = new ArrayList<>();
     private final ArrayList<Button> gameOverButtons = new ArrayList<>();
+    private final ArrayList<Button> controlButtons = new ArrayList<>();
+
+    private final BufferedImage[] controlPages;
+    private int controlInd= 0;
+    {
+        try {
+            controlPages = new BufferedImage[]{
+                    ImageIO.read(new File(MainGame.getImgDir() + "Control Page/Control0.png")),
+                    ImageIO.read(new File(MainGame.getImgDir() + "Control Page/Control1.png")),
+                    ImageIO.read(new File(MainGame.getImgDir() + "Control Page/Control2.png"))};
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
 
     private int score;
     private static int deathAnimationCounter;
@@ -27,6 +45,7 @@ public class Game3D extends BaseFrame {
         super("MainGame.Game3D", WID, HGT);
         this.setLocationRelativeTo(null);
         game3Dinit();
+        gameState = "title";
     }
     public void game3Dinit(){
         gameState = "title";
@@ -48,9 +67,14 @@ public class Game3D extends BaseFrame {
         int butPlace = 500;
         titleButtons.add(new TitleButtons(30,butPlace,400,20,"Start Game", "game"));
         titleButtons.add(new TitleButtons(30,butPlace+25,400,20,"Endless", "endless"));
-        titleButtons.add(new TitleButtons(30,butPlace+50,400,20,"Controls", "controls"));
+        titleButtons.add(new TitleButtons(30,butPlace+50,400,20,"Controls", "control0"));
         titleButtons.add(new TitleButtons(30,butPlace+75,400,20,"Exit", "exit"));
         gameOverButtons.add(new GameOverButton(WID/2-75, 600, 150,60,"Menu", "title"));
+        controlButtons.add(new InvisButton(WID-60, HGT-60, 60,60,"","control1"));
+        controlButtons.add(new InvisButton(WID-60, HGT-60, 60,60,"","control2"));
+        controlButtons.add(new InvisButton(WID-60 - 400, HGT-60, 60,60,"","control0"));
+        controlButtons.add(new InvisButton(WID-60- 400, HGT-60, 60,60,"","control1"));
+        controlButtons.add(new TitleButtons(30,HGT-30,400,20,"Back", "title"));
 
     }
 
@@ -94,10 +118,29 @@ public class Game3D extends BaseFrame {
                     g2d.drawString("Score: " + score,430 - 10 *  (""+score).length(),360);
             }
         }
-
-        if(Objects.equals(gameState, "exit")){
-            System.exit(0);
+        System.out.println(gameState);
+        if(Objects.equals(gameState, "control0")) {
+            g.drawImage(controlPages[0], 0,0,null);
+            controlButtons.get(0).changeGameState(mx,my,mb);
+            controlButtons.get(4).changeGameState(mx,my,mb);
+            controlButtons.get(4).draw(g,mx,my,mb);
         }
+        else if(Objects.equals(gameState, "control1")) {
+            g.drawImage(controlPages[1], 0,0,null);
+            controlButtons.get(1).changeGameState(mx,my,mb);
+            controlButtons.get(2).changeGameState(mx,my,mb);
+            controlButtons.get(4).changeGameState(mx,my,mb);
+            controlButtons.get(4).draw(g,mx,my,mb);
+        }
+        else if(Objects.equals(gameState, "control2")) {
+            g.drawImage(controlPages[2], 0,0,null);
+            controlButtons.get(3).changeGameState(mx,my,mb);
+            controlButtons.get(4).changeGameState(mx,my,mb);
+            controlButtons.get(4).draw(g,mx,my,mb);
+        }
+
+        if(Objects.equals(gameState, "exit"))
+            System.exit(0);
     }
 
     private void deathAnimation(Graphics g) {
@@ -132,7 +175,7 @@ public class Game3D extends BaseFrame {
     @Override
     public void keyReleased(KeyEvent e) {
         super.keyReleased(e);
-        if(e.getKeyCode() == KeyEvent.VK_M &&( Objects.equals(gameState, "game") || Objects.equals(gameState, "endless")))
+        if(e.getKeyCode() == KeyEvent.VK_SHIFT &&( Objects.equals(gameState, "game") || Objects.equals(gameState, "endless")))
             displayMap = !displayMap;
     }
 

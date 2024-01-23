@@ -67,8 +67,8 @@ public class GoblinSlinger extends BaseEnemy {
         setStartDist(800);
         setStopDist(300);
         setFrameRate(0.5);
-        setDamage(1);
-        setHealth(3);
+        setDamage(2);
+        setHealth(5);
         enemyImgArr = imgArr;
 }
 }

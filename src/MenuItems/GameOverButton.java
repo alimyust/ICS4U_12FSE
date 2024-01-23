@@ -17,14 +17,13 @@ public class GameOverButton extends Button {
         if(isMouseOver(mx,my))
             g.drawRect(getX(), getY(),getWidth(),getHeight());
         g.setFont(new Font("Arial", Font.BOLD,40));
-        g.drawString(getText(), getX()+40, getY() + 50);
+        g.drawString(getText(), getX()+20, getY() + 50);
     }
 
     @Override
     public void changeGameState(int mx, int my, int mb) {
         super.changeGameState(mx, my, mb);
-        if(isClicked(mx,my,mb))
+        if(isClicked(mx,my,mb)) // resets game
             MainGame.g3D.game3Dinit();
-//            Game3D.setGameState(getNewGameState());
     }
 }

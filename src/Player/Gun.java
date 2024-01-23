@@ -11,9 +11,7 @@ public class Gun {
     private final double frameRate;
     private final int aoe;
     private final int range;
-    private double xOff; // cos(a * pi);
-    private double yOff; //sin(- abs(a) * pi)/2
-
+ // cos(a * pi);//sin(- abs(a) * pi)/2
     private double offCount;
     private double offSpeed;
     private BufferedImage currentGunImage;  // Declare it as a field

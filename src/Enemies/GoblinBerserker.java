@@ -61,8 +61,8 @@ public class GoblinBerserker extends BaseEnemy{
         setStartDist(400);
         setStopDist(100);
         setFrameRate(0.5);
-        setDamage(4);
-        setHealth(5);
+        setDamage(5);
+        setHealth(15);
         enemyImgArr = imgArr;
     }
 }

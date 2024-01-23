@@ -10,6 +10,8 @@ public class Button {
     private final String text;
     private final Rectangle bounds;
     private final String newGameState;
+    private boolean wasButtonPressed = true; // Track the previous mouse button state
+
     public Button(int x, int y, int width, int height, String text, String newGameState) {
         this.x = x;
         this.y = y;
@@ -28,7 +30,11 @@ public class Button {
     }
 
     public boolean isClicked(int mx, int my, int mb) {
-        return isMouseOver(mx, my) && mb == MouseEvent.BUTTON1;
+        boolean isMouseOver = isMouseOver(mx, my);
+        // Check if the mouse button is pressed in the current frame and was not pressed in the previous frame
+        boolean isButtonClicked = isMouseOver && mb == MouseEvent.BUTTON1 && !wasButtonPressed;
+        wasButtonPressed = mb == MouseEvent.BUTTON1;
+        return isButtonClicked;
     }
     public void changeGameState(int mx, int my, int mb){
     }

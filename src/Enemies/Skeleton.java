@@ -51,8 +51,8 @@ public class Skeleton extends BaseEnemy{
         setStartDist(800);
         setStopDist(100);
         setFrameRate(0.5);
-        setDamage(2);
-        setHealth(2);
+        setDamage(3);
+        setHealth(4);
         enemyImgArr = imgArr;
     }
 }

@@ -21,8 +21,9 @@ public class Player extends ParentEntity {
     private double dX;
     private double dY;
     private Gun curGun;
-    private Pistol pistol  = new Pistol(0.5, 15, 700, 1);
-    private Shotgun shotgun = new Shotgun(0.5, 30, 500, 2);
+    private Pistol pistol  = new Pistol(0.5, 15, 900, 2);
+    private Shotgun shotgun = new Shotgun(0.5, 30, 300, 4);
+    private SMG smg = new SMG(0.5, 20, 500, 1);
 
     private double health;
     private static boolean isMoving;
@@ -57,6 +58,8 @@ public class Player extends ParentEntity {
             curGun = pistol;
         if (keys[KeyEvent.VK_2])
             curGun = shotgun;
+        if (keys[KeyEvent.VK_3])
+            curGun = smg;
     }
     public void movePlayer(boolean[] keys, Dungeon dun) {
         double turnAngle = 0.1;
