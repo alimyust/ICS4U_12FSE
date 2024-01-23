@@ -44,7 +44,7 @@ public class Game3D extends BaseFrame {
 
     {
         try {
-            winScreen = read(new File(MainGame.getImgDir() + "winPage.png"));
+            winScreen = read(new File(MainGame.getImgDir() + "titlePage.png"));
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
@@ -53,6 +53,8 @@ public class Game3D extends BaseFrame {
     private int score;
     private static int deathAnimationCounter;
     private boolean displayMap;
+    private BufferedImage titlePage;
+    titlePage = new BufferedImage(read(new File("resources/images/titlePage.png")));
 
     public Game3D() {
         super("MainGame.Game3D", WID, HGT);
