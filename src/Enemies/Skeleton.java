@@ -1,5 +1,6 @@
 package Enemies;
 import MainGame.MainGame;
+import MainGame.Music;
 import java.awt.*;
 
 import static MainGame.MainGame.getImgDir;
@@ -52,7 +53,9 @@ public class Skeleton extends BaseEnemy{
         setStopDist(100);
         setFrameRate(0.5);
         setDamage(3);
-        setHealth(4);
+        setHealth(12);
+        setAttackFrame(6);
+        setEnemyAttackSound(new Music("resources/sound/Enemy Sound/SkeletonSlash1.wav"));
         enemyImgArr = imgArr;
     }
 }

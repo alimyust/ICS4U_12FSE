@@ -1,5 +1,7 @@
 package Player;
 
+import MainGame.Music;
+
 import javax.imageio.ImageIO;
 import java.awt.*;
 import java.awt.image.BufferedImage;
@@ -27,6 +29,8 @@ public class SMG extends Gun{
     public SMG(double frameRate, int aoe, int range, int damage) {
         super(frameRate, aoe, range, damage);
         setFireFrame(fireFrame);
+        setGunSound(new Music("resources/sound/Player Sound/SMGFire.wav"));
+
     }
 
     @Override

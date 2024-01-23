@@ -9,26 +9,27 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="8a55d714-b0cf-47b0-bb48-82f33721ee53" name="Changes" comment="Gr12 FSE Jan 22&#10;Go get this done gameover kinda works but no title and no win">
-      <change afterPath="$PROJECT_DIR$/resources/images/Control Page/Control0.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/images/Control Page/Control1.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/images/Control Page/Control2.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/images/Player/Firing SMG/SmallMachineGunFiring0.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/images/Player/Firing SMG/SmallMachineGunFiring1.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/images/Player/Firing SMG/SmallMachineGunFiring2.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/images/Player/Firing SMG/SmallMachineGunFiring3.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/MenuItems/InvisButton.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Player/SMG.java" afterDir="false" />
+    <list default="true" id="8a55d714-b0cf-47b0-bb48-82f33721ee53" name="Changes" comment="Gr12 FSE Jan 22&#10;Finished controls but an issue with the pictures ( A and S are mixed ). Need to fix that. Endless 1st level isn't random and death is broken, so fix that. Make a title screen and maybe a credits screen too. if extra time then add idle animations and COMMMENT!!!!">
+      <change afterPath="$PROJECT_DIR$/resources/images/winPage.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resources/sound/Enemy Sound/SkeletonSlash1.wav" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resources/sound/Player Sound/PistolFiring.wav" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resources/sound/Player Sound/SMGFire.wav" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resources/sound/Player Sound/ShotgunFire.wav" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/MainGame/Music.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/images/Player/Firing Pistol/firingPistol0.png" beforeDir="false" afterPath="$PROJECT_DIR$/resources/images/Player/Firing Pistol/firingPistol0.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/images/Control Page/Control0.png" beforeDir="false" afterPath="$PROJECT_DIR$/resources/images/Control Page/Control0.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/images/Control Page/Control1.png" beforeDir="false" afterPath="$PROJECT_DIR$/resources/images/Control Page/Control1.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/images/Control Page/Control2.png" beforeDir="false" afterPath="$PROJECT_DIR$/resources/images/Control Page/Control2.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Enemies/BaseEnemy.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Enemies/BaseEnemy.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Enemies/GoblinBerserker.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Enemies/GoblinBerserker.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Enemies/GoblinSlinger.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Enemies/GoblinSlinger.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Enemies/Skeleton.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Enemies/Skeleton.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/MainGame/Game3D.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/MainGame/Game3D.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/MenuItems/Button.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/MenuItems/Button.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/MenuItems/GameOverButton.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/MenuItems/GameOverButton.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Player/Gun.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Player/Gun.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Player/Pistol.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Player/Pistol.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Player/Player.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Player/Player.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Player/SMG.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Player/SMG.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Player/Shotgun.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Player/Shotgun.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -80,7 +81,7 @@
     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
     "git-widget-placeholder": "master",
     "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "C:/Users/alimy/Documents/GitHub/ICS4U_12FSE/resources/images/Control Page",
+    "last_opened_file_path": "C:/Users/alimy/Documents/GitHub/ICS4U_12FSE/resources/sound/Enemy Sound",
     "project.structure.last.edited": "Artifacts",
     "project.structure.proportion": "0.15",
     "project.structure.side.proportion": "0.2"
@@ -88,11 +89,11 @@
 }]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
-      <recent name="C:\Users\alimy\Documents\GitHub\ICS4U_12FSE\resources\images\Control Page" />
+      <recent name="C:\Users\alimy\Documents\GitHub\ICS4U_12FSE\resources\sound\Enemy Sound" />
+      <recent name="C:\Users\alimy\Documents\GitHub\ICS4U_12FSE\resources\sound\Player Sound" />
       <recent name="C:\Users\alimy\Documents\GitHub\ICS4U_12FSE\resources\images" />
+      <recent name="C:\Users\alimy\Documents\GitHub\ICS4U_12FSE\resources\images\Control Page" />
       <recent name="C:\Users\alimy\Documents\GitHub\ICS4U_12FSE\resources\images\Player\Firing Pistol" />
-      <recent name="C:\Users\Ali\Documents\GitHub\ICS4U_12FSE\resources\images\Player\Firing Shotgun" />
-      <recent name="C:\Users\Ali\Documents\GitHub\ICS4U_12FSE\resources\images" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\Users\alimy\Documents\GitHub\ICS4U_12FSE\resources\images\Control Page" />
@@ -245,7 +246,15 @@
       <option name="project" value="LOCAL" />
       <updated>1705976836607</updated>
     </task>
-    <option name="localTasksCounter" value="12" />
+    <task id="LOCAL-00012" summary="Gr12 FSE Jan 22&#10;Finished controls but an issue with the pictures ( A and S are mixed ). Need to fix that. Endless 1st level isn't random and death is broken, so fix that. Make a title screen and maybe a credits screen too. if extra time then add idle animations and COMMMENT!!!!">
+      <option name="closed" value="true" />
+      <created>1705991037455</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1705991037455</updated>
+    </task>
+    <option name="localTasksCounter" value="13" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -283,7 +292,8 @@
     <MESSAGE value="Gr12 FSE Jan 14&#10;Both pistol and shotgun working. Abandoing reloading idea. Swapping gun works. Need to add some camera shake to the gun and the footsteps. Need to start makign the main game loop and polishing enemies. Could implement similar logic for guns by overlaoding the draw for each enemy to make it nice when enemy sizes change. Better to make a full game using sans and bats for now though. Need to also work on the mapNode texture customizations" />
     <MESSAGE value="Gr12 FSE Jan 15 School&#10;Shaking gamestate working with one random door spawning. lots of lag when on second and third levels so need to fix that. Openspaces doesn't seem to work 100% consistently either so have to remedy that as well." />
     <MESSAGE value="Gr12 FSE Jan 22&#10;Go get this done gameover kinda works but no title and no win" />
-    <option name="LAST_COMMIT_MESSAGE" value="Gr12 FSE Jan 22&#10;Go get this done gameover kinda works but no title and no win" />
+    <MESSAGE value="Gr12 FSE Jan 22&#10;Finished controls but an issue with the pictures ( A and S are mixed ). Need to fix that. Endless 1st level isn't random and death is broken, so fix that. Make a title screen and maybe a credits screen too. if extra time then add idle animations and COMMMENT!!!!" />
+    <option name="LAST_COMMIT_MESSAGE" value="Gr12 FSE Jan 22&#10;Finished controls but an issue with the pictures ( A and S are mixed ). Need to fix that. Endless 1st level isn't random and death is broken, so fix that. Make a title screen and maybe a credits screen too. if extra time then add idle animations and COMMMENT!!!!" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

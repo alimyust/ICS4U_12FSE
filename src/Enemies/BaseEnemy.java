@@ -1,4 +1,5 @@
 package Enemies;
+import MainGame.Music;
 import ParentEntity.ParentEntity;
 import Player.Player;
 import Map.*;
@@ -34,7 +35,9 @@ public class BaseEnemy extends ParentEntity {
     private final int HURT =3;
     private final int DEAD =4;
     private int enemyState;
+    private int attackFrame;
 
+    private Music enemyAttackSound;
     public BaseEnemy(int x, int y) {
         super(x, y, 64, 64);
         this.frame = 0;
@@ -66,6 +69,7 @@ public class BaseEnemy extends ParentEntity {
             enemyState = RUN;
             return;
         }
+        this.playSound();
         enemyState = ATTACK;
         if(Math.random() < 0.2) player.setHealth(player.getHealth() - damage);
     }
@@ -160,7 +164,19 @@ public class BaseEnemy extends ParentEntity {
         lastDeadTime = System.currentTimeMillis();
 
     }
+    public void playSound(){
+        if(((int)frame & attackFrame) == 0){
+            enemyAttackSound.play();
+        }
+    }
 
+    public void setAttackFrame(int attackFrame) {
+        this.attackFrame = attackFrame;
+    }
+
+    public void setEnemyAttackSound(Music enemyAttackSound) {
+        this.enemyAttackSound = enemyAttackSound;
+    }
 
     public void setAlive(boolean alive) {
         isAlive = alive;

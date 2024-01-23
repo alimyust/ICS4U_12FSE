@@ -4,6 +4,7 @@ import MainGame.MainGame;
 import java.awt.*;
 
 import static MainGame.MainGame.getImgDir;
+import MainGame.Music;
 
 public class GoblinBerserker extends BaseEnemy{
     private static final String imgDir = getImgDir() + "Enemies/GoblinBerserker/";
@@ -62,7 +63,9 @@ public class GoblinBerserker extends BaseEnemy{
         setStopDist(100);
         setFrameRate(0.5);
         setDamage(5);
-        setHealth(15);
+        setHealth(35);
+        setAttackFrame(7);
+        setEnemyAttackSound(new Music("resources/sound/Enemy Sound/SkeletonSlash1.wav"));
         enemyImgArr = imgArr;
     }
 }

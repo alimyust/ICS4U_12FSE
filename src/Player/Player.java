@@ -22,7 +22,7 @@ public class Player extends ParentEntity {
     private double dY;
     private Gun curGun;
     private Pistol pistol  = new Pistol(0.5, 15, 900, 2);
-    private Shotgun shotgun = new Shotgun(0.5, 30, 300, 4);
+    private Shotgun shotgun = new Shotgun(0.4, 30, 300, 4);
     private SMG smg = new SMG(0.5, 20, 500, 1);
 
     private double health;
@@ -49,7 +49,7 @@ public class Player extends ParentEntity {
             g.drawPolygon(healthBar[0], healthBar[1],8);
             g2d.setClip(0,0,getWID(), getHGT());
         }
-        if(health == 0)
+        if(health <= 0)
             Game3D.setGameState("gameover");
 
     }
@@ -102,6 +102,7 @@ public class Player extends ParentEntity {
         if (!keys[KeyEvent.VK_SPACE]) return;
         if (curGun.getGunFrame() != 0) return;
         curGun.setGunFrame(1);
+        curGun.playSound();
         for( BaseEnemy enemy: dun.geteArr()) {
             if (Math.abs(enemy.isPlayerLookingAt(this, curGun.getAoe())) >= 1) continue;
             if (dist(x, y, enemy.x, enemy.y) >= curGun.getRange()) continue;

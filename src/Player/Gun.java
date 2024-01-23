@@ -1,5 +1,7 @@
 package Player;
 
+import MainGame.Music;
+
 import java.awt.*;
 import java.awt.image.BufferedImage;
 
@@ -15,6 +17,7 @@ public class Gun {
     private double offCount;
     private double offSpeed;
     private BufferedImage currentGunImage;  // Declare it as a field
+    private Music gunSound;
 
     public Gun( double frameRate, int aoe, int range, int damage) {
         this.frameRate = frameRate;
@@ -63,11 +66,15 @@ public class Gun {
         return offCount;
     }
 
-    public double getDamage() {
-        return damage;
+    public void setGunSound(Music gunSound) {
+        this.gunSound = gunSound;
     }
 
     public void setGunFrame(double gunFrame) {
         this.gunFrame = gunFrame;
+    }
+
+    public void playSound() {
+        gunSound.play();
     }
 }

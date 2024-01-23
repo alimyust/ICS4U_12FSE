@@ -1,11 +1,11 @@
 package Player;
-import MainGame.MainGame;
 import javax.imageio.ImageIO;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 
+import MainGame.Music;
 import static MainGame.MainGame.getHGT;
 import static MainGame.MainGame.getWID;
 import static MainGame.MainGame.getImgDir;
@@ -46,6 +46,8 @@ public class Shotgun extends Gun {
     public Shotgun(double frameRate, int aoe, int range, int damage) {
         super(frameRate, aoe, range,damage);
         setFireFrame(fireFrame);
+        setGunSound(new Music("resources/sound/Player Sound/ShotgunFire.wav"));
+
     }
 
     @Override
