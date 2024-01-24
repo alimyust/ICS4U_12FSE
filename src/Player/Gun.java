@@ -5,6 +5,8 @@ import MainGame.Music;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 
+//gun class that uses parameters to chagne the attributes. Has most gun logic and uses setters to get textures
+//each also has a special overrided drawing function
 public class Gun {
     public double damage;
     private BufferedImage[] fireFrame;

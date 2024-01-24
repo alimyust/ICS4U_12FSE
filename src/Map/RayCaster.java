@@ -4,13 +4,19 @@ import java.awt.*;
 
 import static java.lang.Math.PI;
 
+/* Raycasting engine
+From 3D Sages online youtube tutorial with insipation from Lode's Online Raycasting Tutorial
+https://lodev.org/cgtutor/raycasting.html#Untextured_Raycaster_
+https://github.com/3DSage/OpenGL-Raycaster_v1
+https://www.youtube.com/watch?v=gYRrGTC7GtA ( and part 2 and 3)
+* */
 public class RayCaster {
     private final int WID = Game3D.getWid3d();
     private final int HGT = Game3D.getHgt3d();
     private final double resolution = 2; //(10 is max before it's too high resolution for the display size)
-    private final int fov = (int) (30 * resolution);
-    private final double DR = Math.PI/180.0/ resolution; // degree
-    private final int depth = (WID / (fov * 2));
+    private final int fov = (int) (30 * resolution); // more rays for same fov increases resp;itopm
+    private final double DR = Math.PI/180.0/ resolution; // 1 degree in radians
+    private final int depth = (WID / (fov * 2)); // line thickness
     private final int mapS;
     private final int mapX;
     private final int mapY;
@@ -25,6 +31,7 @@ public class RayCaster {
     }
 
     public static MapNode[] flatten(MapNode[][] array) {
+        //turns 2d array into 1d array
         int rows = array.length;
         int cols = array[0].length;
         MapNode[] flattenedArray = new MapNode[rows * cols];
@@ -34,6 +41,11 @@ public class RayCaster {
     }
 
     public void drawRays3d(Graphics2D g2) {
+        /*Works by first giving each ray its own angle. A xOffset and yOffset is calculated to figure out what is needed to hit the next
+        horizontal / vertical line. Then the ray is extended until it intersects with a horizontal
+        or vertical line in the grid. If it's a wall the distance and final point is saved. If it isn't than the ray adds the
+        xOffset and yOffset until it is. This way you can figure out where each ray hits.
+        * */
         int tSize = MainGame.dun.getDSIZE();
         int renderDist = 32; //amount of walls rendered when looking around
         int distScale = 50; //how far away things look
@@ -42,12 +54,12 @@ public class RayCaster {
         int py = MainGame.player.y;
         double pa = MainGame.player.getAngle();
         int mx = 0, my = 0, mp = 0, dof;
-        double rx = 0;
-        double ry = 0;
-        double ra;
-        double xo = 0;
-        double yo = 0;
-        double distT = 0;
+        double rx = 0; //ray x
+        double ry = 0; //ray y
+        double ra; // ray angle
+        double xo = 0; // x offset
+        double yo = 0; // y offset
+        double distT = 0; // total distance from player to end of ray
         ra = pa - DR * fov;
         g2.setStroke(new BasicStroke(depth));
 
@@ -140,9 +152,14 @@ public class RayCaster {
             }
             MainGame.player.setPlayerRay((int) rx, (int) ry);
             // drawing Setup
+
+            /* Now that we have a distance, subtracting it from a max wall height will give us how tall the wall should be.
+            * As the player gets further away, the ray dist gets longer ( to a certain amount) Now taking that length and
+            * subtracting a constant max length will make it look like the wall scales with distance.
+            * */
             double ca = fixAng(pa - ra);
             distT = distT * Math.cos(ca); //player to ray distance
-            int lineH = (int) ((mapS * HGT) / distT / distScale); // line height when drawing
+            int lineH = (int) ((mapS * HGT) / distT / distScale); // line height when drawing (cap)
             double tyStep = 32 / (double) lineH;
             double tyOff = 0;
             if (lineH > HGT) {
@@ -152,6 +169,11 @@ public class RayCaster {
             double lineOff = (double) HGT / 2 - (lineH / 2F); // Starting point after cutoff ( >0)
             rayDist[r] = (int) distT;
             //---draw walls---
+            /*For drawing textured walls, it uses the same process as just the vertical walls, but now each tile drawn is broken
+            into the x and y. the closer you are, the more times tx and ty can step, so the higher quality the sprite looks.
+            The texture is taken from a 1d colour array that is converted at the start of teh program for all the textures.
+            Shading applied based on distance.
+            * */
             double ty = tyOff * tyStep; //texture y val
             int tx;
             int texSize = 32;
@@ -182,7 +204,12 @@ public class RayCaster {
                 ty += tyStep; // Adjust texture coordinate
             }
             if(mapW[mp].getwCode() == -1) continue;
+            //can skip floors for a node with a wall texture.
             //ceiling
+            /*Now instead of getting the exact distance from each wall, we need a perspective to draw the ceil/floors.
+            This is done by comparing the player angle and ray angle. The textures are calculated using a scaled x
+            and y value that changes based on the perspective angle that was calculated.
+            * */
             for (int y = (int) lineOff + lineH; y < HGT; y++) {
                 double dy = y - (double) HGT / 2.0f; //distance from end of wall to end of screen
                 double raFix = Math.cos(fixAng(pa - ra));
@@ -245,12 +272,9 @@ public class RayCaster {
         int red = (int) (color.getRed() * factor);
         int green = (int) (color.getGreen() * factor);
         int blue = (int) (color.getBlue() * factor);
-
-        // Ensure that the RGB values are within the valid range [0, 255]
         red = Math.max(0, Math.min(255, red));
         green = Math.max(0, Math.min(255, green));
         blue = Math.max(0, Math.min(255, blue));
-
         return new Color(red, green, blue);
     }
 }

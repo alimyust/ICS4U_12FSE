@@ -23,7 +23,7 @@ public class TitleButtons extends Button {
             int red = 100 + counter - i;
             int green = 46 + (counter - i) / 5;
             int blue = 1;
-
+        //length changes depening on whether the mouse is on it or not
             red = Math.min(255, red);
             green = Math.min(255, green);
 

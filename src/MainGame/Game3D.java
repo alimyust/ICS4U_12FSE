@@ -16,7 +16,9 @@ import java.util.Objects;
 
 import static javax.imageio.ImageIO.read;
 
-/*The main class that controls the gameflow. It calls all of the functions needed to make the game run*/
+/*The main class that controls the gameflow. It calls all of the functions needed to make the game run
+* Most have self-explanatory names
+* */
 public class Game3D extends BaseFrame {
     private static final int WID = 64 * 15;
     private static final int HGT = 64 * 12;
@@ -55,6 +57,9 @@ public class Game3D extends BaseFrame {
     private int score;
     private static int deathAnimationCounter;
     private boolean displayMap;
+    private final Music gameOverSound = new Music("resources/sound/gameOverSound.wav");
+    private final Music gameWinSound = new Music("resources/sound/gameWinSound.wav");
+
 
     public Game3D() {
         super("MainGame.Game3D", WID, HGT);
@@ -65,7 +70,7 @@ public class Game3D extends BaseFrame {
     }
     public void game3Dinit(){
         gameState = "title";
-        displayMap = false;
+        displayMap = true;
         lvl = 0;
         score= 0;
         deathAnimationCounter= 0;
@@ -103,8 +108,6 @@ public class Game3D extends BaseFrame {
         }
         if(!Objects.equals(oldGameState, gameState) &&( Objects.equals(gameState, "game") || Objects.equals(gameState, "endless")))
             refreshDungeon();
-//        System.out.println(gameState + "," + oldGameState);
-//        if(!(Objects.equals(oldGameState, gameState))) return;
 
         if(Objects.equals(gameState, "game") || Objects.equals(gameState, "endless") ||
                 Objects.equals(gameState, "gameover")|| Objects.equals(gameState, "win")){
@@ -119,42 +122,46 @@ public class Game3D extends BaseFrame {
             if(Objects.equals(gameState, "game") || Objects.equals(gameState, "endless"))
                 g2d.drawString("Score: " + score,10,55);
         }
-
+        if(Objects.equals(gameState, "gameover") &&( Objects.equals(oldGameState, "game") || Objects.equals(oldGameState, "endless")))
+            gameOverSound.play(); // only plays once}
         if(Objects.equals(gameState, "gameover")){
-            deathAnimationCounter += 15;
-            if(deathAnimationCounter >= WID + 15) {
+            deathAnimationCounter += 5;
+            if(deathAnimationCounter >= WID + 25) {
                 //increasing alpha makes the screen darker
-                int alpha = Math.min(deathAnimationCounter - (WID + 15), 255);
+                int alpha = Math.min(deathAnimationCounter - (WID + 25), 255);
                 g.setColor(new Color(0, 0, 0, alpha));
                 g.fillRect(0, 0, WID, HGT);
                 g.setColor(new Color(117, 1, 1));
-                for(Button but: gameOverButtons){
-                    but.draw(g,mx,my, mb);
-                    but.changeGameState(mx,my,mb);
+                if(deathAnimationCounter >= WID+1000) {
+                    for (Button but : gameOverButtons) {
+                        but.draw(g, mx, my, mb);
+                        but.changeGameState(mx, my, mb);
+                    }
                 }
                 g.setFont(new Font("Doom 2016 Text", Font.BOLD | Font.ITALIC,150));
                 g2d.drawString("Game Over", 250,300);
                 g.setFont(new Font("Arial", Font.BOLD | Font.ITALIC,25));
-                if(deathAnimationCounter >= WID+500)
+                if(deathAnimationCounter >= WID+400)
                     g2d.drawString("Score: " + score,430 - 10 *  (""+score).length(),360);
             }
         }
         if (Objects.equals(gameState, "win")) {
-            deathAnimationCounter += 30;
-            if (deathAnimationCounter >= WID + 30) {
-                int alpha = Math.min(deathAnimationCounter - (WID + 30), 255); // Gradually increase alpha
+            deathAnimationCounter += 5;
+            if (deathAnimationCounter >= WID + 25) {
+                int alpha = Math.min(deathAnimationCounter - (WID + 25), 255); // Gradually increase alpha
                 g.setColor(new Color(0, 0, 0, alpha));
                 g.fillRect(0, 0, WID, HGT);
                 g.setColor(new Color(245, 192, 80));
                 g.setFont(new Font("Doom 2016 Text", Font.BOLD | Font.ITALIC,150));
                 g.drawString("You Win",300,300);
                 g.setFont(new Font("Arial", Font.BOLD | Font.ITALIC,25));
-                if(deathAnimationCounter >= WID+500)
+                if(deathAnimationCounter >= WID+400)
                     g2d.drawString("Score: " + score,430 - 7 *  (""+score).length(),360);
-                for(Button but: gameOverButtons){
+                if(deathAnimationCounter >= WID+1000) {
+                    for(Button but: gameOverButtons){
                     but.draw(g,mx,my, mb);
                     but.changeGameState(mx,my,mb);
-                }
+                }}
             }
         }
         //different gamestates for the control screens that have different buttons
@@ -197,6 +204,8 @@ public class Game3D extends BaseFrame {
                 refreshDungeon();
             }
         }
+        if(Objects.equals(gameState, "win") &&( Objects.equals(oldGameState, "game") || Objects.equals(oldGameState, "endless")))
+            gameWinSound.play(); // only plays once
         oldGameState = gameState;
     }
 
@@ -221,17 +230,17 @@ public class Game3D extends BaseFrame {
     public void refreshDungeon() {
         if (Objects.equals(gameState, "game")) {
             switch (lvl) { //lvl dictates which dungeon to be in (for regular gameplaye
-                case 0 -> MainGame.dun = new Dungeon(new Point(7, 0), new Point(7, 6), new Point(7, 6), "");
-                case 1 -> MainGame.dun = new Dungeon(new Point(5, 12), new Point(5, 10), new Point(5, 0), "");
-                case 2 -> MainGame.dun = new Dungeon(new Point(5, 0), new Point(5, 12), new Point(5, 6), "");
-                case 3 -> MainGame.dun = new Dungeon(new Point(5, 13), new Point(5, 12), new Point(5, 6), "");
-                case 4 -> MainGame.dun = new Dungeon(new Point(4, 1), new Point(5, 2), new Point(4, 1), "");
-                case 5 -> MainGame.dun = new Dungeon(new Point(5, 2), new Point(6, 1), new Point(2, 3), "");
-                case 6 -> MainGame.dun = new Dungeon(new Point(7, 6), new Point(7, 3), new Point(7, 0), "");
-                case 7 -> MainGame.dun = new Dungeon(new Point(5, 12), new Point(5, 5), new Point(5, 1), "");
-                case 8 -> MainGame.dun = new Dungeon(new Point(2, 2), new Point(2, 4), new Point(3, 0), "");
-                case 9 -> MainGame.dun = new Dungeon(new Point(3, 4), new Point(5, 2), new Point(5, 2), "");
-                case 10 -> gameState = "win";
+                case 0 -> MainGame.dun = new Dungeon(new Point(5, 13), new Point(5, 12), new Point(5, 6), "");
+//                case 1 -> MainGame.dun = new Dungeon(new Point(5, 12), new Point(5, 10), new Point(5, 0), "");
+//                case 2 -> MainGame.dun = new Dungeon(new Point(6, 3), new Point(6, 3), new Point(6, 1), "");
+//                case 3 -> MainGame.dun = new Dungeon(new Point(7, 0), new Point(7, 6), new Point(7, 6), "");
+//                case 4 -> MainGame.dun = new Dungeon(new Point(4, 1), new Point(5, 2), new Point(4, 1), "");
+//                case 5 -> MainGame.dun = new Dungeon(new Point(5, 2), new Point(6, 1), new Point(2, 3), "");
+//                case 6 -> MainGame.dun = new Dungeon(new Point(7, 6), new Point(7, 3), new Point(7, 0), "");
+//                case 7 -> MainGame.dun = new Dungeon(new Point(5, 12), new Point(5, 5), new Point(5, 1), "");
+//                case 8 -> MainGame.dun = new Dungeon(new Point(2, 2), new Point(2, 4), new Point(3, 0), "");
+//                case 9 -> MainGame.dun = new Dungeon(new Point(3, 4), new Point(5, 2), new Point(5, 2), "");
+                case 1 -> gameState = "win";
                 default -> lvl = -1;
             }
         }

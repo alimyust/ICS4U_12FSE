@@ -8,7 +8,7 @@ public class Music {
     Clip clip;
     AudioInputStream sound;
     private final String fileDir;
-    private final boolean noSound = true;
+    private final boolean noSound = false;
 
     public Music(String fileDir) {
         this.fileDir = fileDir;

@@ -136,22 +136,16 @@ public class BaseEnemy extends ParentEntity {
     public double isPlayerLookingAt(Player player, int tolerance) {
         double angle = Math.atan2(player.y + 32 - (y + 48), player.x + 32 - (x + 48));
         double playerAngle = player.getAngle();
-
-        // Calculate the smallest angle difference considering circular nature
         double angleDifference = fixAng(playerAngle - angle) - Math.PI;
         double angleTolerance = Math.toRadians(tolerance);
         return angleDifference / angleTolerance;
     }
 
-    // Assuming fixAng function looks like this:
     private double fixAng(double angle) {
-        // Normalize angle to the range [0, 2π)
-        while (angle < 0) {
+        while (angle < 0)
             angle += 2 * Math.PI;
-        }
-        while (angle >= 2 * Math.PI) {
+        while (angle >= 2 * Math.PI)
             angle -= 2 * Math.PI;
-        }
         return angle;
     }
 

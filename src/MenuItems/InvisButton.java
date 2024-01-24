@@ -3,7 +3,7 @@ package MenuItems;
 import MainGame.Game3D;
 
 import java.awt.*;
-
+//invis for the control menu buttons
 public class InvisButton extends Button{
     public InvisButton(int x, int y, int width, int height, String text, String newGameState) {
         super(x, y, width, height, text, newGameState);

@@ -6,6 +6,7 @@ import java.awt.*;
 import static MainGame.MainGame.getImgDir;
 import MainGame.Music;
 
+//each enemy just uses setters on baseenemy to make something unique per child class
 public class GoblinBerserker extends BaseEnemy{
     private static final String imgDir = getImgDir() + "Enemies/GoblinBerserker/";
 
@@ -65,7 +66,7 @@ public class GoblinBerserker extends BaseEnemy{
         setDamage(5);
         setHealth(35);
         setAttackFrame(7);
-        setEnemyAttackSound(new Music("resources/sound/Enemy Sound/SkeletonSlash1.wav"));
+        setEnemyAttackSound(new Music("resources/sound/Enemy Sound/GoblinBersekerSlash1.wav"));
         enemyImgArr = imgArr;
     }
 }

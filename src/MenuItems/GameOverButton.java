@@ -5,7 +5,7 @@ import MainGame.MainGame;
 
 import java.awt.*;
 import java.nio.charset.MalformedInputException;
-
+//restarts game
 public class GameOverButton extends Button {
     public GameOverButton(int x, int y, int width, int height, String text, String newGameState) {
         super(x, y, width, height, text, newGameState);
