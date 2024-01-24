@@ -4,7 +4,7 @@ import java.awt.*;
 import static MainGame.MainGame.getImgDir;
 
 public class MapNode {
-
+        //mapnode that holds the texture colour array used in raycaster as well as a code to see if it's alive or dead
     private static final Color[][][] allTextures = {
             // Bricks
             {

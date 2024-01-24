@@ -8,12 +8,14 @@ public class Music {
     Clip clip;
     AudioInputStream sound;
     private final String fileDir;
+    private final boolean noSound = false;
 
     public Music(String fileDir) {
         this.fileDir = fileDir;
     }
 
     public void setFile(String soundFileName) {
+        if(noSound) return;
         try {//gets file and tries setting the current object to the sound file
             File file = new File(soundFileName);
             sound = AudioSystem.getAudioInputStream(file);
@@ -25,11 +27,24 @@ public class Music {
     }
 
     public void play() {
+        if(noSound) return;
         setFile(fileDir);
         clip.start();
     }//plays audio
-    public void stop() throws IOException {
-        sound.close();
+    public void loop(){
+        if(noSound) return;
+        setFile(fileDir);
+        clip.loop(-1);
+    }
+
+        public void stop(){
+        if(noSound) return;
+        if(sound == null) return;
+        try{
+            sound.close();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
         clip.close();
         clip.stop();
     }

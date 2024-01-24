@@ -9,27 +9,12 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="8a55d714-b0cf-47b0-bb48-82f33721ee53" name="Changes" comment="Gr12 FSE Jan 22&#10;Finished controls but an issue with the pictures ( A and S are mixed ). Need to fix that. Endless 1st level isn't random and death is broken, so fix that. Make a title screen and maybe a credits screen too. if extra time then add idle animations and COMMMENT!!!!">
-      <change afterPath="$PROJECT_DIR$/resources/images/winPage.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/sound/Enemy Sound/SkeletonSlash1.wav" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/sound/Player Sound/PistolFiring.wav" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/sound/Player Sound/SMGFire.wav" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/sound/Player Sound/ShotgunFire.wav" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/MainGame/Music.java" afterDir="false" />
+    <list default="true" id="8a55d714-b0cf-47b0-bb48-82f33721ee53" name="Changes" comment="Gr12 FSE Jan 23&#10;AHHH MInimpa WORking WIthT Enemies and got sound in and owkring and uhh flipp sdofis added comments to everything and addeds soudns. Just need to add some music and make it nicer then IMl DONs dasd noank jnb">
+      <change afterPath="$PROJECT_DIR$/resources/sound/gameMusic.wav" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/images/Control Page/Control0.png" beforeDir="false" afterPath="$PROJECT_DIR$/resources/images/Control Page/Control0.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/images/Control Page/Control1.png" beforeDir="false" afterPath="$PROJECT_DIR$/resources/images/Control Page/Control1.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/images/Control Page/Control2.png" beforeDir="false" afterPath="$PROJECT_DIR$/resources/images/Control Page/Control2.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Enemies/BaseEnemy.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Enemies/BaseEnemy.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Enemies/GoblinBerserker.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Enemies/GoblinBerserker.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Enemies/GoblinSlinger.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Enemies/GoblinSlinger.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Enemies/Skeleton.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Enemies/Skeleton.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/sound/Player Sound/ShotgunFire.wav" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/MainGame/Game3D.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/MainGame/Game3D.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Player/Gun.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Player/Gun.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Player/Pistol.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Player/Pistol.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Player/Player.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Player/Player.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Player/SMG.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Player/SMG.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Player/Shotgun.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Player/Shotgun.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/MainGame/Music.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/MainGame/Music.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -56,6 +41,20 @@
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
     <option name="RESET_MODE" value="HARD" />
   </component>
+  <component name="GitHubPullRequestSearchHistory"><![CDATA[{
+  "lastFilter": {
+    "state": "OPEN",
+    "assignee": "alimyust"
+  }
+}]]></component>
+  <component name="GithubPullRequestsUISettings">
+    <option name="selectedUrlAndAccountId">
+      <UrlAndAccount>
+        <option name="accountId" value="5773016b-9ab4-4a3f-bd38-d6005c6aabc1" />
+        <option name="url" value="https://github.com/alimyust/ICS4U_12FSE.git" />
+      </UrlAndAccount>
+    </option>
+  </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
   </component>
@@ -81,7 +80,7 @@
     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
     "git-widget-placeholder": "master",
     "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "C:/Users/alimy/Documents/GitHub/ICS4U_12FSE/resources/sound/Enemy Sound",
+    "last_opened_file_path": "C:/Users/Ali/Documents/GitHub/ICS4U_12FSE/resources/sound/Player Sound",
     "project.structure.last.edited": "Artifacts",
     "project.structure.proportion": "0.15",
     "project.structure.side.proportion": "0.2"
@@ -89,11 +88,11 @@
 }]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\Ali\Documents\GitHub\ICS4U_12FSE\resources\sound\Player Sound" />
+      <recent name="C:\Users\Ali\Documents\GitHub\ICS4U_12FSE\resources\sound" />
+      <recent name="C:\Users\Ali\Documents\GitHub\ICS4U_12FSE\resources\sound\Enemy Sound" />
+      <recent name="C:\Users\Ali\Documents\GitHub\ICS4U_12FSE\resources\images" />
       <recent name="C:\Users\alimy\Documents\GitHub\ICS4U_12FSE\resources\sound\Enemy Sound" />
-      <recent name="C:\Users\alimy\Documents\GitHub\ICS4U_12FSE\resources\sound\Player Sound" />
-      <recent name="C:\Users\alimy\Documents\GitHub\ICS4U_12FSE\resources\images" />
-      <recent name="C:\Users\alimy\Documents\GitHub\ICS4U_12FSE\resources\images\Control Page" />
-      <recent name="C:\Users\alimy\Documents\GitHub\ICS4U_12FSE\resources\images\Player\Firing Pistol" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\Users\alimy\Documents\GitHub\ICS4U_12FSE\resources\images\Control Page" />
@@ -254,7 +253,23 @@
       <option name="project" value="LOCAL" />
       <updated>1705991037455</updated>
     </task>
-    <option name="localTasksCounter" value="13" />
+    <task id="LOCAL-00013" summary="Gr12 FSE Jan 23&#10;AHHH minimap working but neeed to comment and make sounds work propelry. Gonna submit rn so i won't be late for the first submission">
+      <option name="closed" value="true" />
+      <created>1706071477613</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1706071477613</updated>
+    </task>
+    <task id="LOCAL-00014" summary="Gr12 FSE Jan 23&#10;AHHH MInimpa WORking WIthT Enemies and got sound in and owkring and uhh flipp sdofis added comments to everything and addeds soudns. Just need to add some music and make it nicer then IMl DONs dasd noank jnb">
+      <option name="closed" value="true" />
+      <created>1706079142820</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1706079142820</updated>
+    </task>
+    <option name="localTasksCounter" value="15" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -293,7 +308,9 @@
     <MESSAGE value="Gr12 FSE Jan 15 School&#10;Shaking gamestate working with one random door spawning. lots of lag when on second and third levels so need to fix that. Openspaces doesn't seem to work 100% consistently either so have to remedy that as well." />
     <MESSAGE value="Gr12 FSE Jan 22&#10;Go get this done gameover kinda works but no title and no win" />
     <MESSAGE value="Gr12 FSE Jan 22&#10;Finished controls but an issue with the pictures ( A and S are mixed ). Need to fix that. Endless 1st level isn't random and death is broken, so fix that. Make a title screen and maybe a credits screen too. if extra time then add idle animations and COMMMENT!!!!" />
-    <option name="LAST_COMMIT_MESSAGE" value="Gr12 FSE Jan 22&#10;Finished controls but an issue with the pictures ( A and S are mixed ). Need to fix that. Endless 1st level isn't random and death is broken, so fix that. Make a title screen and maybe a credits screen too. if extra time then add idle animations and COMMMENT!!!!" />
+    <MESSAGE value="Gr12 FSE Jan 23&#10;AHHH minimap working but neeed to comment and make sounds work propelry. Gonna submit rn so i won't be late for the first submission" />
+    <MESSAGE value="Gr12 FSE Jan 23&#10;AHHH MInimpa WORking WIthT Enemies and got sound in and owkring and uhh flipp sdofis added comments to everything and addeds soudns. Just need to add some music and make it nicer then IMl DONs dasd noank jnb" />
+    <option name="LAST_COMMIT_MESSAGE" value="Gr12 FSE Jan 23&#10;AHHH MInimpa WORking WIthT Enemies and got sound in and owkring and uhh flipp sdofis added comments to everything and addeds soudns. Just need to add some music and make it nicer then IMl DONs dasd noank jnb" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

@@ -11,7 +11,7 @@ import java.util.ArrayList;
 import static MainGame.MainGame.getHGT;
 import static MainGame.MainGame.getWID;
 
-
+//player that deals with all things player (guns health gui  etc.
 public class Player extends ParentEntity {
 
 
@@ -48,9 +48,10 @@ public class Player extends ParentEntity {
             g.setColor(Color.white);
             g.drawPolygon(healthBar[0], healthBar[1],8);
             g2d.setClip(0,0,getWID(), getHGT());
-        }
-        if(health <= 0)
+        }//clips healthbar to make it look nice
+        if(health <= 0) {
             Game3D.setGameState("gameover");
+        }
 
     }
     public void chooseGun(boolean[] keys){
@@ -60,6 +61,7 @@ public class Player extends ParentEntity {
             curGun = shotgun;
         if (keys[KeyEvent.VK_3])
             curGun = smg;
+        //guns are already initizaled, so the curGun can choose different ones
     }
     public void movePlayer(boolean[] keys, Dungeon dun) {
         double turnAngle = 0.1;
@@ -72,7 +74,7 @@ public class Player extends ParentEntity {
         dX = Math.cos(angle) * speed;
         dY = Math.sin(angle) * speed;
         isMoving = false;
-        if (keys[KeyEvent.VK_W] &&
+        if (keys[KeyEvent.VK_W] && //nothing in the way to keep walking
         Game3D.notIntersectingMap((int) (x + dX), (int) (y + dY), dun.getMap()) &&
                 !checkCollisionWithEnemies(x+dX,y+dY, dun.geteArr() )) {
             x += (int) Math.round(dX);
@@ -101,7 +103,7 @@ public class Player extends ParentEntity {
     public void shootEnemies(boolean[] keys, Dungeon dun) {
         if (!keys[KeyEvent.VK_SPACE]) return;
         if (curGun.getGunFrame() != 0) return;
-        curGun.setGunFrame(1);
+        curGun.setGunFrame(1); //gunframe acts as a bool (if greater than 0 increases until hits max length, than goes back to zero)
         curGun.playSound();
         for( BaseEnemy enemy: dun.geteArr()) {
             if (Math.abs(enemy.isPlayerLookingAt(this, curGun.getAoe())) >= 1) continue;
@@ -118,7 +120,7 @@ public class Player extends ParentEntity {
 
     public void drawPlayer(Graphics g,int xOff, int yOff, int r) { //2d
         g.setColor(Color.green);
-        g.fillRect(xOff+(x/r - w / 2), yOff+(y/r - h / 2), w, h);
+        g.fillRect(xOff+(x - w / 2)/r, yOff+(y - h / 2)/r, w, h);
         rx.clear();
         ry.clear();
     }

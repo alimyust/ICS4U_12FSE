@@ -4,6 +4,7 @@ import MainGame.Game3D;
 
 import java.awt.*;
 import java.awt.event.MouseEvent;
+//general button used as template for differnt button types
 
 public class Button {
     private final int x, y, width, height;

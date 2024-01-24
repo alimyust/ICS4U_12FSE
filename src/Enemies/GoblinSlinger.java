@@ -71,7 +71,7 @@ public class GoblinSlinger extends BaseEnemy {
         setDamage(2);
         setHealth(15);
         setAttackFrame(7);
-        setEnemyAttackSound(new Music("resources/sound/Enemy Sound/SkeletonSlash1.wav"));
+        setEnemyAttackSound(new Music("resources/sound/Enemy Sound/GoblinSlingerShot1.wav"));
 
         enemyImgArr = imgArr;
 }

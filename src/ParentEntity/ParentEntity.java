@@ -2,7 +2,7 @@ package ParentEntity;
 
 
 import java.awt.*;
-
+//general parent enntiy
 public class ParentEntity {
     public int x;
     public int y;
