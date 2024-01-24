@@ -59,6 +59,7 @@ public class Game3D extends BaseFrame {
     private boolean displayMap;
     private final Music gameOverSound = new Music("resources/sound/gameOverSound.wav");
     private final Music gameWinSound = new Music("resources/sound/gameWinSound.wav");
+    private final Music gameMusic = new Music("resources/sound/gameMusic.wav");
 
 
     public Game3D() {
@@ -101,13 +102,19 @@ public class Game3D extends BaseFrame {
         super.draw(g);
         if(Objects.equals(gameState, "title")){
             g.drawImage(titleScreen, 0,0,null);
+            gameWinSound.stop();
+            gameOverSound.stop();
             for(Button but: titleButtons){
                 but.draw(g,mx,my, mb);
                 but.changeGameState(mx,my,mb);
             }
         }
-        if(!Objects.equals(oldGameState, gameState) &&( Objects.equals(gameState, "game") || Objects.equals(gameState, "endless")))
+        if(!Objects.equals(oldGameState, gameState) &&( Objects.equals(gameState, "game") || Objects.equals(gameState, "endless"))) {
             refreshDungeon();
+            gameOverSound.stop();
+            gameWinSound.stop();
+            gameMusic.loop();
+        }
 
         if(Objects.equals(gameState, "game") || Objects.equals(gameState, "endless") ||
                 Objects.equals(gameState, "gameover")|| Objects.equals(gameState, "win")){
@@ -126,6 +133,8 @@ public class Game3D extends BaseFrame {
             gameOverSound.play(); // only plays once}
         if(Objects.equals(gameState, "gameover")){
             deathAnimationCounter += 5;
+            gameMusic.stop();
+            displayMap = false;
             if(deathAnimationCounter >= WID + 25) {
                 //increasing alpha makes the screen darker
                 int alpha = Math.min(deathAnimationCounter - (WID + 25), 255);
@@ -139,23 +148,27 @@ public class Game3D extends BaseFrame {
                     }
                 }
                 g.setFont(new Font("Doom 2016 Text", Font.BOLD | Font.ITALIC,150));
-                g2d.drawString("Game Over", 250,300);
+                if(deathAnimationCounter >= WID+500)
+                    g2d.drawString("Game Over", 250,300);
                 g.setFont(new Font("Arial", Font.BOLD | Font.ITALIC,25));
-                if(deathAnimationCounter >= WID+400)
+                if(deathAnimationCounter >= WID+700)
                     g2d.drawString("Score: " + score,430 - 10 *  (""+score).length(),360);
             }
         }
         if (Objects.equals(gameState, "win")) {
             deathAnimationCounter += 5;
+            gameMusic.stop();
+            displayMap = false;
             if (deathAnimationCounter >= WID + 25) {
                 int alpha = Math.min(deathAnimationCounter - (WID + 25), 255); // Gradually increase alpha
                 g.setColor(new Color(0, 0, 0, alpha));
                 g.fillRect(0, 0, WID, HGT);
                 g.setColor(new Color(245, 192, 80));
                 g.setFont(new Font("Doom 2016 Text", Font.BOLD | Font.ITALIC,150));
-                g.drawString("You Win",300,300);
+                if(deathAnimationCounter >= WID+500)
+                    g.drawString("You Win",300,300);
                 g.setFont(new Font("Arial", Font.BOLD | Font.ITALIC,25));
-                if(deathAnimationCounter >= WID+400)
+                if(deathAnimationCounter >= WID+700)
                     g2d.drawString("Score: " + score,430 - 7 *  (""+score).length(),360);
                 if(deathAnimationCounter >= WID+1000) {
                     for(Button but: gameOverButtons){
@@ -230,17 +243,17 @@ public class Game3D extends BaseFrame {
     public void refreshDungeon() {
         if (Objects.equals(gameState, "game")) {
             switch (lvl) { //lvl dictates which dungeon to be in (for regular gameplaye
-                case 0 -> MainGame.dun = new Dungeon(new Point(5, 13), new Point(5, 12), new Point(5, 6), "");
-//                case 1 -> MainGame.dun = new Dungeon(new Point(5, 12), new Point(5, 10), new Point(5, 0), "");
-//                case 2 -> MainGame.dun = new Dungeon(new Point(6, 3), new Point(6, 3), new Point(6, 1), "");
-//                case 3 -> MainGame.dun = new Dungeon(new Point(7, 0), new Point(7, 6), new Point(7, 6), "");
-//                case 4 -> MainGame.dun = new Dungeon(new Point(4, 1), new Point(5, 2), new Point(4, 1), "");
-//                case 5 -> MainGame.dun = new Dungeon(new Point(5, 2), new Point(6, 1), new Point(2, 3), "");
-//                case 6 -> MainGame.dun = new Dungeon(new Point(7, 6), new Point(7, 3), new Point(7, 0), "");
-//                case 7 -> MainGame.dun = new Dungeon(new Point(5, 12), new Point(5, 5), new Point(5, 1), "");
-//                case 8 -> MainGame.dun = new Dungeon(new Point(2, 2), new Point(2, 4), new Point(3, 0), "");
-//                case 9 -> MainGame.dun = new Dungeon(new Point(3, 4), new Point(5, 2), new Point(5, 2), "");
-                case 1 -> gameState = "win";
+                case 0 -> MainGame.dun = new Dungeon(new Point(6, 3), new Point(6, 4), new Point(6, 1), "");
+                case 1 -> MainGame.dun = new Dungeon(new Point(5, 12), new Point(5, 10), new Point(5, 0), "");
+                case 2 -> MainGame.dun = new Dungeon(new Point(6, 3), new Point(6, 3), new Point(6, 1), "");
+                case 3 -> MainGame.dun = new Dungeon(new Point(7, 0), new Point(7, 6), new Point(7, 6), "");
+                case 4 -> MainGame.dun = new Dungeon(new Point(4, 1), new Point(5, 2), new Point(4, 1), "");
+                case 5 -> MainGame.dun = new Dungeon(new Point(5, 2), new Point(6, 1), new Point(2, 3), "");
+                case 6 -> MainGame.dun = new Dungeon(new Point(5, 13), new Point(5, 12), new Point(5, 6), "");
+                case 7 -> MainGame.dun = new Dungeon(new Point(5, 12), new Point(5, 5), new Point(5, 1), "");
+                case 8 -> MainGame.dun = new Dungeon(new Point(2, 2), new Point(2, 4), new Point(3, 0), "");
+                case 9 -> MainGame.dun = new Dungeon(new Point(3, 4), new Point(5, 2), new Point(5, 2), "");
+                case 10 -> gameState = "win";
                 default -> lvl = -1;
             }
         }

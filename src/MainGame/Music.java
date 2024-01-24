@@ -31,9 +31,20 @@ public class Music {
         setFile(fileDir);
         clip.start();
     }//plays audio
-    public void stop() throws IOException {
+    public void loop(){
         if(noSound) return;
-        sound.close();
+        setFile(fileDir);
+        clip.loop(-1);
+    }
+
+        public void stop(){
+        if(noSound) return;
+        if(sound == null) return;
+        try{
+            sound.close();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
         clip.close();
         clip.stop();
     }
