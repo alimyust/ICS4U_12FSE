@@ -4,6 +4,7 @@ import MenuItems.*;
 import Map.*;
 import MenuItems.Button;
 import Player.Player;
+import com.sun.tools.javac.Main;
 //importing neccesary packages
 import java.awt.*;
 import java.awt.event.KeyEvent;
@@ -23,6 +24,7 @@ public class Game3D extends BaseFrame {
     private RayCaster rayCast;
     private static int lvl;
     private static String gameState = "";
+    private static String oldGameState = "";
     private final ArrayList<Button> titleButtons = new ArrayList<>();
     private final ArrayList<Button> gameOverButtons = new ArrayList<>();
     private final ArrayList<Button> controlButtons = new ArrayList<>();
@@ -40,11 +42,11 @@ public class Game3D extends BaseFrame {
             throw new RuntimeException(e);
         }
     }
-    private final BufferedImage winScreen;
+    private final BufferedImage titleScreen;
 
     {
         try {
-            winScreen = read(new File(MainGame.getImgDir() + "winPage.png"));
+            titleScreen = read(new File(MainGame.getImgDir() + "titlePage.png"));
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
@@ -58,6 +60,7 @@ public class Game3D extends BaseFrame {
         super("MainGame.Game3D", WID, HGT);
         this.setLocationRelativeTo(null);
         game3Dinit();
+        buttonInit();
 //        gameState = "title";
     }
     public void game3Dinit(){
@@ -66,11 +69,7 @@ public class Game3D extends BaseFrame {
         lvl = 0;
         score= 0;
         deathAnimationCounter= 0;
-        MainGame.player = new Player(WID/2,HGT/2);;
-        MainGame.dun = new Dungeon(new Point(7, 0), new Point(7, 6), new Point(7, 6), "");;
-        this.rayCast = new RayCaster();
         refreshDungeon();
-        buttonInit();
     }
     public static int getDeathAnimationCounter() {
         return deathAnimationCounter;
@@ -96,11 +95,16 @@ public class Game3D extends BaseFrame {
         Graphics2D g2d = (Graphics2D) g;
         super.draw(g);
         if(Objects.equals(gameState, "title")){
+            g.drawImage(titleScreen, 0,0,null);
             for(Button but: titleButtons){
                 but.draw(g,mx,my, mb);
                 but.changeGameState(mx,my,mb);
             }
         }
+        if(!Objects.equals(oldGameState, gameState) &&( Objects.equals(gameState, "game") || Objects.equals(gameState, "endless")))
+            refreshDungeon();
+//        System.out.println(gameState + "," + oldGameState);
+//        if(!(Objects.equals(oldGameState, gameState))) return;
 
         if(Objects.equals(gameState, "game") || Objects.equals(gameState, "endless") ||
                 Objects.equals(gameState, "gameover")|| Objects.equals(gameState, "win")){
@@ -135,7 +139,6 @@ public class Game3D extends BaseFrame {
                     g2d.drawString("Score: " + score,430 - 10 *  (""+score).length(),360);
             }
         }
-        System.out.println(gameState);
         if (Objects.equals(gameState, "win")) {
             deathAnimationCounter += 30;
             if (deathAnimationCounter >= WID + 30) {
@@ -194,15 +197,20 @@ public class Game3D extends BaseFrame {
                 refreshDungeon();
             }
         }
+        oldGameState = gameState;
     }
 
     private void displayMap(Graphics g) {
+        int r = 16; // how small each tile is displayed as (larger is smaller)
+        int xOff = 760; int yOff = 20;
+        int rectWid = 200;
         if(displayMap){
-            MainGame.dun.drawDungeon2D(g,200,200,8);
-            MainGame.player.drawPlayer(g,200,200,8);
+            g.setColor(new Color(27, 27, 35));
+            g.fillRect(xOff-10, yOff-10, rectWid, rectWid);
+            MainGame.dun.drawDungeon2D(g,xOff,yOff,r);
+//            MainGame.player.drawPlayer(g,200,150,r);
         }
     }
-
     @Override
     public void keyReleased(KeyEvent e) {
         super.keyReleased(e);
@@ -214,16 +222,16 @@ public class Game3D extends BaseFrame {
         if (Objects.equals(gameState, "game")) {
             switch (lvl) { //lvl dictates which dungeon to be in (for regular gameplaye
                 case 0 -> MainGame.dun = new Dungeon(new Point(7, 0), new Point(7, 6), new Point(7, 6), "");
-//                case 1 -> MainGame.dun = new Dungeon(new Point(5, 12), new Point(5, 10), new Point(5, 0), "");
-//                case 2 -> MainGame.dun = new Dungeon(new Point(5, 0), new Point(5, 12), new Point(5, 6), "");
-//                case 3 -> MainGame.dun = new Dungeon(new Point(5, 13), new Point(5, 12), new Point(5, 6), "");
-//                case 4 -> MainGame.dun = new Dungeon(new Point(4, 1), new Point(5, 2), new Point(4, 1), "");
-//                case 5 -> MainGame.dun = new Dungeon(new Point(5, 2), new Point(6, 1), new Point(2, 3), "");
-//                case 6 -> MainGame.dun = new Dungeon(new Point(7, 6), new Point(7, 3), new Point(7, 0), "");
-//                case 7 -> MainGame.dun = new Dungeon(new Point(5, 12), new Point(5, 5), new Point(5, 1), "");
-//                case 8 -> MainGame.dun = new Dungeon(new Point(2, 2), new Point(2, 4), new Point(3, 0), "");
-//                case 9 -> MainGame.dun = new Dungeon(new Point(3, 4), new Point(5, 2), new Point(5, 2), "");
-                case 1 -> gameState = "win";
+                case 1 -> MainGame.dun = new Dungeon(new Point(5, 12), new Point(5, 10), new Point(5, 0), "");
+                case 2 -> MainGame.dun = new Dungeon(new Point(5, 0), new Point(5, 12), new Point(5, 6), "");
+                case 3 -> MainGame.dun = new Dungeon(new Point(5, 13), new Point(5, 12), new Point(5, 6), "");
+                case 4 -> MainGame.dun = new Dungeon(new Point(4, 1), new Point(5, 2), new Point(4, 1), "");
+                case 5 -> MainGame.dun = new Dungeon(new Point(5, 2), new Point(6, 1), new Point(2, 3), "");
+                case 6 -> MainGame.dun = new Dungeon(new Point(7, 6), new Point(7, 3), new Point(7, 0), "");
+                case 7 -> MainGame.dun = new Dungeon(new Point(5, 12), new Point(5, 5), new Point(5, 1), "");
+                case 8 -> MainGame.dun = new Dungeon(new Point(2, 2), new Point(2, 4), new Point(3, 0), "");
+                case 9 -> MainGame.dun = new Dungeon(new Point(3, 4), new Point(5, 2), new Point(5, 2), "");
+                case 10 -> gameState = "win";
                 default -> lvl = -1;
             }
         }
@@ -238,6 +246,7 @@ public class Game3D extends BaseFrame {
                 {0,1,2,3,4,5},
                 {0,1,2,3,4,5,6},
         };
+        //generates a new textured dungeon
         if(Objects.equals(gameState, "endless")){
             int textGroup = (int) (Math.random()*textureInd.length);
             Point wall = new Point(textGroup, (int) (Math.random()*textureInd[textGroup].length));
@@ -246,7 +255,8 @@ public class Game3D extends BaseFrame {
             MainGame.dun = new Dungeon(wall,floor,ceil, "");
             System.out.println(wall + ", "+floor+ ", " +ceil);
         }
-        if(!Objects.equals(gameState, "win")) {
+        if(!Objects.equals(gameState, "win") && (Objects.equals(gameState, "game") || Objects.equals(gameState, "endless"))) {
+            //resets game for the next level
             MainGame.player = new Player(512, 512);
             rayCast = new RayCaster();
             lvl++;
@@ -257,6 +267,13 @@ public class Game3D extends BaseFrame {
         return (int) Math.sqrt((point.x - doorPoint.x) * (point.x - doorPoint.x) +
                 (point.y - doorPoint.y) * (point.y - doorPoint.y));
 
+    }
+
+    public static boolean notIntersectingMap(int ax, int ay, MapNode[][] map){
+        int mapX = ax/64;
+        int mapY = ay/64;
+        if (mapX >= map[0].length || mapY >= map.length) return false;
+        return map[mapY][mapX].getwCode() == 0;
     }
 
     public static int getWid3d() {
@@ -271,32 +288,13 @@ public class Game3D extends BaseFrame {
         return lvl;
     }
 
-    public static boolean notIntersectingMap(int ax, int ay, MapNode[][] map){
-        int mapX = ax/64;
-        int mapY = ay/64;
-        if (mapX >= map[0].length || mapY >= map.length) return false;
-        return map[mapY][mapX].getwCode() == 0;
-    }
-
-    public String getGameState() {
-        return gameState;
-    }
-
-    public int getScore() {
-        return score;
-    }
-
-    public void setScore(int score) {
-        this.score = score;
-    }
-
     public static void setGameState(String gameState) {
         Game3D.gameState = gameState;
     }
 
     private boolean removeEnemy(BaseEnemy e) {
         boolean alive = !e.isAlive();
-        if (alive) score += 35;
+        if (alive) score += 55;
         return alive;
     }
 }

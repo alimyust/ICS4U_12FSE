@@ -1,6 +1,7 @@
 package Map;
 
 import Enemies.BaseEnemy;
+import Player.Player;
 import MainGame.*;
 import java.awt.*;
 import java.util.ArrayList;
@@ -14,7 +15,7 @@ public class Dungeon {
     private final int DSIZE = 64;
     private final int dSizeMultiplier = 4;
     private final int WID = MainGame.getWID() / DSIZE * dSizeMultiplier;
-    private final int HGT = MainGame.getHGT() / DSIZE* dSizeMultiplier;
+    private final int HGT = MainGame.getHGT() / DSIZE * dSizeMultiplier;
     private final int ALIVE = 0; // empty space is alive
     private final int DEAD = 1; // dead is wall
     private MapNode[][] map = new MapNode[HGT][WID];
@@ -57,7 +58,7 @@ public class Dungeon {
             generateGrid(0.50);
             automata(20, 5, 4);
             map = makeBorder(map);
-            c = floodFill(HGT / 2/dSizeMultiplier, WID / 2/dSizeMultiplier, -1);
+            c = floodFill(8,8, -1);
         } while (!((double) c / (double) (HGT * WID) > 0.3)); // 30 percent of map must be explorable
         for (int i = 0; i < HGT; i++) {
             for (int j = 0; j < WID; j++) {
@@ -178,15 +179,36 @@ public class Dungeon {
         return map;
     }
 
-    public void drawDungeon2D(Graphics g, int xOff,int yOff,int rVal) {
-        for (int y = 0; y < HGT; y += 1) {
-            for (int x = 0; x < WID; x += 1) {
-                g.setColor((map[y][x].getwCode() == 0) ? Color.WHITE :Color.BLACK);
-                if(map[y][x].getwCode() == 5) g.setColor(Color.GREEN);
-                g.fillRect(xOff +x * DSIZE / rVal, yOff +y * DSIZE / rVal, DSIZE / rVal, DSIZE / rVal);
+    public void drawDungeon2D(Graphics g, int xOff, int yOff, int rVal) {
+        Graphics2D g2d = (Graphics2D) g;
+        g2d.setStroke(new BasicStroke(1));
+        int minimapRange = 30; // total amount of grid squares that can be seen
+        // Calculate the player's position in the grid
+        int playerGridX = MainGame.player.x / DSIZE;
+        int playerGridY = MainGame.player.y / DSIZE;
+
+        // Calculate the bounds for the displayed area
+        int displayX = playerGridX - minimapRange/2; ;//Math.max(0, playerGridX - minimapRange/2);  // Display 10 blocks, 5 on each side of the player
+        int displayY = playerGridY - minimapRange/2;//Math.max(0, playerGridY - minimapRange/2);
+        int xRange = playerGridX +minimapRange;//Math.min(playerGridX +minimapRange, WID-1);
+        int yRange = playerGridY +minimapRange;//Math.min(playerGridY +minimapRange, HGT-1);
+        // Draw a white background
+        for (int y = displayY; y <  yRange; y++) {
+            for (int x = displayX; x <  xRange; x++) {
+                int wallCode = map[Math.max(0, Math.min(y, HGT - 1))][Math.max(0, Math.min(x, WID - 1))].getwCode();
+                g.setColor(switch (wallCode){ // ^ Everything out of bounds should be a wall, so this doesn't lose any data
+                    case 0 -> Color.WHITE;
+                    case 5 -> new Color(34, 158, 225, 255);
+                    default -> Color.BLACK;
+                });
+                g.fillRect(xOff + (x - displayX) * DSIZE / rVal, yOff + (y - displayY) * DSIZE / rVal, DSIZE / rVal, DSIZE / rVal);
+                g.setColor(Color.ORANGE);
+                g.fillOval(xOff +(minimapRange/2)* DSIZE / rVal-4,yOff +(minimapRange/2)* DSIZE / rVal-4,8,8);
             }
         }
+
     }
+
 
 
     public MapNode[][] getMap() {

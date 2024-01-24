@@ -118,7 +118,7 @@ public class Player extends ParentEntity {
 
     public void drawPlayer(Graphics g,int xOff, int yOff, int r) { //2d
         g.setColor(Color.green);
-        g.fillRect(xOff+(x/r - w / 2), yOff+(y/r - h / 2), w, h);
+        g.fillRect(xOff+(x - w / 2)/r, yOff+(y - h / 2)/r, w, h);
         rx.clear();
         ry.clear();
     }

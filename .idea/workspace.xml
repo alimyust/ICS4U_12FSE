@@ -10,26 +10,15 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="8a55d714-b0cf-47b0-bb48-82f33721ee53" name="Changes" comment="Gr12 FSE Jan 22&#10;Finished controls but an issue with the pictures ( A and S are mixed ). Need to fix that. Endless 1st level isn't random and death is broken, so fix that. Make a title screen and maybe a credits screen too. if extra time then add idle animations and COMMMENT!!!!">
-      <change afterPath="$PROJECT_DIR$/resources/images/winPage.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/sound/Enemy Sound/SkeletonSlash1.wav" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/sound/Player Sound/PistolFiring.wav" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/sound/Player Sound/SMGFire.wav" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/sound/Player Sound/ShotgunFire.wav" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/MainGame/Music.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/images/Control Page/Control0.png" beforeDir="false" afterPath="$PROJECT_DIR$/resources/images/Control Page/Control0.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/images/Control Page/Control1.png" beforeDir="false" afterPath="$PROJECT_DIR$/resources/images/Control Page/Control1.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/images/Control Page/Control2.png" beforeDir="false" afterPath="$PROJECT_DIR$/resources/images/Control Page/Control2.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/images/winPage.png" beforeDir="false" afterPath="$PROJECT_DIR$/resources/images/titlePage.png" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Enemies/BaseEnemy.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Enemies/BaseEnemy.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Enemies/GoblinBerserker.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Enemies/GoblinBerserker.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Enemies/GoblinSlinger.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Enemies/GoblinSlinger.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Enemies/Skeleton.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Enemies/Skeleton.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/MainGame/Game3D.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/MainGame/Game3D.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Player/Gun.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Player/Gun.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Player/Pistol.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Player/Pistol.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/MainGame/MainGame.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/MainGame/MainGame.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/MainGame/Music.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/MainGame/Music.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Map/Dungeon.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Map/Dungeon.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Player/Player.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Player/Player.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Player/SMG.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Player/SMG.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Player/Shotgun.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Player/Shotgun.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -81,7 +70,7 @@
     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
     "git-widget-placeholder": "master",
     "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "C:/Users/alimy/Documents/GitHub/ICS4U_12FSE/resources/sound/Enemy Sound",
+    "last_opened_file_path": "C:/Users/Ali/Documents/GitHub/ICS4U_12FSE/resources/images",
     "project.structure.last.edited": "Artifacts",
     "project.structure.proportion": "0.15",
     "project.structure.side.proportion": "0.2"
@@ -89,11 +78,11 @@
 }]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\Ali\Documents\GitHub\ICS4U_12FSE\resources\images" />
       <recent name="C:\Users\alimy\Documents\GitHub\ICS4U_12FSE\resources\sound\Enemy Sound" />
       <recent name="C:\Users\alimy\Documents\GitHub\ICS4U_12FSE\resources\sound\Player Sound" />
       <recent name="C:\Users\alimy\Documents\GitHub\ICS4U_12FSE\resources\images" />
       <recent name="C:\Users\alimy\Documents\GitHub\ICS4U_12FSE\resources\images\Control Page" />
-      <recent name="C:\Users\alimy\Documents\GitHub\ICS4U_12FSE\resources\images\Player\Firing Pistol" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\Users\alimy\Documents\GitHub\ICS4U_12FSE\resources\images\Control Page" />

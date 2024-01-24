@@ -7,8 +7,8 @@ import MainGame.Game3D;
 import java.awt.*;
 import java.util.ArrayList;
 
-import static java.lang.Math.PI;
-
+// A class that has all of the functions each enemy would need. The enemies have a separate class where
+//the right variables are set, but the behaviour for each enemy is mechanically the same.
 public class BaseEnemy extends ParentEntity {
 
     protected Color[][][][] enemyImgArr;
@@ -38,6 +38,8 @@ public class BaseEnemy extends ParentEntity {
     private int attackFrame;
 
     private Music enemyAttackSound;
+    private int oldEnemyState;
+
     public BaseEnemy(int x, int y) {
         super(x, y, 64, 64);
         this.frame = 0;
@@ -45,6 +47,7 @@ public class BaseEnemy extends ParentEntity {
     }
 
     public static ArrayList<BaseEnemy> addEnemy(ArrayList<BaseEnemy> eArr, ArrayList<Point> spots, int eCount, int type) {
+        //picks an open spot and adds the respective enemy based on the code
         for (int i = 0; i < eCount; i++) {
             int ind = (int) (Math.random() * (spots.size() - 1));
             Point currSpot = spots.get(ind);
@@ -62,7 +65,7 @@ public class BaseEnemy extends ParentEntity {
         int dx = (int) (Math.cos(ang) * speed);
         int dy = (int) (Math.sin(ang) * speed);
         if (enemyState == DEAD ||enemyState == HURT|| !Game3D.notIntersectingMap(x + dx, y + dy, dun.getMap())) return;
-        if (playerEnemyDist(player) >= startDist) return;
+        if (playerEnemyDist(player) >= startDist) return; // range where enemy will start moving
         if (playerEnemyDist(player) > stopDist) {
             x += dx;
             y += dy;
@@ -76,6 +79,7 @@ public class BaseEnemy extends ParentEntity {
 
     public void drawBaseEnemy(Graphics g, Player player, int HGT, int WID, RayCaster ray) {
         if(!isAlive) return; // only draw when alive
+        if(oldEnemyState != enemyState) frame = 0;
         Color[][] sprite = enemyImgArr[enemyState][(int) (frame % (enemyImgArr[enemyState].length - 1))];
         if (enemyState == HURT) {            // Check if hurt cooldown is over
             if (System.currentTimeMillis() - lastHurtTime >= 300) {
@@ -123,6 +127,7 @@ public class BaseEnemy extends ParentEntity {
                 g.drawRect(xPos + x, yPos + y, 1, 1);
             }
         }
+        oldEnemyState = enemyState;
         frame += frameRate;
 
     }
@@ -152,6 +157,7 @@ public class BaseEnemy extends ParentEntity {
 
     public void setHurtState() {
         // Save the previous state and frame
+        frame = 0;
         enemyState = HURT;
 //        previousState = enemyState;
         lastHurtFrame = frame;
@@ -159,13 +165,15 @@ public class BaseEnemy extends ParentEntity {
 
     }
     public void setDeadState() {
+        frame = 0;
         if(enemyState == DEAD) return;
         enemyState = DEAD;
         lastDeadTime = System.currentTimeMillis();
 
     }
     public void playSound(){
-        if(((int)frame & attackFrame) == 0){
+//        if(enemyAttackSound)
+        if((int)frame % attackFrame == 0 && (int)(frame - frameRate)% attackFrame != 0){
             enemyAttackSound.play();
         }
     }

@@ -12,8 +12,8 @@ import java.io.IOException;
 public class MainGame {
     private static final int WID = 64*16;
     private static final int HGT= 64*16;
-    public static Player player = new Player(WID/2,HGT/2);;
-    public static Dungeon dun = new Dungeon(new Point(7, 0), new Point(7, 6), new Point(7, 6), "");;
+    public static Player player;// = new Player(WID/2,HGT/2);;
+    public static Dungeon dun;// = new Dungeon(new Point(7, 0), new Point(7, 6), new Point(7, 6), "");;
     private static final String imgDir = "resources/images/";
     public static Game3D g3D;
 
